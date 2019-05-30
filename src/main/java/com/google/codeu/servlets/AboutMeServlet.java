@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/about")
 public class AboutMeServlet extends HttpServlet{
 
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getOutputStream().println("hello world");
-	}
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	    response.getOutputStream().println("hello world");
+    }
 }
