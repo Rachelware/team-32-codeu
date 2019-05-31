@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Stats</title>
-	<link rel="stylesheet" href="/css/main.css">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/stats.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<title>Site Statistics</title>
 
 	<script>
 		// Fetch stats and display them in the page.
@@ -32,10 +34,9 @@
 	</script>
 </head>
 <body onload="buildUI()">
-<div id="content">
-	<h1>Site Statistics</h1>
-	<hr/>
+	<div id="content" class="stats-title">
+		<h1 id="title">Site Statistics</h1>
+	</div>
 	<div id="stats-container">Loading...</div>
-</div>
 </body>
 </html>
