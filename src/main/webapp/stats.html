@@ -16,8 +16,12 @@
 				const statsContainer = document.getElementById('stats-container');
 			statsContainer.innerHTML = '';
 
-			const messageCountElement = buildStatElement('Message count: ' + stats.messageCount);
+			const messageCountElement = buildStatElement('Total Messages: ' + stats.messageCount);
 			statsContainer.appendChild(messageCountElement);
+			const userCountElement = buildStatElement('Active Users: ' + stats.userCount);
+			statsContainer.appendChild(userCountElement);
+			const averageElement = buildStatElement('Average # of Messages per User: ' + stats.average);
+			statsContainer.appendChild(averageElement);
 		});
 		}
 

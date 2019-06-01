@@ -41,5 +41,6 @@ p {
 	display: list-item;
 	list-style-type: circle;
 	list-style-position: inside;
+	color: white;
 }
 

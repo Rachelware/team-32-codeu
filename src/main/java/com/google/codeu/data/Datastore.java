@@ -32,6 +32,7 @@ import java.util.UUID;
 public class Datastore {
 
   private DatastoreService datastore;
+  List<String> users = new ArrayList<>();
 
   public Datastore() {
     datastore = DatastoreServiceFactory.getDatastoreService();
@@ -41,6 +42,7 @@ public class Datastore {
   public void storeMessage(Message message) {
     Entity messageEntity = new Entity("Message", message.getId().toString());
     messageEntity.setProperty("user", message.getUser());
+    users.add(message.getUser());
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
 
@@ -55,7 +57,6 @@ public class Datastore {
    */
   public List<Message> getMessages(String user) {
     List<Message> messages = new ArrayList<>();
-
     Query query =
         new Query("Message")
             .setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user))
@@ -84,7 +85,30 @@ public class Datastore {
   public int getTotalMessageCount(){
     Query query = new Query("Message");
     PreparedQuery results = datastore.prepare(query);
+    /*for (Entity entity : results.asIterable()) {
+      datastore.delete(entity.getKey());
+    }*/
     return results.countEntities(FetchOptions.Builder.withLimit(1000));
   }
 
+  public int getActiveUserCount() {
+    List<Object> users = new ArrayList<>();
+    Query query = new Query("Message");
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+      Object user = entity.getProperty("user");
+      if (!users.contains(user)) {
+        users.add(user);
+      }
+    }
+    return users.size();
+  }
+
+  public String getAverageMessagesPerUser() {
+    int users = getActiveUserCount();
+    int messages = getTotalMessageCount();
+    String average = Float.toString((float) messages / users);
+    System.out.println(average);
+    return average;
+  }
 }
