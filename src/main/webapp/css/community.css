@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-h1#title {
-	margin-top: 0;
-	line-height: 60px;
-	margin-left: 15px;
-	color: white;
-}
 
 /* Customize the title of the community page */
 .com-title {
 	width: 100%;
 	background-color: #80808057;
+	margin-top: 0;
+	line-height: 60px;
+	padding-left: 10px;
+	color: white;
 }
 
 p {
 	margin-left: 10px;
 	margin-bottom: 10px;
+}
+
+a {
+	color: #90ebff;
 }
