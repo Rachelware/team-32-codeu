@@ -3,7 +3,8 @@
 <head>
 	<title>Community Page</title>
 	<link rel="stylesheet" href="/css/main.css">
-
+	<link rel="stylesheet" href="/css/community.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<script>
 
 		/** Fetches users and adds them to the page. */
@@ -41,12 +42,15 @@
 		}
 	</script>
 </head>
-<body onload="buildUI()">
-<div id="content">
+<div onload="buildUI()">
+<div id="content" class="title">
 	<h1>Community Page</h1>
 	<p>Here is a list of every user who has posted a message:</p>
 	<hr/>
-	<ul id="list">Loading...</ul>
+</div>
+	<div>
+		<ul id="list">Loading...</ul>
+	</div>
 </div>
 </body>
 </html>

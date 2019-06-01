@@ -14,4 +14,7 @@
  * limitations under the License.
  */
 
-/* Prevent the page from becoming too wide. */
+.title {
+	box-shadow: 5px 10px;
+	border: 2px solid black;
+}

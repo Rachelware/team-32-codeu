@@ -16,7 +16,9 @@
 
 /* Prevent the page from becoming too wide. */
 body {
-  max-width: 600px;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #4b0c13;
+  color: white;
 }
 
 /* Remove bullet points from navigation bar. */
