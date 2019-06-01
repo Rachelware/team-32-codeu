@@ -32,20 +32,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/login-status")
 public class LoginStatusServlet extends HttpServlet {
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    JsonObject jsonObject = new JsonObject();
+        JsonObject jsonObject = new JsonObject();
 
-    UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      jsonObject.addProperty("isLoggedIn", true);
-      jsonObject.addProperty("username", userService.getCurrentUser().getEmail());
-    } else {
-      jsonObject.addProperty("isLoggedIn", false);
+        UserService userService = UserServiceFactory.getUserService();
+        if (userService.isUserLoggedIn()) {
+            jsonObject.addProperty("isLoggedIn", true);
+            jsonObject.addProperty("username", userService.getCurrentUser().getEmail());
+        } else {
+            jsonObject.addProperty("isLoggedIn", false);
+        }
+
+        response.setContentType("application/json");
+        response.getWriter().println(jsonObject.toString());
     }
-
-    response.setContentType("application/json");
-    response.getWriter().println(jsonObject.toString());
-  }
 }
