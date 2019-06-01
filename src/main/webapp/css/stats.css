@@ -28,6 +28,7 @@ h1#title {
 	line-height: 60px;
 	margin-left: 15px;
 	color: white;
+	box-shadow: 1px 10px #181e21;
 }
 
 /* Customize the title of the stats page */

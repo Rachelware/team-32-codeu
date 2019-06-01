@@ -108,7 +108,6 @@ public class Datastore {
     int users = getActiveUserCount();
     int messages = getTotalMessageCount();
     String average = Float.toString((float) messages / users);
-    System.out.println(average);
     return average;
   }
 }
