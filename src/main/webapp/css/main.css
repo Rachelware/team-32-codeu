@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/* Prevent the page from becoming too wide. */
+/* Overarching design */
 html, body {
   height:100%;
   width:100%;
@@ -27,12 +27,12 @@ html, body {
 
 /* Remove bullet points from navigation bar. */
 nav ul {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 /* Keep navigation menu on one line. */
 nav li {
-  display: inline-block;
-  margin-right: 10px
+    display: inline-block;
+    margin-right: 10px
 }

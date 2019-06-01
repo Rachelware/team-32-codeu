@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,21 +31,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    UserService userService = UserServiceFactory.getUserService();
+        UserService userService = UserServiceFactory.getUserService();
 
-    // If the user is already logged in, redirect to their page
-    if (userService.isUserLoggedIn()) {
-      String user = userService.getCurrentUser().getEmail();
-      response.sendRedirect("/user-page.html?user=" + user);
-      return;
+        // If the user is already logged in, redirect to their page
+        if (userService.isUserLoggedIn()) {
+            String user = userService.getCurrentUser().getEmail();
+            response.sendRedirect("/user-page.html?user=" + user);
+            return;
+        }
+
+        // Redirect to Google login page. That page will then redirect back to /login,
+        // which will be handled by the above if statement.
+        String googleLoginUrl = userService.createLoginURL("/login");
+        response.sendRedirect(googleLoginUrl);
     }
-
-    // Redirect to Google login page. That page will then redirect back to /login,
-    // which will be handled by the above if statement.
-    String googleLoginUrl = userService.createLoginURL("/login");
-    response.sendRedirect(googleLoginUrl);
-  }
 }
