@@ -91,7 +91,7 @@ public class Datastore {
       List<Message> messages = new ArrayList<>();
 
       Query query = new Query("Message")
-        .addsort("timestamp", SortDirection.DESCENDING);
+        .addSort("timestamp", SortDirection.DESCENDING);
       PreparedQuery results = datastore.prepare(query);
 
       for (Entity entity : results.asIterable()){
@@ -100,9 +100,9 @@ public class Datastore {
           UUID id = UUID.fromString(idString);
           String user = (String) entity.getProperty("user");
           String text = (String) entity.getProperty("text");
-          long timestamp = (long)ventity.getProperty("timestamp");
+          long timestamp = (long) entity.getProperty("timestamp");
 
-          Message message = newMessage(id, user, text, timestamp);
+          Message message = new Message(id, user, text, timestamp);
           messages.add(message);
         } catch (Exception e){
           System.err.println("Error reading message. ");
@@ -110,8 +110,7 @@ public class Datastore {
           e.printStackTrace();
         }
       }
-      
+
       return messages;
     }
-  }
 }
