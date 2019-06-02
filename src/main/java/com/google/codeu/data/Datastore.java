@@ -149,6 +149,7 @@ public class Datastore {
    * @return a list of messages from all the users. 
    * List stored in time descending order.
    **/
+
     public List<Message> getAllMessages(){
         List<Message> messages = new ArrayList<>();
 
