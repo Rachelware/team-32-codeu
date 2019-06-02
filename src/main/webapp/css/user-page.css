@@ -23,8 +23,11 @@
     margin-left: 10px;
     margin-right: 25px;
     margin-bottom: 10px;
-    color: #344144;
+    color: #263238;
     font-size: medium;
+    background-color:#c5c5c5;
+    border-radius: 3px;
+    border-color: transparent;
 }
 
 /* Give each message a rounded border. */
