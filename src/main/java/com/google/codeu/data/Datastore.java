@@ -36,6 +36,7 @@ public class Datastore {
 
 
     public Datastore() {
+      
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
@@ -148,32 +149,31 @@ public class Datastore {
    * @return a list of messages from all the users. 
    * List stored in time descending order.
    **/
+    public List<Message> getAllMessages(){
+        List<Message> messages = new ArrayList<>();
 
-  public List<Message> getAllMessages(){
-      List<Message> messages = new ArrayList<>();
+        Query query = new Query("Message")
+            .addSort("timestamp", SortDirection.DESCENDING);
+        PreparedQuery results = datastore.prepare(query);
 
-      Query query = new Query("Message")
-        .addsort("timestamp", SortDirection.DESCENDING);
-      PreparedQuery results = datastore.prepare(query);
+        for (Entity entity : results.asIterable()){
+            try {
 
-      for (Entity entity : results.asIterable()){
-        try {
-          String idString = entity.getKey().getName();
-          UUID id = UUID.fromString(idString);
-          String user = (String) entity.getProperty("user");
-          String text = (String) entity.getProperty("text");
-          long timestamp = (long)ventity.getProperty("timestamp");
+                String idString = entity.getKey().getName();
+                UUID id = UUID.fromString(idString);
+                String user = (String) entity.getProperty("user");
+                String text = (String) entity.getProperty("text");
+                long timestamp = (long) entity.getProperty("timestamp");
 
-          Message message = newMessage(id, user, text, timestamp);
-          messages.add(message);
-        } catch (Exception e){
-          System.err.println("Error reading message. ");
-          System.err.println(entity.toString());
-          e.printStackTrace();
+                Message message = new Message(id, user, text, timestamp);
+                messages.add(message);
+            } catch (Exception e){
+                System.err.println("Error reading message. ");
+                System.err.println(entity.toString());
+                e.printStackTrace();
+            }
         }
-      }
-      
-      return messages;
+
+        return messages;
     }
-  }
 }
