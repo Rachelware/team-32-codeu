@@ -18,20 +18,31 @@
    and will fill the width of its parent element. */
 #message-input {
     height: 100px;
-    width: 100%;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    color: #263238;
+    font-size: medium;
+    background-color:#c5c5c5;
+    border-radius: 3px;
+    border-color: transparent;
 }
 
 /* Give each message a rounded border. */
 .message-div {
-    border: thin solid black;
-    border-radius: 5px;
+    border: 1px solid #80808057;
+    border-radius: 3px;
     margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 25px;
 }
 
 /* Add a bottom border to the message header. */
 .message-header {
-    border-bottom: thin solid black;
     padding: 5px;
+    background-color: #80808057;
 }
 
 /* Give the message body a margin so the text
