@@ -41,6 +41,13 @@ h1, h2, h3 {
     padding-left: 10px;
 }
 
+/* General input box design */
+input {
+    margin-left: 10px;
+    width: 80%;
+}
+
+
 /* General list design */
 li {
     list-style-type: circle;

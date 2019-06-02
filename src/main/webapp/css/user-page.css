@@ -25,11 +25,6 @@
     font-size: medium;
 }
 
-input {
-    margin-left: 10px;
-    width: 80%;
-}
-
 /* Give each message a rounded border. */
 .message-div {
     border: 1px solid #80808057;
