@@ -43,8 +43,13 @@ h1, h2, h3 {
 
 /* General input box design */
 input {
-    margin-left: 10px;
-    width: 80%;
+    margin-left: 25px;
+    color: #90ebff;
+    background-color: #80808057;
+    border:transparent;
+    border-radius: 3px;
+    padding: 10px 10px;
+    box-shadow: 3px 3px #58585857;
 }
 
 
