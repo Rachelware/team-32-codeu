@@ -18,9 +18,11 @@
    and will fill the width of its parent element. */
 #message-input {
     height: 100px;
-    width: 80%;
-    margin: 25px;
-    margin-right: 50px;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
     color: #344144;
     font-size: medium;
 }
