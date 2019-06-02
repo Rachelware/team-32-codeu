@@ -78,41 +78,68 @@ public class Datastore {
         return messages;
     }
 
-  public Set<String> getUsers(){
-      Set<String> users = new HashSet<>();
-      Query query = new Query("Message");
-      PreparedQuery results = datastore.prepare(query);
-      for(Entity entity : results.asIterable()) {
-          users.add((String) entity.getProperty("user"));
-      }
-      return users;
-  }
+    public Set<String> getUsers(){
+        Set<String> users = new HashSet<>();
+        Query query = new Query("Message");
+        PreparedQuery results = datastore.prepare(query);
+        for(Entity entity : results.asIterable()) {
+            users.add((String) entity.getProperty("user"));
+        }
+        return users;
+    }
   
   /** Returns the total number of messages for all users. */
-  public int getTotalMessageCount(){
-      Query query = new Query("Message");
-      PreparedQuery results = datastore.prepare(query);
-      return results.countEntities(FetchOptions.Builder.withLimit(1000));
-  }
+    public int getTotalMessageCount(){
+        Query query = new Query("Message");
+        PreparedQuery results = datastore.prepare(query);
+        return results.countEntities(FetchOptions.Builder.withLimit(1000));
+    }
 
-  public int getActiveUserCount() {
-      List<Object> users = new ArrayList<>();
-      Query query = new Query("Message");
-      PreparedQuery results = datastore.prepare(query);
-      for (Entity entity : results.asIterable()) {
-          Object user = entity.getProperty("user");
-          if (!users.contains(user)) {
-              users.add(user);
-          }
-      }
-      return users.size();
-  }
+    public int getActiveUserCount() {
+        List<Object> users = new ArrayList<>();
+        Query query = new Query("Message");
+        PreparedQuery results = datastore.prepare(query);
+        for (Entity entity : results.asIterable()) {
+            Object user = entity.getProperty("user");
+            if (!users.contains(user)) {
+                users.add(user);
+            }
+        }
+        return users.size();
+    }
 
-  public String getAverageMessagesPerUser() {
-      int users = getActiveUserCount();
-      int messages = getTotalMessageCount();
-      String average = Float.toString((float) messages / users);
-      return average;
-  }
+    public String getAverageMessagesPerUser() {
+        int users = getActiveUserCount();
+        int messages = getTotalMessageCount();
+        String average = Float.toString((float) messages / users);
+        return average;
+    }
+  
+    /** Stores the User in Datastore. */
+    public void storeUser(User user) {
+        Entity userEntity = new Entity("User", user.getEmail());
+        userEntity.setProperty("email", user.getEmail());
+        userEntity.setProperty("aboutMe", user.getAboutMe());
+        datastore.put(userEntity);
+    }
+  
+    /**
+    * Returns the User owned by the email address, or
+    * null if no matching User was found.
+    */
+    public User getUser(String email) {
+      
+        Query query = new Query("User").setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
+        PreparedQuery results = datastore.prepare(query);
+        Entity userEntity = results.asSingleEntity();
+        if(userEntity == null) {
+            return null;
+        }
+      
+        String aboutMe = (String) userEntity.getProperty("aboutMe");
+        User user = new User(email, aboutMe);
+      
+        return user;
+    }
 
 }
