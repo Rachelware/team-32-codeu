@@ -2,11 +2,17 @@
 <html>
 <head>
     <title>A New Chart</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
     <script src="/js/chart-loader.js"></script>
 </head>
-<body>
-<h1>Chart Project</h1>
-<div id="book_chart"></div>
+<body onload="loadAll();">
+    <h1>Chart Project</h1>
+    <div id="book_chart"></div>
 </body>
 </html>

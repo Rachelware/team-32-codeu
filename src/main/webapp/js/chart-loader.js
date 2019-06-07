@@ -1,6 +1,6 @@
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-function drawChart(){
+
+
+function drawChart() {
     var book_data = new google.visualization.DataTable();
     //define columns for the DataTable instance
     book_data.addColumn('string', 'Book Title');
@@ -21,3 +21,8 @@ function drawChart(){
         height: 400
     };
     chart.draw(book_data, chart_options);
+}
+
+function loadAll() {
+    drawChart();
+}
