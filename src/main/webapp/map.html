@@ -7,7 +7,7 @@
         function createMap(){
             const map = new google.maps.Map(document.getElementById('map'), {
 
-            //Google Plex offic
+            //Google Plex office
             center: {lat: 37.422, lng: -122.084},
             zoom: 16,
 
@@ -95,10 +95,16 @@
 
             //Adds a marker at Stan the T-Rex
             const trexMarker = new google.maps.Marker({
-            position: {lat: 37.421903, lng: -122.084674},
-            map: map,
-            title: 'Stan the T-Rex'
+                position: {lat: 37.421903, lng: -122.084674},
+                map: map,
+                title: 'Stan the T-Rex'
             });
+
+            //info window for the T-rex
+            var trexInfoWindow = new google.maps.InfoWindow({
+                content: 'This is Stan, the T-Rex statue.'
+            });
+            trexInfoWindow.open(map, trexMarker);
 
 
         }
