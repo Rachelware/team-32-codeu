@@ -87,19 +87,32 @@ function createMap(){
     }]
 });
 
-//Adds a marker at Stan the T-Rex
-const trexMarker = new google.maps.Marker({
-    position: {lat: 37.421903, lng: -122.084674},
-    map: map,
-    title: 'Stan the T-Rex'
-});
+//adds a landmark at Google West Campus
+addLandmark(map, 37.423829, -122.092154, 'Google West Campus',
+    'Google West Campus is home to YouTube and Maps.')
 
-//info window for the T-rex
-var trexInfoWindow = new google.maps.InfoWindow({
-    content: 'This is Stan, the T-Rex statue.'
-});
-trexInfoWindow.open(map, trexMarker);
+//adds a landmark at Stan the T-Rex 
+addLandmark(map, 37.421903, -122.084674, 'Stan the T-Rex',
+    'This is Stan, the T-Rex statue.')
 
+//adds a landmark Permanente Creek Trail
+addLandmark(map, 37.420919, -122.086619, 'Permanente Creek Trail',
+    'Permanente Creek Trail connects Google to a system of bike trails.');
 
+}
+
+/** Adds a marker that shows an info window when clicked. */
+function addLandmark(map, lat, lng, title, description){
+    const marker = new google.maps.Marker({
+        position: {lat: lat, lng: lng},
+        map: map,
+        title: title
+    });
+    const infoWindow = new google.maps.InfoWindow({
+        content: description
+    });
+    marker.addListener('click', function() {
+        infoWindow.open(map, marker);
+    });
 }
     
