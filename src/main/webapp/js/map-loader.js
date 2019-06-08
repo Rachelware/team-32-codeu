@@ -3,7 +3,7 @@ function createMap(){
 
     //Google Plex office
     center: {lat: 37.422, lng: -122.084},
-    zoom: 16,
+    zoom: 14,
 
     //Styles map in Night Mode
     styles: [
@@ -99,6 +99,11 @@ addLandmark(map, 37.421903, -122.084674, 'Stan the T-Rex',
 addLandmark(map, 37.420919, -122.086619, 'Permanente Creek Trail',
     'Permanente Creek Trail connects Google to a system of bike trails.');
 
+//event listener listens for click then places marker
+map.addListener('click', function(e) {
+    placeMarkerAndPanTo(e.latLng, map);
+  });
+
 }
 
 /** Adds a marker that shows an info window when clicked. */
@@ -114,5 +119,14 @@ function addLandmark(map, lat, lng, title, description){
     marker.addListener('click', function() {
         infoWindow.open(map, marker);
     });
+}
+
+/*Places a marker at the location*/
+function placeMarkerAndPanTo(latLng, map) {
+  var marker = new google.maps.Marker({
+    position: latLng,
+    map: map
+  });
+  map.panTo(latLng);
 }
     
