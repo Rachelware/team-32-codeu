@@ -36,7 +36,6 @@ public class Datastore {
 
 
     public Datastore() {
-      
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
@@ -61,19 +60,14 @@ public class Datastore {
             new Query("Message").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user))
             .addSort("timestamp", SortDirection.DESCENDING);
         PreparedQuery results = datastore.prepare(query);
-
         for (Entity entity : results.asIterable()) {
             try {
-
                 Message message = messageQuery(user, entity);
                 messages.add(message);
-
             } catch (Exception e) {
-              
                 printError(entity, e);
             }
         }
-      
         return messages;
     }
 
@@ -127,17 +121,14 @@ public class Datastore {
     * null if no matching User was found.
     */
     public User getUser(String email) {
-      
         Query query = new Query("User").setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
         PreparedQuery results = datastore.prepare(query);
         Entity userEntity = results.asSingleEntity();
         if(userEntity == null) {
             return null;
         }
-      
         String aboutMe = (String) userEntity.getProperty("aboutMe");
         User user = new User(email, aboutMe);
-      
         return user;
     }
 
@@ -150,29 +141,22 @@ public class Datastore {
 
     public List<Message> getAllMessages(){
         List<Message> messages = new ArrayList<>();
-
         Query query = new Query("Message")
             .addSort("timestamp", SortDirection.DESCENDING);
         PreparedQuery results = datastore.prepare(query);
-
         for (Entity entity : results.asIterable()){
             try {
-
                 String user = (String) entity.getProperty("user");
-                
                 Message message = messageQuery(user, entity);
                 messages.add(message);
-
             } catch (Exception e){
                 printError(entity, e);
             }
         }
-
         return messages;
     }
 
     public Message messageQuery(String user, Entity newEntity){
-        
         String idString = newEntity.getKey().getName();
         UUID id = UUID.fromString(idString);
         String text = (String) newEntity.getProperty("text");
@@ -182,11 +166,9 @@ public class Datastore {
     }
 
     public void printError(Entity newEntity, Exception e){
-
         System.err.println("Error reading message. ");
         System.err.println(newEntity.toString());
         e.printStackTrace();
-
     }
 }
 
