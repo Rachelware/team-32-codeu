@@ -1,28 +1,80 @@
 
-
 function drawChart() {
-    var book_data = new google.visualization.DataTable();
-    //define columns for the DataTable instance
-    book_data.addColumn('string', 'Book Title');
-    book_data.addColumn('number', 'Votes');
+    var messageCountElement;
+    var userCountElement;
+    var averageElement;
 
-    //add data to book_data
-    book_data.addRows([
-        ["The Best We Could Do", 6],
-        ["Sing, Unburied, Sing", 10],
-        ["The Book of Unknown Americans", 7],
-        ["The 57 Bus", 4],
-        ["The Handmaid's Tale", 8]
-    ]);
+    //get data from JSON ur;
+    fetch('/stats').then(res => res.json())
+    .then((stats) => {
+        console.log("");
+        messageCountElement = stats.messageCount;
+        userCountElement = stats.userCount;
+        averageElement = parseFloat(stats.average);
 
-    var chart = new google.visualization.BarChart(document.getElementById('book_chart'));
-    var chart_options = {
-        width: 800,
-        height: 400
-    };
-    chart.draw(book_data, chart_options);
-}
+        var data = google.visualization.arrayToDataTable([
+            ["Stats", "Number", { role: "style" } ],
+            ["Total Messages", messageCountElement, "#e5e4e2"],
+            ["Active Users", userCountElement, "#e5e4e2"],
+            ["Average # of Messages Per User", averageElement, "#e5e4e2"]
+        ]);
 
-function loadAll() {
-    drawChart();
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            { calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation" },
+            2]);
+
+
+        var chart = new google.charts.Bar(document.getElementById('book_chart'));
+        var chart_options = {
+            titleTextStyle: {
+                color: '#ffffff',
+                fontSize: 24,
+                bold: false,
+                italic: false
+            },
+            chartArea: {
+                left: 20
+            },
+            width: 800,
+            colors: ['#ffffff'],
+            chart: {
+                title: 'Site Statistics'
+            },
+            fontSize: 18,
+            bars: 'horizontal',
+            legend: { position: "none" },
+            hAxis: {
+                textStyle: {
+                    color: '#ffffff'
+                }
+            },
+            vAxis: {
+                textStyle: {
+                    color: '#ffffff'
+                },
+                textPosition: 'in'
+            },
+            axes: {
+                x: {
+                    0: { side: 'bottom', color: '#ffffff', label: ''} // Top x-axis.
+                },
+                y: {
+                    0: {label: ''}
+                }
+            },
+            backgroundColor: '#263238',
+            annotations: {
+                textStyle: {
+                    fontSize: 18,
+                    color: '#f2f3f5'
+                }
+            }
+        };
+
+        chart.draw(view, google.charts.Bar.convertOptions(chart_options));
+    });
 }

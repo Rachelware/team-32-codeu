@@ -78,11 +78,26 @@ public class MessageServlet extends HttpServlet {
         String user = userService.getCurrentUser().getEmail();
         String text = Jsoup.clean(request.getParameter("text"), Whitelist.none());
         
-        String regex = "(https?://\\S+\\.(png|jpg))";
-        String replacement = "<img src=\"$1\" />";
+        /* Can take website links to pictures or gifs in messages*/
+        String regex = "(https?://\\S+\\.(png|jpg|gif))";
+        String replacement = "<img src=\"$1\" />"; 
         String textWithImagesReplaced = text.replaceAll(regex, replacement);
-
-        Message message = new Message(user, textWithImagesReplaced);
+        
+        /* Can take in BBCode to create basic styled text*/
+        String textWithBBCodeReplaced = textWithImagesReplaced.replace("[b]", "<strong>")
+        .replace("[/b]", "</strong>").replace("[i]", "<em>").replace("[/i]", "</em>")
+        .replace("[u]", "<ins>").replace("[/u]", "</ins>").replace("[s]", "<del>")
+        .replace("[/s]", "</del>").replace("[quote]", "<blockquote>")
+        .replace("[/quote]", "</blockquote>").replace("[code]", "<pre>").replace("[/code]", "</pre>");
+        
+        /* possibly a safer way
+        String BBCodeRegex = "(\\[b\\](\\S|\\s)+\\[/b\\])";
+        String BBCodeReplacement = "<strong>\"$1\"</strong>";
+        String textWithBBCodeReplaced = textWithImagesReplaced.replaceAll(BBCodeRegex, BBCodeReplacement);
+        
+        */
+        
+        Message message = new Message(user, textWithBBCodeReplaced);
         datastore.storeMessage(message);
 
         response.sendRedirect("/user-page.html?user=" + user);
