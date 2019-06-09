@@ -14,9 +14,9 @@ function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
             ["Stats", "Number", { role: "style" } ],
-            ["Total Messages", messageCountElement, "color: #e5e4e2"],
-            ["Active Users", userCountElement, "color: #e5e4e2"],
-            ["Average # of Messages Per User", averageElement, "color: #e5e4e2"]
+            ["     Total Messages", messageCountElement, "#e5e4e2"],
+            ["     Active Users", userCountElement, "#e5e4e2"],
+            ["     Average # of Messages Per User", averageElement, "#e5e4e2"]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -30,10 +30,19 @@ function drawChart() {
 
         var chart = new google.charts.Bar(document.getElementById('book_chart'));
         var chart_options = {
+            titleTextStyle: {
+                color: '#ffffff',
+                fontSize: 24,
+                bold: false,
+                italic: false
+            },
+            chartArea: {
+                left: 20
+            },
             width: 800,
             colors: ['#ffffff'],
             chart: {
-                title: ''
+                title: '     Site Statistics'
             },
             fontSize: 18,
             bars: 'horizontal',
@@ -46,7 +55,8 @@ function drawChart() {
             vAxis: {
                 textStyle: {
                     color: '#ffffff'
-                }
+                },
+                textPosition: 'in'
             },
             axes: {
                 x: {
