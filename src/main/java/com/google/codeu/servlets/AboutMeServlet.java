@@ -81,7 +81,8 @@ public class AboutMeServlet extends HttpServlet{
         "\\[s\\]((\\S|\\s)+)\\[/s\\]", 
         "\\[quote\\]((\\S|\\s)+)\\[/quote\\]",
         "\\[code\\]((\\S|\\s)+)\\[/code\\]", 
-        "\\[size=(?<number>\\d)\\](([^\\[\\]])+)\\[/size\\]"};
+        "\\[size=(?<number>\\d)\\](([^\\[\\]])+)\\[/size\\]",
+        "\\[/br\\]"};
         
         String[] BBCodeReplacement = {"<strong>$1</strong>", 
         "<em>$1</em>", 
@@ -89,7 +90,8 @@ public class AboutMeServlet extends HttpServlet{
         "<del>$1</del>", 
         "<q>$1</q>", 
         "<pre>$1</pre>", 
-        "<font size=$1>$2</font>"};
+        "<font size=$1>$2</font>",
+        "</br>"};
         
         
         //Iterate through to replace each type of tag
