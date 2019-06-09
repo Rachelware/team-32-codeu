@@ -14,34 +14,12 @@
  * limitations under the License.
  */
 
-html, body {
-	height:100%;
-	width:100%;
-	margin:0;
-	padding:0;
-	font-family: 'Open Sans', sans-serif;
-	background-color: #263238;
-}
-
-h1#title {
-	margin-top: 0;
-	line-height: 60px;
-	margin-left: 15px;
-	color: white;
-	box-shadow: 1px 10px #181e21;
-}
-
-/* Customize the title of the stats page */
-.stats-title {
-	width: 100%;
-	background-color: #80808057;
-}
-
 p {
 	margin-left: 10px;
 	display: list-item;
 	list-style-type: circle;
 	list-style-position: inside;
 	color: white;
+	border: #90ebff;
 }
 
