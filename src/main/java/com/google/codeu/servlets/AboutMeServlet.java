@@ -67,7 +67,39 @@ public class AboutMeServlet extends HttpServlet{
         String userEmail = userService.getCurrentUser().getEmail();
         String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
         
-        User user = new User(userEmail, aboutMe);
+        /* Can take website links to pictures or gifs in messages*/
+        String regex = "(https?://\\S+\\.(png|jpg|gif))";
+        String replacement = "<img src=\"$1\" />"; 
+        String aboutMeWithImagesReplaced = aboutMe.replaceAll(regex, replacement);
+        
+        /* Can take in BBCode to create basic styled text*/
+
+        //Mapped BBCode and HTML replacement to same index of 2 arrays
+        String[] BBCodeRegex = {"\\[b\\]((\\S|\\s)+)\\[/b\\]", 
+        "\\[i\\]((\\S|\\s)+)\\[/i\\]", 
+        "\\[u\\]((\\S|\\s)+)\\[/u\\]", 
+        "\\[s\\]((\\S|\\s)+)\\[/s\\]", 
+        "\\[quote\\]((\\S|\\s)+)\\[/quote\\]",
+        "\\[code\\]((\\S|\\s)+)\\[/code\\]", 
+        "\\[size=(?<number>\\d)\\](([^\\[\\]])+)\\[/size\\]"};
+        
+        String[] BBCodeReplacement = {"<strong>$1</strong>", 
+        "<em>$1</em>", 
+        "<ins>$1</ins>", 
+        "<del>$1</del>", 
+        "<q>$1</q>", 
+        "<pre>$1</pre>", 
+        "<font size=$1>$2</font>"};
+        
+        
+        //Iterate through to replace each type of tag
+        int i;
+        String aboutMeWithBBCodeReplaced = aboutMeWithImagesReplaced;
+        for (i = 0; i < BBCodeRegex.length; i++) {
+            aboutMeWithBBCodeReplaced = aboutMeWithBBCodeReplaced.replaceAll(BBCodeRegex[i], BBCodeReplacement[i]);
+        }
+        
+        User user = new User(userEmail, aboutMeWithBBCodeReplaced);
         datastore.storeUser(user);
         
         response.sendRedirect("/user-page.html?user=" + userEmail);
