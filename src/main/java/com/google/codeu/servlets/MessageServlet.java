@@ -84,18 +84,33 @@ public class MessageServlet extends HttpServlet {
         String textWithImagesReplaced = text.replaceAll(regex, replacement);
         
         /* Can take in BBCode to create basic styled text*/
-        String textWithBBCodeReplaced = textWithImagesReplaced.replace("[b]", "<strong>")
-        .replace("[/b]", "</strong>").replace("[i]", "<em>").replace("[/i]", "</em>")
-        .replace("[u]", "<ins>").replace("[/u]", "</ins>").replace("[s]", "<del>")
-        .replace("[/s]", "</del>").replace("[quote]", "<blockquote>")
-        .replace("[/quote]", "</blockquote>").replace("[code]", "<pre>").replace("[/code]", "</pre>");
+
+        //Mapped BBCode and HTML replacement to same index of 2 arrays
+        String[] BBCodeRegex = {"\\[b\\]((\\S|\\s)+)\\[/b\\]", 
+        "\\[i\\]((\\S|\\s)+)\\[/i\\]", 
+        "\\[u\\]((\\S|\\s)+)\\[/u\\]", 
+        "\\[s\\]((\\S|\\s)+)\\[/s\\]", 
+        "\\[quote\\]((\\S|\\s)+)\\[/quote\\]",
+        "\\[code\\]((\\S|\\s)+)\\[/code\\]", 
+        "\\[size=(?<number>\\d)\\](([^\\[\\]])+)\\[/size\\]",
+        "\\[/br\\]"};
         
-        /* possibly a safer way
-        String BBCodeRegex = "(\\[b\\](\\S|\\s)+\\[/b\\])";
-        String BBCodeReplacement = "<strong>\"$1\"</strong>";
-        String textWithBBCodeReplaced = textWithImagesReplaced.replaceAll(BBCodeRegex, BBCodeReplacement);
+        String[] BBCodeReplacement = {"<strong>$1</strong>", 
+        "<em>$1</em>", 
+        "<ins>$1</ins>", 
+        "<del>$1</del>", 
+        "<q>$1</q>", 
+        "<pre>$1</pre>", 
+        "<font size=$1>$2</font>",
+        "</br>"};
         
-        */
+        
+        //Iterate through to replace each type of tag
+        int i;
+        String textWithBBCodeReplaced = textWithImagesReplaced;
+        for (i = 0; i < BBCodeRegex.length; i++) {
+            textWithBBCodeReplaced = textWithBBCodeReplaced.replaceAll(BBCodeRegex[i], BBCodeReplacement[i]);
+        }
         
         Message message = new Message(user, textWithBBCodeReplaced);
         datastore.storeMessage(message);
