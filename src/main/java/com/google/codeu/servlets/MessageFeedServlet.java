@@ -12,6 +12,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
+import com.google.codeu.data.User;
 import com.google.gson.Gson;
 
 /* Handles fetching all messages for the public feed*/
@@ -34,12 +35,14 @@ public class MessageFeedServlet extends HttpServlet{
 		UserService userService = UserServiceFactory.getUserService();
 		String email = userService.getCurrentUser().getEmail();
 		int level;
-		if (email == null || email.equals("")) {
-			// Request is invalid, return empty array
-			response.getWriter().println("[]");
-			return;
+		User user;
+		if (datastore.getUser(email) == null) {
+			user = new User(email, null, 1);
+			datastore.storeUser(user);
+			level = user.getLevel();
 		} else {
-			level = datastore.getUser(email).getLevel();
+			user = datastore.getUser(email);
+			level = user.getLevel();
 		}
 
 		List<Message> messages = datastore.getLevelMessages(level);
