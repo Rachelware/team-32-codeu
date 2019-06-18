@@ -47,7 +47,7 @@ function showMessageFormIfViewingSelf() {
         });
 }
 
-
+/** Loads the Level container and allows users to update their level */
 function levelUp() {
     const url = '/user-level';
     fetch(url)
