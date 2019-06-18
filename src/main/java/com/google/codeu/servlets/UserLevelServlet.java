@@ -33,13 +33,7 @@ public class UserLevelServlet extends HttpServlet{
             user = new User(user_email, null, 1);
             datastore.storeUser(user);
         }
-        System.out.println("USER:");
-        System.out.println(user);
-        System.out.println("USER EMAIL:");
-        System.out.println(user_email);
         int level = user.getLevel();
-        System.out.println("LEVEL:");
-        System.out.println(level);
         Gson gson = new Gson();
         String json = gson.toJson(level);
         response.getOutputStream().println(json);
