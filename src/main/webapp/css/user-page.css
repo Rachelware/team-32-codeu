@@ -55,6 +55,22 @@
     font-size: large;
 }
 
+#level-container{
+    float: right;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 35px;
+    width: 200px;
+    display: flex;
+}
+
+.level-header {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 6px;
+    width: inherit;
+}
+
 /* Give each message a rounded border. */
 .message-div {
     border: 1px solid #80808057;
