@@ -12,7 +12,10 @@ import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
-/*Handles upload from Blobstore.*/
+/**
+ * When the fetch() function requests the /blobstore-upload-url URL, the content of the
+ * response is the URL that allows a user to upload a file to Blobstore.
+ */
 @WebServlet("/blobstore-upload-url")
 public class BlobstoreUploadUrlServlet extends HttpServlet {
 
@@ -24,4 +27,5 @@ public class BlobstoreUploadUrlServlet extends HttpServlet {
     response.setContentType("text/html");
     response.getOutputStream().println(uploadUrl);
     }
+
 }

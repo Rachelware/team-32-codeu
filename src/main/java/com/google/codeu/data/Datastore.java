@@ -48,6 +48,13 @@ public class Datastore {
         datastore.put(messageEntity);
     }
 
+    //Stores Image URL for BLobstore
+    public void storeBlobUrl(String imageUrl) {
+        Entity imageUrlEntity = new Entity("");
+        //use as entity?
+        datastore.put(imageUrlEntity);
+    }
+
     /**
      * Gets messages posted by a specific user.
      *
@@ -80,7 +87,7 @@ public class Datastore {
         }
         return users;
     }
-  
+
   /** Returns the total number of messages for all users. */
     public int getTotalMessageCount(){
         Query query = new Query("Message");
@@ -107,7 +114,7 @@ public class Datastore {
         String average = Float.toString((float) messages / users);
         return average;
     }
-  
+
     /** Stores the User in Datastore. */
     public void storeUser(User user) {
         Entity userEntity = new Entity("User", user.getEmail());
@@ -115,7 +122,7 @@ public class Datastore {
         userEntity.setProperty("aboutMe", user.getAboutMe());
         datastore.put(userEntity);
     }
-  
+
     /**
     * Returns the User owned by the email address, or
     * null if no matching User was found.
@@ -135,7 +142,7 @@ public class Datastore {
   /**
    * Gets messages for all users
    *
-   * @return a list of messages from all the users. 
+   * @return a list of messages from all the users.
    * List stored in time descending order.
    **/
 
@@ -171,5 +178,3 @@ public class Datastore {
         e.printStackTrace();
     }
 }
-
-

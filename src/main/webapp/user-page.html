@@ -33,9 +33,9 @@ limitations under the License.
                 <li><a href="/features.html">Features</a></li>
             </ul>
         </nav>
-        
+
         <h1 id="page-title">User Page</h1>
-        
+
         <div id="about-me-container">Loading...</div>
         <div id="about-me-section">
             <form id="about-me-form" action="/about" method="POST" class="hidden">
@@ -44,7 +44,16 @@ limitations under the License.
                 <input type="submit" value="Submit">
             </form>
         </div>
-        
+
+        <div>
+            <form id="image-upload" action="/blobstore-upload-url" method="POST" enctype="multipart/form-data">
+                <p>Upload an Image</p>
+                <input type="file" name="image">
+                <br/>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
         <div id="message-section">
         <form id="message-form" action="/messages" method="POST" class="hidden">
             <h3> Enter a new message: </h3>
@@ -53,6 +62,6 @@ limitations under the License.
         </form>
         </div>
         <div id="message-container">Loading...</div>
-        
+
     </body>
 </html>
