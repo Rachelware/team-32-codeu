@@ -149,14 +149,16 @@ public class Datastore {
      * Returns the Stat owned by the user, with the specific stat,
      * and level identified. null if no matching Stat was found.
      */
-    public User getStat(User user, Stat.Stat_Type type, int level) {
+    public Stat getStat(String email, Stat.Stat_Type type, int level) {
         Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
         PreparedQuery results = datastore.prepare(query);
         Entity statEntity = results.asSingleEntity();
         if(statEntity == null) {
             return null;
         }
-        return user;
+        double value = (double) statEntity.getProperty("value");
+        Stat stat = new Stat(email, type, value, level);
+        return stat;
     }
 
   /**
@@ -187,7 +189,7 @@ public class Datastore {
         List<Message> messages = new ArrayList<>();
         Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
         Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
-        Query query = new Query("Message").setFilter(levelFilter).setFilter(timeFilter)
+        Query query = new Query("Message").setFilter(timeFilter).setFilter(levelFilter)
                 .addSort("timestamp", SortDirection.DESCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){

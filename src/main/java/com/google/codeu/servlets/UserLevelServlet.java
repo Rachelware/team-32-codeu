@@ -58,7 +58,7 @@ public class UserLevelServlet extends HttpServlet{
         // Grab current time
         long end_time = user.getTimestamp();
         //Save info in stat object
-        Stat time_stat = new Stat(user, Stat.Stat_Type.DURATION, end_time - start_time, level);
+        Stat time_stat = new Stat(user_email, Stat.Stat_Type.DURATION, end_time - start_time, level);
         //Store updated user and stat object
         datastore.storeUser(user);
         datastore.storeStat(time_stat);

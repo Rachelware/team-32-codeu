@@ -10,23 +10,23 @@ public class Stat {
         CONTRIBUTION
     }
 
-    private User user;
+    private String user_email;
     private Stat_Type type;
     private double value;
     private int level;
     private UUID id;
 
     /* Constructor */
-    public Stat(User user, Stat_Type type, double value, int level) {
-        this.user = user;
+    public Stat(String user_email, Stat_Type type, double value, int level) {
+        this.user_email = user_email;
         this.type = type;
         this.value = value;
         this.level = level;
         this.id = java.util.UUID.randomUUID();
     }
 
-    public User getUser() {
-        return this.user;
+    public String getUser() {
+        return this.user_email;
     }
 
     public String getId() {
