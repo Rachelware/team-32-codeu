@@ -36,4 +36,12 @@ public class User {
     public String getAboutMe(){
         return this.aboutMe;
     }
+
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(long time) {
+        this.timestamp = time;
+    }
 }
