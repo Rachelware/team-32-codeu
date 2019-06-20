@@ -150,7 +150,7 @@ public class Datastore {
      * and level identified. null if no matching Stat was found.
      */
     public Stat getStat(String email, Stat.Stat_Type type, int level) {
-        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
+        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
         PreparedQuery results = datastore.prepare(query);
         Entity statEntity = results.asSingleEntity();
         if(statEntity == null) {
