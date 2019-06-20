@@ -183,10 +183,11 @@ public class Datastore {
         return messages;
     }
 
-    public List<Message> getLevelMessages(int level){
+    public List<Message> getLevelMessages(int level, long timestamp){
         List<Message> messages = new ArrayList<>();
         Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
-        Query query = new Query("Message").setFilter(levelFilter)
+        Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
+        Query query = new Query("Message").setFilter(levelFilter).setFilter(timeFilter)
                 .addSort("timestamp", SortDirection.DESCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){
