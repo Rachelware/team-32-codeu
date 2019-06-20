@@ -35,17 +35,20 @@ public class MessageFeedServlet extends HttpServlet{
 		UserService userService = UserServiceFactory.getUserService();
 		String email = userService.getCurrentUser().getEmail();
 		int level;
+		long timestamp;
 		User user;
 		if (datastore.getUser(email) == null) {
 			user = new User(email, null, 1);
 			datastore.storeUser(user);
 			level = user.getLevel();
+			timestamp = user.getTimestamp();
 		} else {
 			user = datastore.getUser(email);
 			level = user.getLevel();
+			timestamp = user.getTimestamp();
 		}
 
-		List<Message> messages = datastore.getLevelMessages(level);
+		List<Message> messages = datastore.getLevelMessages(level, timestamp);
 		Gson gson = new Gson();
 		String json = gson.toJson(messages);
 
