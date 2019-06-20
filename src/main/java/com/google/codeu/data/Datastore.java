@@ -117,6 +117,16 @@ public class Datastore {
         userEntity.setProperty("level", user.getLevel());
         datastore.put(userEntity);
     }
+
+    /** Stores the Stat in Datastore. */
+    public void storeStat(Stat user_stat) {
+        Entity statEntity = new Entity("Stat", user_stat.getId());
+        statEntity.setProperty("user", user_stat.getUser());
+        statEntity.setProperty("value", user_stat.getValue());
+        statEntity.setProperty("type", user_stat.getType());
+        statEntity.setProperty("level", user_stat.getLevel());
+        datastore.put(statEntity);
+    }
   
     /**
     * Returns the User owned by the email address, or
@@ -132,6 +142,20 @@ public class Datastore {
         String aboutMe = (String) userEntity.getProperty("aboutMe");
         long level = (long) userEntity.getProperty("level");
         User user = new User(email, aboutMe, (int) level);
+        return user;
+    }
+
+    /**
+     * Returns the Stat owned by the user, with the specific stat,
+     * and level identified. null if no matching Stat was found.
+     */
+    public User getStat(User user, Stat.Stat_Type type, int level) {
+        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
+        PreparedQuery results = datastore.prepare(query);
+        Entity statEntity = results.asSingleEntity();
+        if(statEntity == null) {
+            return null;
+        }
         return user;
     }
 
