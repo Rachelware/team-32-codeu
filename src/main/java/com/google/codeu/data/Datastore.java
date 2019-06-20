@@ -123,9 +123,21 @@ public class Datastore {
         Entity statEntity = new Entity("Stat", user_stat.getId());
         statEntity.setProperty("user", user_stat.getUser());
         statEntity.setProperty("value", user_stat.getValue());
-        statEntity.setProperty("type", user_stat.getType());
+        statEntity.setProperty("type", user_stat.getType().toString());
         statEntity.setProperty("level", user_stat.getLevel());
         datastore.put(statEntity);
+    }
+
+    public Stat.Stat_Type convertStringtoStat(String str) {
+        switch(str) {
+            case "DURATION":
+                return Stat.Stat_Type.DURATION;
+            case "ATTEMPTS":
+                return Stat.Stat_Type.ATTEMPTS;
+            case "CONTRIBUTION":
+                return Stat.Stat_Type.CONTRIBUTION;
+        }
+        return null;
     }
   
     /**

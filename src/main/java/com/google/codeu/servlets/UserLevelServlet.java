@@ -67,6 +67,7 @@ public class UserLevelServlet extends HttpServlet{
         /*
         * if answer is wrong:
         * //Increment ATTEMPTS
+        * //Might need to handle converting enum types
         *   Stat stat = datastore.getStat(user, Stat.Stat_type.ATTEMPTS, level);
         *   double value = stat.getValue() + 1;
         *   stat.setValue(value);
