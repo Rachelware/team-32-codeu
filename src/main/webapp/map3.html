@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marker Storage</title>
+    <link rel = "stylesheet" href = "/css/main.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA"></script>
+    <script>
+        function createMap(){
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 38.5949, lng: -94.8923},
+                zoom: 4
+            });
+             // When the user clicks in the map, show a marker with a text box the user can edit.
+            map.addListener('click', (event) => {
+                createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
+            });
+            fetchMarkers();
+        }
+        
+
+
+
+    </script>
+    <style>
+        #map {
+            width: 500px;
+            height: 500px;
+            border: thin solid black;
+        }
+    </style>
+</head>
+<body onload="createMap();">
+    <h1>Marker Storage</h1>
+    <div id="map"></div>
+    <p>Click on map to create a new marker</p>
+</body>
+</html>
