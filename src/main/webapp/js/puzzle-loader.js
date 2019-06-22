@@ -54,12 +54,6 @@ function createLink(url, text) {
     return linkElement;
 }
 
-/** Sets the page title based on the URL parameter username. */
-function setPageTitle() {
-    document.getElementById('page-title').innerText = datastore.getUser(parameterUsername).getLevel();
-    document.title = parameterUsername + ' - User Page';
-}
-
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
