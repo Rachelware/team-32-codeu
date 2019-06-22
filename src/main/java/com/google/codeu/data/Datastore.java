@@ -117,6 +117,28 @@ public class Datastore {
         userEntity.setProperty("level", user.getLevel());
         datastore.put(userEntity);
     }
+
+    /** Stores the Stat in Datastore. */
+    public void storeStat(Stat user_stat) {
+        Entity statEntity = new Entity("Stat", user_stat.getId());
+        statEntity.setProperty("user", user_stat.getUser());
+        statEntity.setProperty("value", user_stat.getValue());
+        statEntity.setProperty("type", user_stat.getType().toString());
+        statEntity.setProperty("level", user_stat.getLevel());
+        datastore.put(statEntity);
+    }
+
+    public Stat.Stat_Type convertStringtoStat(String str) {
+        switch(str) {
+            case "DURATION":
+                return Stat.Stat_Type.DURATION;
+            case "ATTEMPTS":
+                return Stat.Stat_Type.ATTEMPTS;
+            case "CONTRIBUTION":
+                return Stat.Stat_Type.CONTRIBUTION;
+        }
+        return null;
+    }
   
     /**
     * Returns the User owned by the email address, or
@@ -133,6 +155,22 @@ public class Datastore {
         long level = (long) userEntity.getProperty("level");
         User user = new User(email, aboutMe, (int) level);
         return user;
+    }
+
+    /**
+     * Returns the Stat owned by the user, with the specific stat,
+     * and level identified. null if no matching Stat was found.
+     */
+    public Stat getStat(String email, Stat.Stat_Type type, int level) {
+        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
+        PreparedQuery results = datastore.prepare(query);
+        Entity statEntity = results.asSingleEntity();
+        if(statEntity == null) {
+            return null;
+        }
+        double value = (double) statEntity.getProperty("value");
+        Stat stat = new Stat(email, type, value, level);
+        return stat;
     }
 
   /**
@@ -159,10 +197,11 @@ public class Datastore {
         return messages;
     }
 
-    public List<Message> getLevelMessages(int level){
+    public List<Message> getLevelMessages(int level, long timestamp){
         List<Message> messages = new ArrayList<>();
         Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
-        Query query = new Query("Message").setFilter(levelFilter)
+        Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
+        Query query = new Query("Message").setFilter(timeFilter).setFilter(levelFilter)
                 .addSort("timestamp", SortDirection.DESCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){

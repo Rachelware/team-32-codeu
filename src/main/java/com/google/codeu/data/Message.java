@@ -64,4 +64,8 @@ public class Message {
     public long getTimestamp() {
         return timestamp;
     }
+
+    public void setTimestamp(long time) {
+        this.timestamp = time;
+    }
 }
