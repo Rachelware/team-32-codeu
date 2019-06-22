@@ -73,6 +73,6 @@ public class UserLevelServlet extends HttpServlet{
         *   stat.setValue(value);
         *   datastore.storeStat(stat);
         * */
-        response.sendRedirect("/user-page.html?user=" + user_email);
+        response.sendRedirect("/puzzle.html?user=" + user_email);
     }
 }

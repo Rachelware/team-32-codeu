@@ -111,6 +111,7 @@ function buildMessageDiv(message) {
 
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message-div');
+    messageDiv.classList.add('z-depth-1');
     messageDiv.appendChild(headerDiv);
     messageDiv.appendChild(bodyDiv);
 

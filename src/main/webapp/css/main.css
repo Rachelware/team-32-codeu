@@ -40,14 +40,16 @@ h1 {
     background-color: #80808057;
     padding-left: 10px;
     margin-top: 0;
-    line-height: 85px;
+    line-height: 55px;
     margin-left: 15px;
     color: white;
+    font-size: large;
 }
 
 /* General header design */
 h2, h3 {
-    padding-left: 10px;
+    padding-left: 15px;
+    font-size: medium;
 }
 
 /* General input box design */
@@ -65,7 +67,8 @@ input {
 /* General list design */
 li {
     list-style-type: circle;
-    list-style-position: outside;
+    list-style-position: inside;
+    padding-left: 10px;
 }
 
 /* Remove bullet points from navigation bar. */
