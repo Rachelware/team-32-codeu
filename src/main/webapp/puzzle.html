@@ -20,9 +20,17 @@
 <div class="wrapper">
     <div class="content1">
         <h1 class="z-depth-1" id="puzzle-title">Puzzle</h1>
-        <div id="level-container">
-            <form id="level-button" action="/user-level" method="POST">
-                <input type="submit" class="z-depth-1" value="Level Up!">
+        <div id="answer-container">Loading...</div>
+        <div id="answer-section" class="z-depth-5">
+            <form id="answer-form" action="/messages" method="POST" class="hidden">
+                <h3 class="enter-answer">Submit Your Answer Here:</h3>
+                <textarea name="text" id="answer-input"></textarea>
+                <input class="submit-answer z-depth-1" type="submit" value="Submit Answer">
+                <div id="level-container">
+                    <form id="level-button" action="/user-level" method="POST">
+                        <input type="submit" class="z-depth-1" value="Level Up!">
+                    </form>
+                </div>
             </form>
         </div>
     </div>
@@ -33,7 +41,7 @@
             <form id="message-form" action="/messages" method="POST" class="hidden">
                 <h3 class="enter-message">Enter a new message:</h3>
                 <textarea name="text" id="message-input"></textarea>
-                <input class="submit-message" type="submit" value="Submit">
+                <input class="submit-message z-depth-1" type="submit" value="Submit Message">
             </form>
         </div>
     </div>

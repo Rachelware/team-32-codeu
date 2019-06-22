@@ -1,9 +1,4 @@
 
-.enter-message {
-    margin-left: 10px;
-    padding-top: 5px;
-    margin-bottom: 8px;
-}
 
 .wrapper {
     padding-right: 20px;
@@ -21,10 +16,39 @@
     height: 200px;
 }
 
+#level-container{
+    font-size: smaller;
+    float: right;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 35px;
+    width: 90px;
+    display: flex;
+}
+
+.level-header {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 6px;
+    width: inherit;
+}
+
+.submit-message {
+    font-size: smaller;
+    margin-bottom: 10px;
+}
+
+.enter-message {
+    font-size: smaller;
+    margin-left: 10px;
+    padding-top: 5px;
+    margin-bottom: 8px;
+}
+
 /* Set the size of the message input to be 100 pixels high
    and will fill the width of its parent element. */
 #message-input {
-    height: 100px;
+    height: 80px;
     width: -webkit-fill-available;
     margin-top: 0px;
     margin-left: 25px;
@@ -37,30 +61,13 @@
     border-color: transparent;
 }
 
-#level-container{
-    float: right;
-    margin-left: 20px;
-    margin-right: 20px;
-    height: 35px;
-    width: 200px;
-    display: flex;
-}
-
-.level-header {
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-top: 6px;
-    width: inherit;
-}
-
-.submit-message {
-    margin-bottom: 10px;
-}
-
 #message-container {
-    height: 310px;
+    height: 340px;
+    padding-top: 0px;
+    margin-top: 0px;
     overflow-y:auto;
 }
+
 
 #message-section {
     margin-top: 20px;
@@ -72,7 +79,9 @@
 
 /* Give each message a rounded border. */
 .message-div {
-    border: 1px solid #80808057;
+    font-size: small;
+    border: 1px solid #fafafa;
+    background-color: white;
     border-radius: 3px;
     margin-top: 20px;
     margin-left: 25px;
@@ -81,18 +90,89 @@
 
 /* Add a bottom border to the message header. */
 .message-header {
+    font-size: smaller;
     padding: 5px;
-    background-color: #80808057;
+    background-color: #536dfe;
 }
 
 /* Give the message body a margin so the text
    isn't too close to the border. */
 .message-body {
     margin: 5px;
+    color: #444;
 }
 
 /* Give message image a size restriction */
 .message-body img {
+    display: block;
+    margin-top: 25px;
+    max-width: 75%;
+}
+
+.submit-answer {
+    font-size: smaller;
+    margin-bottom: 7px;
+}
+
+.enter-answer {
+    font-size: smaller;
+    margin-left: 10px;
+    padding-top: 5px;
+    margin-bottom: 8px;
+}
+
+/* Set the size of the message input to be 100 pixels high
+   and will fill the width of its parent element. */
+#answer-input {
+    height: 80px;
+    width: -webkit-fill-available;
+    margin-top: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    color: #263238;
+    font-size: medium;
+    background-color:#c5c5c5;
+    border-radius: 3px;
+    border-color: transparent;
+}
+
+#answer-container {
+    height: 340px;
+    overflow-y:auto;
+}
+
+#answer-section {
+    margin-top: 20px;
+    margin-left:25px;
+    margin-right: 10px;
+    background-color: #172429;
+}
+
+
+/* Give each message a rounded border. */
+.answer-div {
+    border: 1px solid #80808057;
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 10px;
+}
+
+/* Add a bottom border to the message header. */
+.answer-header {
+    padding: 5px;
+    background-color: #80808057;
+}
+
+/* Give the message body a margin so the text
+   isn't too close to the border. */
+.answer-body {
+    margin: 5px;
+}
+
+/* Give message image a size restriction */
+.answer-body img {
     display: block;
     margin-top: 25px;
     max-width: 75%;
