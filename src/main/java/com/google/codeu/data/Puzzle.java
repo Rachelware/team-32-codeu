@@ -18,7 +18,7 @@ public class Puzzle {
 
     /* Constructor */
     public Puzzle(int level, Puzzle_Type type, String answer) {
-        this.type = type;
+        this.answer = answer;
         this.level = level;
         this.type = type;
         this.stats = new ArrayList<>();
