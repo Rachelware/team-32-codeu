@@ -30,7 +30,6 @@ public class MessageFeedServlet extends HttpServlet{
       for all users. */
     @Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
-
     	response.setContentType("application/json");
 		UserService userService = UserServiceFactory.getUserService();
 		String email = userService.getCurrentUser().getEmail();
@@ -44,12 +43,9 @@ public class MessageFeedServlet extends HttpServlet{
 			user = datastore.getUser(email);
 			level = user.getLevel();
 		}
-
 		List<Message> messages = datastore.getLevelMessages(level);
 		Gson gson = new Gson();
 		String json = gson.toJson(messages);
-
 		response.getOutputStream().println(json);
-
     }
 }
