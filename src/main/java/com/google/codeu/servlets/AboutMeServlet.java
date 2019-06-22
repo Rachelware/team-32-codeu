@@ -66,6 +66,7 @@ public class AboutMeServlet extends HttpServlet{
         
         String userEmail = userService.getCurrentUser().getEmail();
         String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
+        int level = datastore.getUser(userEmail).getLevel();
         
         /* Can take website links to pictures or gifs in messages*/
         String regex = "(https?://\\S+\\.(png|jpg|gif))";
@@ -101,7 +102,7 @@ public class AboutMeServlet extends HttpServlet{
             aboutMeWithBBCodeReplaced = aboutMeWithBBCodeReplaced.replaceAll(BBCodeRegex[i], BBCodeReplacement[i]);
         }
         
-        User user = new User(userEmail, aboutMeWithBBCodeReplaced);
+        User user = new User(userEmail, aboutMeWithBBCodeReplaced, level);
         datastore.storeUser(user);
         
         response.sendRedirect("/user-page.html?user=" + userEmail);

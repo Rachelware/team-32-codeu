@@ -47,6 +47,23 @@ function showMessageFormIfViewingSelf() {
         });
 }
 
+/** Loads the Level container and allows users to update their level */
+function levelUp() {
+    const url = '/user-level';
+    fetch(url)
+        .then((response) => {
+        return response.json();
+    })
+.then((level) => {
+    const levelContainer = document.getElementById('level-container');
+    const headerDiv = document.createElement('div');
+    headerDiv.classList.add('level-header');
+    headerDiv.appendChild(document.createTextNode(
+        'Level: ' + level));
+    levelContainer.appendChild(headerDiv);
+});
+}
+
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
     const url = '/messages?user=' + parameterUsername;
@@ -114,4 +131,5 @@ function buildUI() {
     showMessageFormIfViewingSelf();
     fetchMessages();
     fetchAboutMe();
+    levelUp();
 }
