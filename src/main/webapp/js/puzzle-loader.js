@@ -56,7 +56,7 @@ function createLink(url, text) {
 
 /** Sets the page title based on the URL parameter username. */
 function setPageTitle() {
-    document.getElementById('page-title').innerText = parameterUsername;
+    document.getElementById('page-title').innerText = datastore.getUser(parameterUsername).getLevel();
     document.title = parameterUsername + ' - User Page';
 }
 
@@ -90,6 +90,8 @@ function levelUp() {
     headerDiv.classList.add('level-header');
     headerDiv.appendChild(document.createTextNode(
         'Level: ' + level));
+    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
+    document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
     levelContainer.appendChild(headerDiv);
 });
 }
