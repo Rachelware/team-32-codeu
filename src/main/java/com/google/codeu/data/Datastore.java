@@ -43,6 +43,7 @@ public class Datastore {
     public void storeMessage(Message message) {
         Entity messageEntity = new Entity("Message", message.getId().toString());
         messageEntity.setProperty("user", message.getUser());
+        messageEntity.setProperty("level", message.getLevel());
         messageEntity.setProperty("text", message.getText());
         messageEntity.setProperty("timestamp", message.getTimestamp());
         datastore.put(messageEntity);
@@ -81,7 +82,7 @@ public class Datastore {
         return users;
     }
   
-  /** Returns the total number of messages for all users. */
+    /** Returns the total number of messages for all users. */
     public int getTotalMessageCount(){
         Query query = new Query("Message");
         PreparedQuery results = datastore.prepare(query);
@@ -113,7 +114,30 @@ public class Datastore {
         Entity userEntity = new Entity("User", user.getEmail());
         userEntity.setProperty("email", user.getEmail());
         userEntity.setProperty("aboutMe", user.getAboutMe());
+        userEntity.setProperty("level", user.getLevel());
         datastore.put(userEntity);
+    }
+
+    /** Stores the Stat in Datastore. */
+    public void storeStat(Stat user_stat) {
+        Entity statEntity = new Entity("Stat", user_stat.getId());
+        statEntity.setProperty("user", user_stat.getUser());
+        statEntity.setProperty("value", user_stat.getValue());
+        statEntity.setProperty("type", user_stat.getType().toString());
+        statEntity.setProperty("level", user_stat.getLevel());
+        datastore.put(statEntity);
+    }
+
+    public Stat.Stat_Type convertStringtoStat(String str) {
+        switch(str) {
+            case "DURATION":
+                return Stat.Stat_Type.DURATION;
+            case "ATTEMPTS":
+                return Stat.Stat_Type.ATTEMPTS;
+            case "CONTRIBUTION":
+                return Stat.Stat_Type.CONTRIBUTION;
+        }
+        return null;
     }
   
     /**
@@ -128,8 +152,25 @@ public class Datastore {
             return null;
         }
         String aboutMe = (String) userEntity.getProperty("aboutMe");
-        User user = new User(email, aboutMe);
+        long level = (long) userEntity.getProperty("level");
+        User user = new User(email, aboutMe, (int) level);
         return user;
+    }
+
+    /**
+     * Returns the Stat owned by the user, with the specific stat,
+     * and level identified. null if no matching Stat was found.
+     */
+    public Stat getStat(String email, Stat.Stat_Type type, int level) {
+        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
+        PreparedQuery results = datastore.prepare(query);
+        Entity statEntity = results.asSingleEntity();
+        if(statEntity == null) {
+            return null;
+        }
+        double value = (double) statEntity.getProperty("value");
+        Stat stat = new Stat(email, type, value, level);
+        return stat;
     }
 
   /**
@@ -156,12 +197,33 @@ public class Datastore {
         return messages;
     }
 
+    public List<Message> getLevelMessages(int level, long timestamp){
+        List<Message> messages = new ArrayList<>();
+        Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
+        Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
+        Query query = new Query("Message").setFilter(timeFilter).setFilter(levelFilter)
+                .addSort("timestamp", SortDirection.DESCENDING);
+        PreparedQuery results = datastore.prepare(query);
+        for (Entity entity : results.asIterable()){
+            try {
+                String user = (String) entity.getProperty("user");
+                Message message = messageQuery(user, entity);
+                messages.add(message);
+            } catch (Exception e){
+                printError(entity, e);
+            }
+        }
+        System.out.println(messages);
+        return messages;
+    }
+
     public Message messageQuery(String user, Entity newEntity){
         String idString = newEntity.getKey().getName();
         UUID id = UUID.fromString(idString);
         String text = (String) newEntity.getProperty("text");
         long timestamp = (long) newEntity.getProperty("timestamp");
-        Message message = new Message(id, user, text, timestamp);
+        int level = getUser(user).getLevel();
+        Message message = new Message(id, user, text, timestamp, level);
         return message;
     }
 

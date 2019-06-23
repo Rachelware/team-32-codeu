@@ -76,6 +76,7 @@ public class MessageServlet extends HttpServlet {
         }
 
         String user = userService.getCurrentUser().getEmail();
+        int level = datastore.getUser(user).getLevel();
         String text = Jsoup.clean(request.getParameter("text"), Whitelist.none());
         
         /* Can take website links to pictures or gifs in messages*/
@@ -112,7 +113,7 @@ public class MessageServlet extends HttpServlet {
             textWithBBCodeReplaced = textWithBBCodeReplaced.replaceAll(BBCodeRegex[i], BBCodeReplacement[i]);
         }
         
-        Message message = new Message(user, textWithBBCodeReplaced);
+        Message message = new Message(user, textWithBBCodeReplaced, level);
         datastore.storeMessage(message);
 
         response.sendRedirect("/user-page.html?user=" + user);
