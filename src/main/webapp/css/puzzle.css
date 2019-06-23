@@ -5,14 +5,14 @@
 }
 
 .content1 {
-    width: 50%;
+    width: 70%;
     height: 200px;
     float: left;
 }
 
 .content2 {
-    width: 50%;
-    margin-left: 50%;
+    width: 30%;
+    margin-left: 70%;
     height: 200px;
 }
 
@@ -41,7 +41,7 @@
 .enter-message {
     font-size: smaller;
     margin-left: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
     margin-bottom: 8px;
 }
 
@@ -55,8 +55,8 @@
     margin-right: 25px;
     margin-bottom: 10px;
     color: #263238;
-    font-size: medium;
-    background-color:#c5c5c5;
+    font-size: small;
+    background-color: white;
     border-radius: 3px;
     border-color: transparent;
 }
@@ -73,14 +73,15 @@
     margin-top: 20px;
     margin-left:25px;
     margin-right: 10px;
-    background-color: #172429;
+    background-color: #448aff;
+    border-radius: 3px;
 }
 
 
 /* Give each message a rounded border. */
 .message-div {
     font-size: small;
-    border: 1px solid #fafafa;
+    border: 0px solid rgba(0, 0, 0, 0.12);
     background-color: white;
     border-radius: 3px;
     margin-top: 20px;
@@ -92,7 +93,9 @@
 .message-header {
     font-size: smaller;
     padding: 5px;
-    background-color: #536dfe;
+    background-color: #448aff;
+    border-color: #448aff;
+    border-radius: 3px 3px 0px 0px;
 }
 
 /* Give the message body a margin so the text
@@ -111,13 +114,13 @@
 
 .submit-answer {
     font-size: smaller;
-    margin-bottom: 7px;
+    margin-bottom: 10px;
 }
 
 .enter-answer {
     font-size: smaller;
     margin-left: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
     margin-bottom: 8px;
 }
 
@@ -131,8 +134,8 @@
     margin-right: 25px;
     margin-bottom: 10px;
     color: #263238;
-    font-size: medium;
-    background-color:#c5c5c5;
+    font-size: small;
+    background-color: white;
     border-radius: 3px;
     border-color: transparent;
 }
@@ -146,7 +149,8 @@
     margin-top: 20px;
     margin-left:25px;
     margin-right: 10px;
-    background-color: #172429;
+    background-color: #26a69a;
+    border-radius: 3px;
 }
 
 
@@ -176,6 +180,24 @@
     display: block;
     margin-top: 25px;
     max-width: 75%;
+}
+
+#puzzle-prompt {
+    margin-left: 25px;
+    margin-right: 10px;
+    font-size: medium;
+    padding: 10px;
+    background-color: #26a69a;
+    color: white;
+}
+
+#puzzle-visual {
+    margin: 25px;
+    margin-right: 10px;
+    color: #26a69a;
+    padding: 10px;
+    background-color: #fafafa;
+    height: 100%;
 }
 
 /* Use this to hide certain elements like forms if the

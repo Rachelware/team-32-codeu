@@ -33,7 +33,7 @@ p {
 
 /* General link design */
 a {
-    color: #90ebff;
+    color: white;
 }
 
 h1 {
@@ -55,8 +55,8 @@ h2, h3 {
 /* General input box design */
 input {
     margin-left: 25px;
-    color: #90ebff;
-    background-color: #80808057;
+    color: white;
+    background-color: #ee6e73;
     border:transparent;
     border-radius: 3px;
     padding: 10px 10px;
