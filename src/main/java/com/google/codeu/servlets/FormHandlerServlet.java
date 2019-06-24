@@ -1,4 +1,3 @@
-
 package com.google.codeu.servlets;
 
 import com.google.appengine.api.blobstore.BlobInfo;
@@ -17,13 +16,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
 import com.google.gson.Gson;
-import java.util.Map;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 
 /**
  * When the user submits the form, Blobstore processes the file upload
@@ -45,6 +37,8 @@ import javax.servlet.http.HttpServletResponse;
         
         //get the Url of the image uploaded to blobstore
         String imageUrl = getUploadedFileUrl(request, "image");
+        
+        //connected version (does not work, waiting for other changes to be merged)
         /**
         UserService userService = UserServiceFactory.getUserService();
         if (!userService.isUserLoggedIn()) {
@@ -56,7 +50,15 @@ import javax.servlet.http.HttpServletResponse;
         String user = userService.getCurrentUser().getEmail();
         int level = datastore.getUser(user).getLevel(); **/
         
-        /*NEED TO REPLACE THIS*/
+        /**
+        String imageHtml = "<a href=\"" + imageUrl + "\">" + "<img src=\"" + imageUrl + "\" />" + "</a>";
+        
+        Message myImage = new Message(user, imageHtml, level);
+        datastore.storeMessage(myImage);
+        
+        response.sendRedirect("imageUpload.html"); **/
+        
+        //non-connected version
         // Output some HTML that shows the data the user entered.
         // A real codebase would probably store these in Datastore.
         ServletOutputStream out = response.getOutputStream();
@@ -65,13 +67,6 @@ import javax.servlet.http.HttpServletResponse;
         out.println("<img src=\"" + imageUrl + "\" />");
         out.println("</a>");
         
-        /**
-        String imageHtml = "<a href=\"" + imageUrl + "\">" + "<img src=\"" + imageUrl + "\" />" + "</a>";
-        
-        Message myImage = new Message(user, imageHtml, level);
-        datastore.storeMessage(myImage);
-        
-        response.sendRedirect("imageUpload.html"); **/
     }
     
     //Returns a URL that points to the uploaded file, or null if the user didn't upload a file.
@@ -103,11 +98,3 @@ import javax.servlet.http.HttpServletResponse;
         return imagesService.getServingUrl(options);
     }
  }
-
-
-
-
-
-
-
-
