@@ -54,12 +54,6 @@ function createLink(url, text) {
     return linkElement;
 }
 
-/** Sets the page title based on the URL parameter username. */
-function setPageTitle() {
-    document.getElementById('page-title').innerText = parameterUsername;
-    document.title = parameterUsername + ' - User Page';
-}
-
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
@@ -73,6 +67,8 @@ function showMessageFormIfViewingSelf() {
             loginStatus.username == parameterUsername) {
         const messageForm = document.getElementById('message-form');
         messageForm.classList.remove('hidden');
+        const answerForm = document.getElementById('answer-form');
+        answerForm.classList.remove('hidden');
     }
 });
 }
@@ -87,9 +83,8 @@ function levelUp() {
 .then((level) => {
         const levelContainer = document.getElementById('level-container');
     const headerDiv = document.createElement('div');
-    headerDiv.classList.add('level-header');
-    headerDiv.appendChild(document.createTextNode(
-        'Level: ' + level));
+    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
+    document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
     levelContainer.appendChild(headerDiv);
 });
 }
@@ -101,9 +96,22 @@ function levelUp() {
  */
 function buildMessageDiv(message) {
     const headerDiv = document.createElement('div');
+    user_name = message.user;
+    user_name = user_name.split("@");
+    var currentDate = new Date(message.timestamp);
+    //var date = currentDate.getDate();
+    //var month = currentDate.getMonth();
+    //var year = currentDate.getFullYear();
+    var stringVersion  = currentDate.toLocaleString(undefined, {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
     headerDiv.classList.add('message-header');
     headerDiv.appendChild(document.createTextNode(
-        message.user + ' - ' + new Date(message.timestamp)));
+        user_name[0] + ' - ' + stringVersion));
 
     const bodyDiv = document.createElement('div');
     bodyDiv.classList.add('message-body');

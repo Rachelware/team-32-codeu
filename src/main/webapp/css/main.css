@@ -33,11 +33,11 @@ p {
 
 /* General link design */
 a {
-    color: #90ebff;
+    color: white;
 }
 
 h1 {
-    background-color: #80808057;
+    background-color: #776e6f;
     padding-left: 10px;
     margin-top: 0;
     line-height: 55px;
@@ -55,8 +55,8 @@ h2, h3 {
 /* General input box design */
 input {
     margin-left: 25px;
-    color: #90ebff;
-    background-color: #80808057;
+    color: white;
+    background-color: #fbc02d;
     border:transparent;
     border-radius: 3px;
     padding: 10px 10px;
