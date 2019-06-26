@@ -213,7 +213,6 @@ public class Datastore {
                 printError(entity, e);
             }
         }
-        System.out.println(messages);
         return messages;
     }
 
