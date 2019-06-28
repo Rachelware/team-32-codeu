@@ -128,7 +128,7 @@ public class Datastore {
 
     /** Stores the Stat in Datastore. */
     public void storeStat(Stat user_stat) {
-        Entity statEntity = new Entity("Stat", user_stat.getId());
+        Entity statEntity = new Entity("Stat", user_stat.getUser());
         statEntity.setProperty("user", user_stat.getUser());
         statEntity.setProperty("value", user_stat.getValue());
         statEntity.setProperty("type", user_stat.getType().name());

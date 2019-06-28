@@ -8,12 +8,13 @@ import com.google.codeu.data.User;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/puzzle")
-public class PuzzleServlet {
+public class PuzzleServlet extends HttpServlet {
     private Datastore datastore;
 
 
@@ -27,7 +28,13 @@ public class PuzzleServlet {
         datastore.savePuzzles();
         UserService userService = UserServiceFactory.getUserService();
         String user_email = userService.getCurrentUser().getEmail();
+
+        if (userService.getCurrentUser() == null) {
+            response.sendRedirect("/");
+        }
+
         User user = datastore.getUser(user_email);
+
         int level = user.getLevel();
         String puzzle = datastore.getPuzzle(level).getQuestion();
 

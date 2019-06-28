@@ -1,6 +1,7 @@
 package com.google.codeu.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +54,7 @@ public class UserLevelServlet extends HttpServlet{
         String answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
         String correct_answer = datastore.getPuzzle(level).getAnswer();
         if (correct_answer.equals(answer)) {
+            //If the user's input is correct
             level = level + 1;
             //Increment level
             user.setLevel(level);
