@@ -12,13 +12,15 @@ public class Puzzle {
     }
 
     int level;
+    String question;
     String answer;
     Puzzle_Type type;
     ArrayList<Stat> stats;
 
     /* Constructor */
-    public Puzzle(int level, Puzzle_Type type, String answer) {
+    public Puzzle(int level, Puzzle_Type type, String question, String answer) {
         this.answer = answer;
+        this.question = question;
         this.level = level;
         this.type = type;
         this.stats = new ArrayList<>();
@@ -26,6 +28,10 @@ public class Puzzle {
 
     public String getAnswer() {
         return this.answer;
+    }
+
+    public String getQuestion() {
+        return this.question;
     }
 
     public Puzzle.Puzzle_Type getType() {

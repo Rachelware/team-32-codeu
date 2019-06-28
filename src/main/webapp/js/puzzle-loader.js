@@ -8,6 +8,16 @@ if (!parameterUsername) {
     window.location.replace('/');
 }
 
+function fetchPuzzles(){
+    const url = '/puzzle';
+    fetch(url).then((response) => {
+        return response.json();
+    }).then((puzzle) => {
+        const puzzleContainer = document.getElementById('puzzle-prompt');
+        puzzleContainer.innerText = 'Prompt: ' + puzzle;
+    });
+}
+
 
 //fetch messages and add them to the page.
 function fetchMessages(){
@@ -157,7 +167,7 @@ function addLoginOrLogoutLinkToNavigation() {
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-   //setPageTitle();
+    fetchPuzzles();
     showMessageFormIfViewingSelf();
     fetchMessages();
     addLoginOrLogoutLinkToNavigation();
