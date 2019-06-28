@@ -91,11 +91,8 @@ function levelUp() {
         return response.json();
 })
 .then((level) => {
-        const levelContainer = document.getElementById('level-container');
-    const headerDiv = document.createElement('div');
     document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
-    levelContainer.appendChild(headerDiv);
 });
 }
 
