@@ -45,7 +45,7 @@ import com.google.gson.Gson;
         String imageUrl = getUploadedFileUrl(request, "image");
         
         //connected version (does not work, waiting for other changes to be merged)
-        /**
+        
         UserService userService = UserServiceFactory.getUserService();
         if (!userService.isUserLoggedIn()) {
             response.sendRedirect("/index.html");
@@ -54,16 +54,17 @@ import com.google.gson.Gson;
         
         //get User
         String user = userService.getCurrentUser().getEmail();
-        int level = datastore.getUser(user).getLevel(); **/
+        int level = datastore.getUser(user).getLevel(); 
         
-        /**
+        
         String imageHtml = "<a href=\"" + imageUrl + "\">" + "<img src=\"" + imageUrl + "\" />" + "</a>";
         
         Message myImage = new Message(user, imageHtml, level);
         datastore.storeMessage(myImage);
         
-        response.sendRedirect("imageUpload.html"); **/
+        response.sendRedirect("/puzzle.html?user=" + user); 
         
+        /*
         //non-connected version
         // Output some HTML that shows the data the user entered.
         // A real codebase would probably store these in Datastore.
@@ -72,7 +73,7 @@ import com.google.gson.Gson;
         out.println("<a href=\"" + imageUrl + "\">");
         out.println("<img src=\"" + imageUrl + "\" />");
         out.println("</a>");
-        
+        */
     }
     
     //Returns a URL that points to the uploaded file, or null if the user didn't upload a file.
