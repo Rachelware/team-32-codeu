@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Features Page</title>
         <meta charset="UTF-8">
+        <title>Features Page</title>
+        <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
         <link rel="stylesheet" href="/css/main.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/features.css">
         <script src="/js/navigation-loader.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     </head>
     <body onload="addLoginOrLogoutLinkToNavigation();">
         <nav>
             <ul id="navigation">
                 <li><a href="/">Home</a></li>
                 <li><a href="/aboutus.html">About Our Team</a></li>
-                <li><a href="/feed.html">Public Feed</a></li>
                 <li><a href="/features.html">Features</a></li>
             </ul>
-            
-            <div>
-            <h1>Features</h1></br>
-            <h2>Message Input</h2>
-                <p>Beyond the basic writing styles, you can use standard BBCode to style your text.</p>
-                <ul>
-                    <li> - <strong>Bold text with</strong> [b]your text[/b]</li></br>
-                    <li> - <em>Italicize text with</em> [i]your text[/i]</li></br>
-                    <li> - <ins>Underline text with</ins> [u]your text[/u]</li></br>
-                    <li> - <del>Strikethrough text with</del> [s]your text[/s]</li></br>
-                    <li> - <q>Quote text with</q> [quote]your text[/quote]</li></br>
-                    <li> - <code>Monospace text with</code> [code]your text[/code]</li></br>
-                    <li> - Enter a line break with [/br]</li></br>
-                    <li> - Display an image (.png or .jpg) or  gif by entering a link</li>
+        </nav>
+        <h1>Features</h1>
+        <div>
+            <h2 class="subtitle"><b>Message Input</b></h2>
+                <p class="info-header">Beyond the basic writing styles, you can use standard BBCode to style your text.</p>
+                <ul class="list">
+                    <li> <b>Bold text with</b> [b]your text[/b]</li>
+                    <li> <em>Italicize text with</em> [i]your text[/i]</li>
+                    <li> <ins>Underline text with</ins> [u]your text[/u]</li>
+                    <li> <del>Strikethrough text with</del> [s]your text[/s]</li>
+                    <li> <q>Quote text with</q> [quote]your text[/quote]</li>
+                    <li> <code>Monospace text with</code> [code]your text[/code]</li>
+                    <li> Enter a line break with [/br]</li>
+                    <li> Display an image (.png or .jpg) or  gif by entering a link</li>
                 </ul>
             </div>
             
         </nav>
+        <script type="text/javascript" src="/js/materialize.js"></script>
     </body>
 </html>

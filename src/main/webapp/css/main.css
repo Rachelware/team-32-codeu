@@ -33,29 +33,30 @@ p {
 
 /* General link design */
 a {
-    color: #90ebff;
+    color: white;
 }
 
 h1 {
-    background-color: #80808057;
+    background-color: #776e6f;
     padding-left: 10px;
     margin-top: 0;
-    line-height: 60px;
+    line-height: 55px;
     margin-left: 15px;
     color: white;
-    box-shadow: 10px 10px #181e21;
+    font-size: large;
 }
 
 /* General header design */
 h2, h3 {
-    padding-left: 10px;
+    padding-left: 15px;
+    font-size: medium;
 }
 
 /* General input box design */
 input {
     margin-left: 25px;
-    color: #90ebff;
-    background-color: #80808057;
+    color: white;
+    background-color: #fbc02d;
     border:transparent;
     border-radius: 3px;
     padding: 10px 10px;
@@ -66,7 +67,8 @@ input {
 /* General list design */
 li {
     list-style-type: circle;
-    list-style-position: outside;
+    list-style-position: inside;
+    padding-left: 10px;
 }
 
 /* Remove bullet points from navigation bar. */

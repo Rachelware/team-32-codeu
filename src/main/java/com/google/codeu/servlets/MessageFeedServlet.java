@@ -32,6 +32,9 @@ public class MessageFeedServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         response.setContentType("application/json");
         UserService userService = UserServiceFactory.getUserService();
+        if (userService.getCurrentUser() == null) {
+            response.sendRedirect("/");
+        }
         String email = userService.getCurrentUser().getEmail();
         int level;
         long timestamp;

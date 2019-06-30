@@ -116,6 +116,6 @@ public class MessageServlet extends HttpServlet {
         Message message = new Message(user, textWithBBCodeReplaced, level);
         datastore.storeMessage(message);
 
-        response.sendRedirect("/user-page.html?user=" + user);
+        response.sendRedirect("/puzzle.html?user=" + user);
     }
 }

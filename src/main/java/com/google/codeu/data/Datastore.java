@@ -128,6 +128,16 @@ public class Datastore {
         datastore.put(statEntity);
     }
 
+    /** Stores the Puzzle in Datastore. */
+    public void storePuzzle(Puzzle puzzle) {
+        Entity puzzleEntity = new Entity("Level", puzzle.getLevel());
+        puzzleEntity.setProperty("answer", puzzle.getAnswer());
+        puzzleEntity.setProperty("type", puzzle.getType());
+        puzzleEntity.setProperty("level", puzzle.getLevel());
+        puzzleEntity.setProperty("stats", puzzle.getStats());
+        datastore.put(puzzleEntity);
+    }
+
     public Stat.Stat_Type convertStringtoStat(String str) {
         switch(str) {
             case "DURATION":
@@ -213,7 +223,6 @@ public class Datastore {
                 printError(entity, e);
             }
         }
-        System.out.println(messages);
         return messages;
     }
 
