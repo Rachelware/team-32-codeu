@@ -8,6 +8,16 @@ if (!parameterUsername) {
     window.location.replace('/');
 }
 
+function fetchPuzzles(){
+    const url = '/puzzle';
+    fetch(url).then((response) => {
+        return response.json();
+    }).then((puzzle) => {
+        const puzzleContainer = document.getElementById('puzzle-prompt');
+        puzzleContainer.innerText = 'Prompt: ' + puzzle;
+    });
+}
+
 
 //fetch messages and add them to the page.
 function fetchMessages(){
@@ -81,11 +91,8 @@ function levelUp() {
         return response.json();
 })
 .then((level) => {
-        const levelContainer = document.getElementById('level-container');
-    const headerDiv = document.createElement('div');
     document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
-    levelContainer.appendChild(headerDiv);
 });
 }
 
@@ -157,7 +164,7 @@ function addLoginOrLogoutLinkToNavigation() {
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-   //setPageTitle();
+    fetchPuzzles();
     showMessageFormIfViewingSelf();
     fetchMessages();
     addLoginOrLogoutLinkToNavigation();

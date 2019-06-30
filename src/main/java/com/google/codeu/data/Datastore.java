@@ -39,6 +39,13 @@ public class Datastore {
         datastore = DatastoreServiceFactory.getDatastoreService();
     }
 
+    public void savePuzzles() {
+        Puzzle new_puzzle = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "Mock Level 1 Question", "answer");
+        storePuzzle(new_puzzle);
+        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "Mock Level 2 Question", "answer");
+        storePuzzle(new_puzzle);
+    }
+
     /** Stores the Message in Datastore. */
     public void storeMessage(Message message) {
         Entity messageEntity = new Entity("Message", message.getId().toString());
@@ -58,8 +65,9 @@ public class Datastore {
     public List<Message> getMessages(String user) {
         List<Message> messages = new ArrayList<>();
         Query query =
-            new Query("Message").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user))
-            .addSort("timestamp", SortDirection.DESCENDING);
+            new Query("Message").setFilter(new Query
+                    .FilterPredicate("user", FilterOperator.EQUAL, user))
+                    .addSort("timestamp", SortDirection.ASCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()) {
             try {
@@ -120,34 +128,42 @@ public class Datastore {
 
     /** Stores the Stat in Datastore. */
     public void storeStat(Stat user_stat) {
-        Entity statEntity = new Entity("Stat", user_stat.getId());
+        Entity statEntity = new Entity("Stat", user_stat.getUser());
         statEntity.setProperty("user", user_stat.getUser());
         statEntity.setProperty("value", user_stat.getValue());
-        statEntity.setProperty("type", user_stat.getType().toString());
+        statEntity.setProperty("type", user_stat.getType().name());
         statEntity.setProperty("level", user_stat.getLevel());
         datastore.put(statEntity);
     }
 
     /** Stores the Puzzle in Datastore. */
     public void storePuzzle(Puzzle puzzle) {
-        Entity puzzleEntity = new Entity("Level", puzzle.getLevel());
+        Entity puzzleEntity = new Entity("Puzzle", puzzle.getLevel());
         puzzleEntity.setProperty("answer", puzzle.getAnswer());
-        puzzleEntity.setProperty("type", puzzle.getType());
+        puzzleEntity.setProperty("question", puzzle.getQuestion());
+        puzzleEntity.setProperty("type", puzzle.getType().name());
         puzzleEntity.setProperty("level", puzzle.getLevel());
         puzzleEntity.setProperty("stats", puzzle.getStats());
         datastore.put(puzzleEntity);
     }
 
-    public Stat.Stat_Type convertStringtoStat(String str) {
-        switch(str) {
-            case "DURATION":
-                return Stat.Stat_Type.DURATION;
-            case "ATTEMPTS":
-                return Stat.Stat_Type.ATTEMPTS;
-            case "CONTRIBUTION":
-                return Stat.Stat_Type.CONTRIBUTION;
+    /**
+     * Returns the User owned by the email address, or
+     * null if no matching User was found.
+     */
+    public Puzzle getPuzzle(int level) {
+        savePuzzles();
+        Query query = new Query("Puzzle").setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
+        PreparedQuery results = datastore.prepare(query);
+        Entity puzzleEntity = results.asSingleEntity();
+        if(puzzleEntity == null) {
+            return null;
         }
-        return null;
+        String answer = (String) puzzleEntity.getProperty("answer");
+        String question = (String) puzzleEntity.getProperty("question");
+        Puzzle.Puzzle_Type type = Puzzle.Puzzle_Type.valueOf((String) puzzleEntity.getProperty("type"));
+        Puzzle puzzle = new Puzzle(level, type, question, answer);
+        return puzzle;
     }
   
     /**
@@ -172,7 +188,7 @@ public class Datastore {
      * and level identified. null if no matching Stat was found.
      */
     public Stat getStat(String email, Stat.Stat_Type type, int level) {
-        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type)).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
+        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type.name())).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
         PreparedQuery results = datastore.prepare(query);
         Entity statEntity = results.asSingleEntity();
         if(statEntity == null) {
@@ -212,7 +228,7 @@ public class Datastore {
         Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
         Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
         Query query = new Query("Message").setFilter(timeFilter).setFilter(levelFilter)
-                .addSort("timestamp", SortDirection.DESCENDING);
+                .addSort("timestamp", SortDirection.ASCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){
             try {

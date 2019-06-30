@@ -44,4 +44,8 @@ public class Stat {
     public double getValue() {
         return this.value;
     }
+
+    public void incrementValue() {
+        this.value = this.value + 1;
+    }
 }
