@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import java.util.Scanner;
 
 @WebServlet("/markers")
 public class MarkerServlet extends HttpServlet {
@@ -30,6 +31,8 @@ public class MarkerServlet extends HttpServlet {
     	String json = gson.toJson(markers);
 
     	response.getOutputStream().println(json);
+
+    	System.out.println(json);
   	}
 
   	/** Accepts a POST request containing a new marker. */
@@ -38,6 +41,9 @@ public class MarkerServlet extends HttpServlet {
     	double lat = Double.parseDouble(request.getParameter("lat"));
     	double lng = Double.parseDouble(request.getParameter("lng"));
     	String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
+
+    	System.out.println("Posting");
+    	System.out.println(content);
 
     	Marker marker = new Marker(lat, lng, content);
     	storeMarker(marker);
@@ -55,6 +61,9 @@ public class MarkerServlet extends HttpServlet {
       		double lat = (double) entity.getProperty("lat");
       		double lng = (double) entity.getProperty("lng");
       		String content = (String) entity.getProperty("content");
+
+      		System.out.println("Get Markers");
+      		System.out.println(content);
 
       		Marker marker = new Marker(lat, lng, content);
       		markers.add(marker);

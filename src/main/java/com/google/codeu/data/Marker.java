@@ -6,6 +6,12 @@ public class Marker {
     private double lng;
     private String content;
 
+    public Marker(){
+        lat = 0;
+        lng = 0;
+        content = "empty";
+    }
+
     public Marker(double lat, double lng, String content) {
         this.lat = lat;
         this.lng = lng;
