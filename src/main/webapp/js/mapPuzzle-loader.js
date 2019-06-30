@@ -29,7 +29,7 @@ function addLandmark(map, lat, lng, title, description){
     var infoWindow = new google.maps.InfoWindow({
         content: description
     });
-    marker.addEventListener('click', function() {
+    marker.addListener('click', function() { //changed name from addEventListener to show description
         infoWindow.open(marker.get('map'), marker);
     });
 }
