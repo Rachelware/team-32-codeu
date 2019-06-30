@@ -69,14 +69,6 @@ import com.google.gson.Gson;
         byte[] blobBytes = getBlobBytes(blobKey);
         List<EntityAnnotation> imageLabels = getImageLabels(blobBytes);
         
-        /*
-        ServletOutputStream outer = response.getOutputStream();
-        outer.println("<p>Here's the image you uploaded:</p>");
-        outer.println("<a href=\"" + imageUrl + "\">");
-        outer.println("<img src=\"" + imageUrl + "\" />");
-        outer.println("</a>"); */
-        
-        
         //check if user is logged in
         UserService userService = UserServiceFactory.getUserService();
         if (!userService.isUserLoggedIn()) {
@@ -195,27 +187,3 @@ import com.google.gson.Gson;
     }
     
  }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
