@@ -12,7 +12,7 @@
         let editMarker;
 
         function createMap(){
-            map = new google.maps.Map(document.getElementById('map'), {
+            const map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 38.5949, lng: -94.8923},
                 zoom: 4
             });
@@ -22,7 +22,7 @@
             });
             fetchMarkers();
 
-            console.log("hello");
+            //console.log("hello");
         }
 
          /** Fetches markers from the backend and adds them to the map. */
@@ -33,8 +33,8 @@
                 markers.forEach((marker) => {
                     createMarkerForDisplay(marker.lat, marker.lng, marker.content)
 
-                    console.log("fetch");
-                    console.log(marker.content);
+                    //console.log("fetch");
+                    //console.log(marker.content);
                 });
             });
         }
@@ -68,8 +68,8 @@
                 body: params
             });
 
-            console.log("Content");
-            console.log(params.get('content'));
+            //console.log("Content");
+            //console.log(params.get('content'));
         }
 
         /** Creates a marker that shows a textbox the user can edit. */
@@ -102,10 +102,12 @@
                 postMarker(lat, lng, textBox.value);
                 createMarkerForDisplay(lat, lng, textBox.value);
                 editMarker.setMap(null);
+
+                //console.log("Build Window");
+                //console.log(textBox.value);
             };
 
-            console.log("Build Window");
-            console.log(textBox.value);
+            
             const containerDiv = document.createElement('div');
             containerDiv.appendChild(textBox);
             containerDiv.appendChild(document.createElement('br'));
