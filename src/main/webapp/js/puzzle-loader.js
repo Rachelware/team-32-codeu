@@ -162,11 +162,25 @@ function addLoginOrLogoutLinkToNavigation() {
 });
 }
 
+//for image upload
+function fetchBlobstoreUrlAndShowForm() {
+        fetch('/blobstore-upload-url')
+          .then((response) => {
+            return response.text();
+          })
+          .then((imageUploadUrl) => {
+            const messageForm = document.getElementById('my-form');
+            messageForm.action = imageUploadUrl;
+            messageForm.classList.remove('hidden');
+          });
+      }
+
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
     fetchPuzzles();
     showMessageFormIfViewingSelf();
     fetchMessages();
     addLoginOrLogoutLinkToNavigation();
+    fetchBlobstoreUrlAndShowForm();
     levelUp();
 }
