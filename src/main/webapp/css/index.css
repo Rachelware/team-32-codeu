@@ -1,0 +1,25 @@
+h1 {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.logo {
+    maring-top: 0;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-bottom: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.card {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    color: #263238;
+    padding: 20px;
+    padding-right: 30px;
+}
