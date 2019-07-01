@@ -42,7 +42,7 @@ public class Datastore {
     public void savePuzzles() {
         Puzzle new_puzzle = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "Mock Level 1 Question", "answer");
         storePuzzle(new_puzzle);
-        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.", "Cheetah");
+        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.", "CHEETAH");
         storePuzzle(new_puzzle);
     }
 
