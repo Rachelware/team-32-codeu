@@ -181,6 +181,6 @@ function buildUI() {
     showMessageFormIfViewingSelf();
     fetchMessages();
     addLoginOrLogoutLinkToNavigation();
-    //fetchBlobstoreUrlAndShowForm();
+    fetchBlobstoreUrlAndShowForm();
     levelUp();
 }

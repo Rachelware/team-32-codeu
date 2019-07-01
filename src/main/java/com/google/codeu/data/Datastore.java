@@ -43,9 +43,9 @@ public class Datastore {
         Puzzle new_puzzle = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?", 
             "AN ELEPHANT'S SHADOW");
         storePuzzle(new_puzzle);
-        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with?"/*" Upload a picture of the animal for your answer. Submit the file and then submit in the answer box."*/, "CHEETAH");
+        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with?"" Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.", "CHEETAH");
         storePuzzle(new_puzzle);
-        new_puzzle = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "You have reached the end of the puzzle road. Please check back for more puzzle's.", "asdnakjsd");
+        new_puzzle = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "You have reached the end of the puzzle road. Please check back for more puzzle's.", "answer");
         storePuzzle(new_puzzle);
     }
 
