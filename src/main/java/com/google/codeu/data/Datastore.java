@@ -40,7 +40,8 @@ public class Datastore {
     }
 
     public void savePuzzles() {
-        Puzzle new_puzzle = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "Mock Level 1 Question", "answer");
+        Puzzle new_puzzle = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "Mock Level 1 Question", 
+            "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(new_puzzle);
         new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "Mock Level 2 Question", "answer");
         storePuzzle(new_puzzle);
