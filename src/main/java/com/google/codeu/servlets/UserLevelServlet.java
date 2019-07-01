@@ -52,7 +52,7 @@ public class UserLevelServlet extends HttpServlet{
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
         String answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-        String correct_answer = datastore.getPuzzle(level).getAnswer()
+        String correct_answer = datastore.getPuzzle(level).getAnswer();
       
         if (correct_answer.equals(answer.toUpperCase())) {
             //If the user's input is correct
