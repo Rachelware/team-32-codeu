@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Puzzle Page</title>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
+    <link rel = "stylesheet" href = "/css/main.css">
+    <link rel = "stylesheet" href = "/css/puzzle.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="/js/puzzle-loader.js"></script>
+</head>
+<body class="body" onload="buildUI()">
+<nav>
+    <ul id="navigation" class="z-depth-2">
+        <li><a href="/">Home</a></li>
+        <li><a href="/aboutus.html">About Our Team</a></li>
+        <li><a href="/features.html">Features</a></li>
+    </ul>
+</nav>
+<div class="wrapper">
+    <div class="content1">
+        <h1 class="z-depth-2" id="puzzle-title">Puzzle</h1>
+        <div id="answer-container">
+            <p id="puzzle-prompt" class="z-depth-3">(Puzzle Prompt Would Go Here) <br> Lorem ipsum dolor sit amet, non convallis vel nulla porta quam, lacinia wisi massa tincidunt blandit nunc. Fermentum donec rutrum et tellus. Nam a et sed sit lacus, porttitor lacus. </p>
+            <p id="puzzle-visual" class="z-depth-1">Puzzle Visual Would Go Here</p>
+        </div>
+        <div id="answer-section" class="z-depth-5">
+            <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
+                <p>Upload an image:</p>
+                <input type="file" name="image">
+                <br/><br/>
+                <button>Submit Image</button>
+            </form>
+            <form id="answer-form" action="/user-level" method="POST" class="hidden">
+                <input class="submit-answer z-depth-1" type="submit" value="Submit Answer">
+            </form>
+        </div>
+    </div>
+    <div id="content" class="content2">
+        <div class="content2-wrapper">
+            <h1 class="z-depth-2" id="chat-title">Message Feed</h1>
+            <div id="message-container">Loading...</div>
+            <div id="message-section" class="card z-depth-5">
+                <form id="message-form" action="/messages" method="POST" class="hidden z-depth-3">
+                    <h3 class="enter-message">Enter a new message:</h3>
+                    <textarea name="text" id="message-input"></textarea>
+                    <input class="submit-message z-depth-1" type="submit" value="Submit Message">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -51,7 +52,18 @@ public class UserLevelServlet extends HttpServlet{
         String user_email = userService.getCurrentUser().getEmail();
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
-        String answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+        String answer = "";
+        
+        
+        if (level == 2) { //for image input, get answer from ImageAnalysisServlet
+            HttpSession session = request.getSession();
+            answer = (String) session.getAttribute("imageAnswer"); 
+        }
+        else {
+        answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+        }
+        
+        
         String correct_answer = datastore.getPuzzle(level).getAnswer();
       
         if (correct_answer.equals(answer.toUpperCase())) {

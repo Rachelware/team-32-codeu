@@ -43,7 +43,7 @@ public class Datastore {
         Puzzle new_puzzle = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "Mock Level 1 Question", 
             "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(new_puzzle);
-        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "Mock Level 2 Question", "answer");
+        new_puzzle = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.", "CHEETAH");
         storePuzzle(new_puzzle);
     }
 

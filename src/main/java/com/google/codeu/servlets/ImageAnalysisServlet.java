@@ -26,6 +26,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
@@ -43,10 +44,12 @@ import com.google.gson.Gson;
  public class ImageAnalysisServlet extends HttpServlet {
     
     private Datastore datastore;
+    private String answer;
 
     @Override
     public void init() {
         datastore = new Datastore();
+        answer = "";
     }
     
     @Override
@@ -87,9 +90,16 @@ import com.google.gson.Gson;
         imageHtml = imageHtml + "<ul>";
         for (EntityAnnotation label : imageLabels) {
             imageHtml = imageHtml + "<li>" + label.getDescription() + " " + label.getScore() + "</li>";
+            if (label.getDescription().toUpperCase().equals(datastore.getPuzzle(level).getAnswer())){
+                answer = label.getDescription();
+            }
         }
         imageHtml = imageHtml + "</ul>";
         
+        //save answer for use in level up
+        HttpSession session = request.getSession();
+        session.setAttribute("imageAnswer", answer);
+
         //store image link as a message
         Message myImage = new Message(user, imageHtml, level);
         datastore.storeMessage(myImage);
