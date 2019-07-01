@@ -32,7 +32,6 @@ public class MarkerServlet extends HttpServlet {
 
     	response.getOutputStream().println(json);
 
-    	System.out.println(json);
   	}
 
   	/** Accepts a POST request containing a new marker. */
@@ -41,9 +40,6 @@ public class MarkerServlet extends HttpServlet {
     	double lat = Double.parseDouble(request.getParameter("lat"));
     	double lng = Double.parseDouble(request.getParameter("lng"));
     	String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
-
-    	System.out.println("Posting");
-    	System.out.println(content);
 
     	Marker marker = new Marker(lat, lng, content);
     	storeMarker(marker);
@@ -58,12 +54,9 @@ public class MarkerServlet extends HttpServlet {
     	PreparedQuery results = datastore.prepare(query);
 
     	for (Entity entity : results.asIterable()) {
-      		double lat = (double) entity.getProperty("lat");
+      	    double lat = (double) entity.getProperty("lat");
       		double lng = (double) entity.getProperty("lng");
       		String content = (String) entity.getProperty("content");
-
-      		System.out.println("Get Markers");
-      		System.out.println(content);
 
       		Marker marker = new Marker(lat, lng, content);
       		markers.add(marker);
