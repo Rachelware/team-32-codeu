@@ -90,7 +90,7 @@ import com.google.gson.Gson;
         imageHtml = imageHtml + "<ul>";
         for (EntityAnnotation label : imageLabels) {
             imageHtml = imageHtml + "<li>" + label.getDescription() + " " + label.getScore() + "</li>";
-            if (label.getDescription().equals(datastore.getPuzzle(level).getAnswer())){
+            if (label.getDescription().toUpperCase().equals(datastore.getPuzzle(level).getAnswer())){
                 answer = label.getDescription();
             }
         }
