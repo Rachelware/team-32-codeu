@@ -45,7 +45,7 @@ public class Datastore {
         storePuzzle(puzzle1);
         Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "\"What animal do you not want to play cards with?\" Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.", "CHEETAH");
         storePuzzle(puzzle2);
-        Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "You have reached the end of the puzzle road. Please check back for more puzzle's.", "answer");
+        Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
     }
 

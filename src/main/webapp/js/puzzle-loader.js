@@ -96,7 +96,28 @@ function levelUp() {
     if (level === 1) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
     } else if (level === 2) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level2.html" ></object>';
+    } else if (level === 3) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
+    } else if (level === 4) {
+        //TODO: Call this method ONLY when necessary for puzzle
         fetchBlobstoreUrlAndShowForm();
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
+    } else if (level === 5) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level5.html" ></object>';
+    } else if (level === 6) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level6.html" ></object>';
+    } else if (level === 7) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level7.html" ></object>';
+    } else if (level === 8) {
+        fetchBlobstoreUrlAndShowForm();
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level8.html" ></object>';
+    } else if (level === 9) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level9.html" ></object>';
+    } else if (level === 10) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level10.html" ></object>';
+    } else {
+        window.location.replace('/escaped.html');
     }
 });
 }
