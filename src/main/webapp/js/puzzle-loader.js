@@ -7,7 +7,7 @@ const parameterUsername = urlParams.get('user');
 if (!parameterUsername) {
     window.location.replace('/');
 }
-
+/*
 function fetchPuzzles(){
     const url = '/puzzle';
     fetch(url).then((response) => {
@@ -17,7 +17,7 @@ function fetchPuzzles(){
         puzzleContainer.innerText = 'Prompt: ' + puzzle;
     });
 }
-
+*/
 
 //fetch messages and add them to the page.
 function fetchMessages(){
@@ -93,6 +93,11 @@ function levelUp() {
 .then((level) => {
     document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
+    if (level === 1) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
+    } else if (level === 2) {
+        fetchBlobstoreUrlAndShowForm();
+    }
 });
 }
 
@@ -177,10 +182,9 @@ function fetchBlobstoreUrlAndShowForm() {
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-    fetchPuzzles();
+    //fetchPuzzles();
     showMessageFormIfViewingSelf();
     fetchMessages();
     addLoginOrLogoutLinkToNavigation();
-    fetchBlobstoreUrlAndShowForm();
     levelUp();
 }
