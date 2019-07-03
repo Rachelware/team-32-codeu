@@ -52,7 +52,7 @@ public class UserLevelServlet extends HttpServlet{
         String user_email = userService.getCurrentUser().getEmail();
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
-        String answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+        String answer = "";
         
         
         if (level == 2) { //for image input, get answer from ImageAnalysisServlet
