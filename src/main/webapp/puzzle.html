@@ -34,7 +34,10 @@
     <div id="content" class="content2">
         <div class="content2-wrapper">
             <h1 class="z-depth-2" id="chat-title">Message Feed</h1>
-            <div id="message-container">Loading...</div>
+            <div id="message-container">
+                <p id="no-messages" class="hidden">There are no messages in the chat at this time. Be the first to spark a conversation!</p>
+                Loading...
+            </div>
             <div id="message-section" class="card z-depth-5">
                 <form id="message-form" action="/messages" method="POST" class="hidden z-depth-3">
                     <h3 class="enter-message">Enter a new message:</h3>
