@@ -7,7 +7,7 @@ const parameterUsername = urlParams.get('user');
 if (!parameterUsername) {
     window.location.replace('/');
 }
-
+/*
 function fetchPuzzles(){
     const url = '/puzzle';
     fetch(url).then((response) => {
@@ -17,7 +17,7 @@ function fetchPuzzles(){
         puzzleContainer.innerText = 'Prompt: ' + puzzle;
     });
 }
-
+*/
 
 //fetch messages and add them to the page.
 function fetchMessages(){
@@ -26,8 +26,8 @@ function fetchMessages(){
         return response.json();
 }).then((messages) => {
         const messageContainer = document.getElementById('message-container');
-    if(messages.length == 0){
-        messageContainer.innerHTML = '<p>There are no posts yet.</p>';
+    if(messages.length === 0){
+        messageContainer.appendChild('<p>There are no posts yet.</p>');
     }
     else{
         messageContainer.innerHTML = '';
@@ -93,6 +93,33 @@ function levelUp() {
 .then((level) => {
     document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
+    if (level === 1) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
+    } else if (level === 2) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level2.html" ></object>';
+    } else if (level === 3) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
+    } else if (level === 4) {
+        //TODO: Call this method ONLY when necessary for puzzle
+        fetchBlobstoreUrlAndShowForm();
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
+    } else if (level === 5) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level5.html" ></object>';
+    } else if (level === 6) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level6.html" ></object>';
+    } else if (level === 7) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level7.html" ></object>';
+    } else if (level === 8) {
+        fetchBlobstoreUrlAndShowForm();
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level8.html" ></object>';
+    } else if (level === 9) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level9.html" ></object>';
+    } else if (level === 10) {
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level10.html" ></object>';
+    } else {
+        //Redirect to Congratulations message
+        window.location.replace('/escaped.html');
+    }
 });
 }
 
@@ -106,9 +133,6 @@ function buildMessageDiv(message) {
     user_name = message.user;
     user_name = user_name.split("@");
     var currentDate = new Date(message.timestamp);
-    //var date = currentDate.getDate();
-    //var month = currentDate.getMonth();
-    //var year = currentDate.getFullYear();
     var stringVersion  = currentDate.toLocaleString(undefined, {
         day: 'numeric',
         month: 'numeric',
@@ -132,6 +156,7 @@ function buildMessageDiv(message) {
 
     return messageDiv;
 }
+
 
 /**
  * Adds a login or logout link to the page, depending on whether the user is
@@ -162,7 +187,7 @@ function addLoginOrLogoutLinkToNavigation() {
 });
 }
 
-//for image upload
+//Only call for image upload!
 function fetchBlobstoreUrlAndShowForm() {
         fetch('/blobstore-upload-url')
           .then((response) => {
@@ -177,10 +202,8 @@ function fetchBlobstoreUrlAndShowForm() {
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-    fetchPuzzles();
     showMessageFormIfViewingSelf();
     fetchMessages();
     addLoginOrLogoutLinkToNavigation();
-    fetchBlobstoreUrlAndShowForm();
     levelUp();
 }
