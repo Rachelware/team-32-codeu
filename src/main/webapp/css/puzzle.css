@@ -156,11 +156,6 @@
     border-color: transparent;
 }
 
-#answer-container {
-    height: 340px;
-    overflow-y:auto;
-}
-
 #answer-section {
     margin-top: 20px;
     margin-left:25px;
@@ -198,27 +193,24 @@
     max-width: 75%;
 }
 
-#puzzle-prompt {
-    margin-left: 25px;
-    margin-right: 10px;
-    margin-top: 0px;
-    font-size: medium;
-    padding: 10px;
-    background-color: #26a69a;
-    color: white;
-}
-
-#puzzle-visual {
-    margin: 25px;
-    margin-right: 10px;
-    color: #26a69a;
-    padding: 10px;
-    background-color: #fafafa;
-    height: 100%;
-}
-
 /* Use this to hide certain elements like forms if the
    user is not logged in or viewing their own page. */
 .hidden {
     display: none;
+}
+
+
+object {
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+#puzzle-container {
+    height: 340px;
+    margin: 0;
+    margin-left: 25px;
+    padding: 0;
+    overflow-y:auto;
 }
