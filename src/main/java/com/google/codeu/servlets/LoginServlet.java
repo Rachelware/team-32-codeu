@@ -21,6 +21,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Puzzle;
+import com.google.codeu.data.User;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -48,9 +49,13 @@ public class LoginServlet extends HttpServlet {
 
         // If the user is already logged in, redirect to their page
         if (userService.isUserLoggedIn()) {
-            String user = userService.getCurrentUser().getEmail();
-            datastore.storeUser(datastore.getUser(user));
-            response.sendRedirect("/puzzle.html?user=" + user);
+            String user_email = userService.getCurrentUser().getEmail();
+            User user = datastore.getUser(user_email);
+            if (user == null) {
+                user = new User(user_email, "", 1);
+            }
+            datastore.storeUser(user);
+            response.sendRedirect("/puzzle.html?user=" + user_email);
             return;
         }
 
