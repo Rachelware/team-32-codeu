@@ -102,8 +102,7 @@ addLandmark(map, 37.420919, -122.086619, 'Permanente Creek Trail',
 //event listener listens for click then places marker
 map.addListener('click', function(e) {
     placeMarkerAndPanTo(e.latLng, map);
-  });
-
+    });
 }
 
 /** Adds a marker that shows an info window when clicked. */
@@ -123,10 +122,10 @@ function addLandmark(map, lat, lng, title, description){
 
 /*Places a marker at the location*/
 function placeMarkerAndPanTo(latLng, map) {
-  var marker = new google.maps.Marker({
-    position: latLng,
-    map: map
-  });
-  map.panTo(latLng);
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
+    map.panTo(latLng);
 }
     

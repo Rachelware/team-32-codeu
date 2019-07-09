@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Escaped</title>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/escaped.css">
+    <script src="/js/navigation-loader.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
-<body>
-
+<body onload="addLoginOrLogoutLinkToNavigation();">
+    <nav>
+        <ul id="navigation" class="z-depth-2">
+            <li><a href="/">Home</a></li>
+            <li><a href="/aboutus.html">About Our Team</a></li>
+            <li><a href="/features.html">Features</a></li>
+        </ul>
+    </nav>
+    <canvas id="confetti" width="1" height="1"></canvas>
+    <script src = "js/escaped-loader.js"></script>
+    <h1>Congratulations! You ESCAPED!</h1>
+    <div class="card z-depth-1">
+        <p><b> You are a super slueth! </b></p>
+        <p> Click the link below to see your stats </p>
+        <p><b>Thanks for playing!</b></p>
+    </div>
+    <script type="text/javascript" src="/js/materialize.js"></script>
 </body>
 </html>
