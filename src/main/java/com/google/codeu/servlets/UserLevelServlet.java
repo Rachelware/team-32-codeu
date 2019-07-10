@@ -58,7 +58,6 @@ public class UserLevelServlet extends HttpServlet{
         if (level == 2) { //for image input, get answer from ImageAnalysisServlet
             HttpSession session = request.getSession();
             answer = (String) session.getAttribute("imageAnswer");
-            System.out.print("ANSWER: " + answer);
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
