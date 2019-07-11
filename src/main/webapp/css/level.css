@@ -3,3 +3,13 @@
     padding: 20px;
     background-color: #26A69A;
 }
+
+html, body {
+    width: inherit;
+    height: inherit;
+}
+
+p {
+    margin-top: 0;
+    margin-left: unset;
+}

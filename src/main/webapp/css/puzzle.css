@@ -212,5 +212,5 @@ object {
     margin: 0;
     margin-left: 25px;
     padding: 0;
-    overflow-y:auto;
+    overflow: hidden;
 }
