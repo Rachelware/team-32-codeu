@@ -43,10 +43,12 @@ public class Datastore {
         Puzzle puzzle1 = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?",
             "AN ELEPHANT'S SHADOW");
         storePuzzle(puzzle1);
-        Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
+        Puzzle puzzle2 = new Puzzle(0, Puzzle.Puzzle_Type.PICTURE, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
         storePuzzle(puzzle2);
         Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
+        Puzzle puzzle4 = new Puzzle(2, Puzzle.Puzzle_Type.LOCATION, "The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 100 miles of the city we are looking for. Good Luck!", "SACRAMENTO CHERNOBYL CARTAGENA");
+        storePuzzle(puzzle4);
     }
 
     /** Stores the Message in Datastore. */
