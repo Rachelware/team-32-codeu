@@ -17,6 +17,7 @@ import com.google.codeu.data.User;
 import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import java.lang.*;
 
 @WebServlet("/user-level")
 public class UserLevelServlet extends HttpServlet{
@@ -65,7 +66,7 @@ public class UserLevelServlet extends HttpServlet{
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
       
-        if (correct_answer.equals(answer.toUpperCase())) {
+        if (correct_answer.equals(answer)) {
             //If the user's input is correct
             level = level + 1;
             //Increment level
@@ -93,5 +94,28 @@ public class UserLevelServlet extends HttpServlet{
             datastore.storeStat(attempt_stat);
             response.sendRedirect("/puzzle.html?user=" + user_email);
         }
+    }
+
+    /*strips the user answer os all punctuation, spaces, and any "an" "a" or "the" 
+    assumes you pass in answer in all caps
+    */
+    public String stripAnswer(String userAnswer){
+        String result = "";
+        String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
+
+        //if the first word of the user answer equals an, a, or the, remove from string
+        if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
+            userAnswer = userAnswer.substring(userAnswer.indexOf(' ') + 1);
+        }
+        //go through user answer to sript any punctation 
+        for(int i = 0; i < userAnswer.length(); i++){
+            char letter = userAnswer.charAt(i);
+            //check if character is letter or digit 
+            if(Character.isLetterOrDigit(letter)){
+                result += letter;
+            }
+        }
+        result = result.trim();
+        return result;
     }
 }
