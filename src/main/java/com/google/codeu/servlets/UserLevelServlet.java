@@ -64,7 +64,7 @@ public class UserLevelServlet extends HttpServlet{
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
         }
-      
+
         String correct_answer = datastore.getPuzzle(level).getAnswer();
       
         if (correct_answer.equals(answer)) {
