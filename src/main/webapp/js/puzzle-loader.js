@@ -35,6 +35,8 @@ function fetchMessages(){
     messages.forEach((message) => {
         const messageDiv = buildMessageDiv(message);
     messageContainer.appendChild(messageDiv);
+    messageContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    messageContainer.scrollTop = messageContainer.scrollHeight;
 });
 });
 }
