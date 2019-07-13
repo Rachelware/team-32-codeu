@@ -35,6 +35,8 @@ function fetchMessages(){
     messages.forEach((message) => {
         const messageDiv = buildMessageDiv(message);
     messageContainer.appendChild(messageDiv);
+    messageContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    messageContainer.scrollTop = messageContainer.scrollHeight;
 });
 });
 }
@@ -91,7 +93,7 @@ function levelUp() {
         return response.json();
 })
 .then((level) => {
-    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
+    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level + ' of 10';
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
     if (level === 1) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
