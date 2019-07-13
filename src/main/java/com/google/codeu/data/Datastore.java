@@ -126,6 +126,7 @@ public class Datastore {
     public void storeUser(User user) {
         Entity userEntity = new Entity("User", user.getEmail());
         userEntity.setProperty("email", user.getEmail());
+        userEntity.setProperty("time", user.getTimestamp());
         userEntity.setProperty("aboutMe", user.getAboutMe());
         userEntity.setProperty("level", user.getLevel());
         datastore.put(userEntity);
@@ -184,7 +185,9 @@ public class Datastore {
         }
         String aboutMe = (String) userEntity.getProperty("aboutMe");
         long level = (long) userEntity.getProperty("level");
+        long timeStamp = (long) userEntity.getProperty("time");
         User user = new User(email, aboutMe, (int) level);
+        user.setTimestamp(timeStamp);
         return user;
     }
 
@@ -231,8 +234,8 @@ public class Datastore {
     public List<Message> getLevelMessages(int level, long timestamp){
         List<Message> messages = new ArrayList<>();
         Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
-        Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
-        Query query = new Query("Message").setFilter(timeFilter).setFilter(levelFilter)
+        Query.Filter timeFilter = new Query.FilterPredicate("timestamp", FilterOperator.LESS_THAN_OR_EQUAL, timestamp);
+        Query query = new Query("Message").setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level)).setFilter(new Query.FilterPredicate("timestamp", FilterOperator.GREATER_THAN, timestamp))
                 .addSort("timestamp", SortDirection.ASCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){

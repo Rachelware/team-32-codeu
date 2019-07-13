@@ -54,12 +54,13 @@ public class UserLevelServlet extends HttpServlet{
         String user_email = userService.getCurrentUser().getEmail();
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
-        String answer = "";
+        String answer;
         
         
         if (level == 2) { //for image input, get answer from ImageAnalysisServlet
             HttpSession session = request.getSession();
-            answer = (String) session.getAttribute("imageAnswer"); 
+            answer = (String) session.getAttribute("imageAnswer");
+            System.out.print("ANSWER: " + answer);
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
