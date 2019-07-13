@@ -41,7 +41,7 @@ public class Datastore {
 
     public void savePuzzles() {
         Puzzle puzzle1 = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?",
-            "AN ELEPHANT'S SHADOW");
+            "ELEPHANTSSHADOW");
         storePuzzle(puzzle1);
         Puzzle puzzle2 = new Puzzle(0, Puzzle.Puzzle_Type.PICTURE, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
         storePuzzle(puzzle2);
