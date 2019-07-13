@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Level 4</title>
+    <link rel = "stylesheet" href = "/css/main.css">
+    <link rel = "stylesheet" href = "/css/map.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA"></script>
+    <script src = "/js/level4-loader.js"></script>
 </head>
-<body>
-
+<body onload="createLevel4Map();">
+    <p>Find the needle in the haystack. Enter your answer as a coordinate location. Hint: Hover cursor over marker to see hint. Click on marker to see location. Enter your answer in the same format you see on the marker ex. (32.9000, -78.999)</p>
+    <div id="map"></div>
 </body>
 </html>
