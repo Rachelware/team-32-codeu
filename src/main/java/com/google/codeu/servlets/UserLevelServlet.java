@@ -89,6 +89,7 @@ public class UserLevelServlet extends HttpServlet{
             String json = gson.toJson(level);
             response.sendRedirect("/puzzle.html?user=" + user_email);
         } else {
+
             Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
             if (attempt_stat == null){
                 attempt_stat = new Stat(user_email, Stat.Stat_Type.ATTEMPTS, 0, level);
@@ -119,12 +120,15 @@ public class UserLevelServlet extends HttpServlet{
     */
     public String stripAnswer(String userAnswer){
         String result = "";
-        String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
+        if(userAnswer.indexOf(' ') != -1){
+            String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
 
-        //if the first word of the user answer equals an, a, or the, remove from string
-        if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
-            result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
+            //if the first word of the user answer equals an, a, or the, remove from string
+            if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
+                result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
+            }
         }
+        
         result = result.trim();
         return result;
     }

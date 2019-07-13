@@ -1,4 +1,4 @@
-function createLevel4Map(){
+function createLevel5Map(){
     fetch('/ufo-data').then(function(response) {
         return response.json();
     }).then((ufoSightings) => {
