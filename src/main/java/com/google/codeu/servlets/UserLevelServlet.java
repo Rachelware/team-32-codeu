@@ -64,7 +64,7 @@ public class UserLevelServlet extends HttpServlet{
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-            answer = answer.toUpperCase();
+            answer = stripAnswer(answer.toUpperCase());
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
@@ -104,8 +104,6 @@ public class UserLevelServlet extends HttpServlet{
         if(userLevel == 1){
             if(Pattern.matches(correctAnswer, userAnswer)){
                 isCorrect = true;
-                System.out.println("Correct answer: " + correctAnswer);
-                System.out.println("User answer: " + userAnswer);
             }
         }
         else{
@@ -116,7 +114,7 @@ public class UserLevelServlet extends HttpServlet{
         return isCorrect;
     }
 
-    /*strips the user answer os all punctuation, spaces, and any "an" "a" or "the" 
+    /*strips the user answer of any "an" "a" or "the" 
     assumes you pass in answer in all caps
     */
     public String stripAnswer(String userAnswer){
@@ -125,15 +123,7 @@ public class UserLevelServlet extends HttpServlet{
 
         //if the first word of the user answer equals an, a, or the, remove from string
         if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
-            userAnswer = userAnswer.substring(userAnswer.indexOf(' ') + 1);
-        }
-        //go through user answer to sript any punctation 
-        for(int i = 0; i < userAnswer.length(); i++){
-            char letter = userAnswer.charAt(i);
-            //check if character is letter or digit 
-            if(Character.isLetterOrDigit(letter)){
-                result += letter;
-            }
+            result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
         }
         result = result.trim();
         return result;
