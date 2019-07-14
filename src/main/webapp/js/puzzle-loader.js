@@ -35,6 +35,8 @@ function fetchMessages(){
     messages.forEach((message) => {
         const messageDiv = buildMessageDiv(message);
     messageContainer.appendChild(messageDiv);
+    messageContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    messageContainer.scrollTop = messageContainer.scrollHeight;
 });
 });
 }
@@ -91,12 +93,14 @@ function levelUp() {
         return response.json();
 })
 .then((level) => {
-    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level;
+    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level + ' of 10';
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
     if (level === 1) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
     } else if (level === 2) {
+        fetchBlobstoreUrlAndShowForm();
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level2.html" ></object>';
+        document.getElementById("answer-section").innerHTML='<form id="my-form" action="/user-level" class="hidden" method="POST" enctype="multipart/form-data"><p>Upload an image:</p><input type="file" name="image"><br/><br/><input class="submit-answer z-depth-1" type="submit" value="Submit Answer"></form>';
     } else if (level === 3) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
     } else if (level === 4) {
