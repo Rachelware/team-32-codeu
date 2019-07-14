@@ -45,7 +45,7 @@ public class UserLevelServlet extends HttpServlet{
         response.getOutputStream().println(json);
     }
 
-    /** Gets called when a user presses the 'Level Up' button - increments the users level
+    /** Gets called when a user presses the 'Submit' button - increments the users level
      * then reloads the page! */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -53,19 +53,22 @@ public class UserLevelServlet extends HttpServlet{
         String user_email = userService.getCurrentUser().getEmail();
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
-        String answer;
+        String answer = "";
         
         
         if (level == 2) { //for image input, get answer from ImageAnalysisServlet
             HttpSession session = request.getSession();
             answer = (String) session.getAttribute("imageAnswer");
-            System.out.print("ANSWER: " + answer);
+            answer = answer.toUpperCase();
+            session.removeAttribute("imageAnswer");
+            //System.out.print("ANSWER: " + answer);
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
+
       
         if (correct_answer.equals(answer)) {
             //If the user's input is correct
