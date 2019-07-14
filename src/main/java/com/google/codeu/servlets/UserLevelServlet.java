@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import java.lang.*;
+import java.util.regex.*;
 
 @WebServlet("/user-level")
 public class UserLevelServlet extends HttpServlet{
@@ -66,12 +67,13 @@ public class UserLevelServlet extends HttpServlet{
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+            answer = answer.toUpperCase();
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
 
       
-        if (correct_answer.equals(answer)) {
+        if (checkAnswer(correct_answer, answer, level)) {
             //If the user's input is correct
             level = level + 1;
             //Increment level
@@ -99,6 +101,23 @@ public class UserLevelServlet extends HttpServlet{
             datastore.storeStat(attempt_stat);
             response.sendRedirect("/puzzle.html?user=" + user_email);
         }
+    }
+
+    public boolean checkAnswer(String correctAnswer, String userAnswer, int userLevel){
+        boolean isCorrect = false;
+        if(userLevel == 1){
+            if(Pattern.matches(correctAnswer, userAnswer)){
+                isCorrect = true;
+                System.out.println("Correct answer: " + correctAnswer);
+                System.out.println("User answer: " + userAnswer);
+            }
+        }
+        else{
+            if(correctAnswer.equals(userAnswer)){
+                isCorrect = true;
+            }
+        }
+        return isCorrect;
     }
 
     /*strips the user answer os all punctuation, spaces, and any "an" "a" or "the" 
