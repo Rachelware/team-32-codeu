@@ -61,6 +61,7 @@ public class UserLevelServlet extends HttpServlet{
             answer = (String) session.getAttribute("imageAnswer");
             answer = answer.toUpperCase();
             session.removeAttribute("imageAnswer");
+            session.setAttribute("imageAnswer", "blorp");
             //System.out.print("ANSWER: " + answer);
         }
         else {
