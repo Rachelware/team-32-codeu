@@ -49,6 +49,7 @@ public class MessageFeedServlet extends HttpServlet{
             level = user.getLevel();
             timestamp = user.getTimestamp();
         }
+
         List<Message> messages = datastore.getLevelMessages(level, timestamp);
         Gson gson = new Gson();
         String json = gson.toJson(messages);

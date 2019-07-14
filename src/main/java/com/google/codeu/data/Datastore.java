@@ -41,9 +41,9 @@ public class Datastore {
 
     public void savePuzzles() {
         Puzzle puzzle1 = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?",
-            "AN ELEPHANT'S SHADOW");
+            "ELEPHANTSSHADOW");
         storePuzzle(puzzle1);
-        Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "\"What animal do you not want to play cards with?\" Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.", "CHEETAH");
+        Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
         storePuzzle(puzzle2);
         Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
@@ -92,7 +92,7 @@ public class Datastore {
         }
         return users;
     }
-  
+
     /** Returns the total number of messages for all users. */
     public int getTotalMessageCount(){
         Query query = new Query("Message");
@@ -119,11 +119,12 @@ public class Datastore {
         String average = Float.toString((float) messages / users);
         return average;
     }
-  
+
     /** Stores the User in Datastore. */
     public void storeUser(User user) {
         Entity userEntity = new Entity("User", user.getEmail());
         userEntity.setProperty("email", user.getEmail());
+        userEntity.setProperty("time", user.getTimestamp());
         userEntity.setProperty("aboutMe", user.getAboutMe());
         userEntity.setProperty("level", user.getLevel());
         datastore.put(userEntity);
@@ -168,7 +169,7 @@ public class Datastore {
         Puzzle puzzle = new Puzzle(level, type, question, answer);
         return puzzle;
     }
-  
+
     /**
     * Returns the User owned by the email address, or
     * null if no matching User was found.
@@ -182,7 +183,9 @@ public class Datastore {
         }
         String aboutMe = (String) userEntity.getProperty("aboutMe");
         long level = (long) userEntity.getProperty("level");
+        long timeStamp = (long) userEntity.getProperty("time");
         User user = new User(email, aboutMe, (int) level);
+        user.setTimestamp(timeStamp);
         return user;
     }
 
@@ -205,7 +208,7 @@ public class Datastore {
   /**
    * Gets messages for all users
    *
-   * @return a list of messages from all the users. 
+   * @return a list of messages from all the users.
    * List stored in time descending order.
    **/
 
@@ -229,8 +232,8 @@ public class Datastore {
     public List<Message> getLevelMessages(int level, long timestamp){
         List<Message> messages = new ArrayList<>();
         Query.Filter levelFilter = new Query.FilterPredicate("level", FilterOperator.EQUAL, level);
-        Query.Filter timeFilter = new Query.FilterPredicate("time", FilterOperator.GREATER_THAN_OR_EQUAL, timestamp);
-        Query query = new Query("Message").setFilter(timeFilter).setFilter(levelFilter)
+        Query.Filter timeFilter = new Query.FilterPredicate("timestamp", FilterOperator.LESS_THAN_OR_EQUAL, timestamp);
+        Query query = new Query("Message").setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level)).setFilter(new Query.FilterPredicate("timestamp", FilterOperator.GREATER_THAN, timestamp))
                 .addSort("timestamp", SortDirection.ASCENDING);
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){
@@ -261,5 +264,3 @@ public class Datastore {
         e.printStackTrace();
     }
 }
-
-
