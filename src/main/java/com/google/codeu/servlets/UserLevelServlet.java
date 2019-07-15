@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import java.lang.*;
+import java.util.regex.*;
 
 @WebServlet("/user-level")
 public class UserLevelServlet extends HttpServlet{
@@ -63,11 +64,12 @@ public class UserLevelServlet extends HttpServlet{
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+            answer = stripAnswer(answer.toUpperCase());
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
       
-        if (correct_answer.equals(answer)) {
+        if (checkAnswer(correct_answer, answer, level)) {
             //If the user's input is correct
             level = level + 1;
             //Increment level
@@ -87,6 +89,7 @@ public class UserLevelServlet extends HttpServlet{
             String json = gson.toJson(level);
             response.sendRedirect("/puzzle.html?user=" + user_email);
         } else {
+
             Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
             if (attempt_stat == null){
                 attempt_stat = new Stat(user_email, Stat.Stat_Type.ATTEMPTS, 0, level);
@@ -97,25 +100,37 @@ public class UserLevelServlet extends HttpServlet{
         }
     }
 
-    /*strips the user answer os all punctuation, spaces, and any "an" "a" or "the" 
+    public boolean checkAnswer(String correctAnswer, String userAnswer, int userLevel){
+        boolean isCorrect = false;
+        if(userLevel == 1){
+            if(Pattern.matches(correctAnswer, userAnswer)){
+                isCorrect = true;
+                System.out.println("Correct answer: " + correctAnswer);
+                System.out.println("User answer: " + userAnswer);
+            }
+        }
+        else{
+            if(correctAnswer.equals(userAnswer)){
+                isCorrect = true;
+            }
+        }
+        return isCorrect;
+    }
+
+    /*strips the user answer of any "an" "a" or "the" 
     assumes you pass in answer in all caps
     */
     public String stripAnswer(String userAnswer){
         String result = "";
-        String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
+        if(userAnswer.indexOf(' ') != -1){
+            String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
 
-        //if the first word of the user answer equals an, a, or the, remove from string
-        if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
-            userAnswer = userAnswer.substring(userAnswer.indexOf(' ') + 1);
-        }
-        //go through user answer to sript any punctation 
-        for(int i = 0; i < userAnswer.length(); i++){
-            char letter = userAnswer.charAt(i);
-            //check if character is letter or digit 
-            if(Character.isLetterOrDigit(letter)){
-                result += letter;
+            //if the first word of the user answer equals an, a, or the, remove from string
+            if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
+                result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
             }
         }
+        
         result = result.trim();
         return result;
     }
