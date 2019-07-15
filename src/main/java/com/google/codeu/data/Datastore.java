@@ -49,6 +49,8 @@ public class Datastore {
         storePuzzle(puzzle3);
         Puzzle puzzle5 = new Puzzle(5, Puzzle.Puzzle_Type.TEXT, "Find the needle in the haystack.", "(47.6038321,-122.3300623)");
         storePuzzle(puzzle5);
+        Puzzle puzzle6 = new Puzzle(6, Puzzle.Puzzle_Type.TEXT, "There are 7 U.S. states that have the same state bird. Using the letters from the abbreviations of those states, make a 7 letter word.", "CANNOLI");
+        storePuzzle(puzzle6);
     }
 
     /** Stores the Message in Datastore. */
