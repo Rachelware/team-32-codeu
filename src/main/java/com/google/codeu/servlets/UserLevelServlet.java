@@ -105,6 +105,8 @@ public class UserLevelServlet extends HttpServlet{
         if(userLevel == 1){
             if(Pattern.matches(correctAnswer, userAnswer)){
                 isCorrect = true;
+                System.out.println("Correct answer: " + correctAnswer);
+                System.out.println("User answer: " + userAnswer);
             }
         }
         else{
