@@ -47,6 +47,8 @@ public class Datastore {
         storePuzzle(puzzle2);
         Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
+        Puzzle puzzle5 = new Puzzle(5, Puzzle.Puzzle_Type.TEXT, "Find the needle in the haystack.", "(47.6038321,-122.3300623)");
+        storePuzzle(puzzle5);
         Puzzle puzzle6 = new Puzzle(6, Puzzle.Puzzle_Type.TEXT, "There are 7 U.S. states that have the same state bird. Using the letters from the abbreviations of those states, make a 7 letter word.", "CANNOLI");
         storePuzzle(puzzle6);
     }

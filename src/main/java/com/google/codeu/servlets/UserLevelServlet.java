@@ -67,7 +67,7 @@ public class UserLevelServlet extends HttpServlet{
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-            answer = answer.toUpperCase();
+            answer = stripAnswer(answer.toUpperCase());
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
@@ -93,6 +93,7 @@ public class UserLevelServlet extends HttpServlet{
             String json = gson.toJson(level);
             response.sendRedirect("/puzzle.html?user=" + user_email);
         } else {
+
             Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
             if (attempt_stat == null){
                 attempt_stat = new Stat(user_email, Stat.Stat_Type.ATTEMPTS, 0, level);
@@ -120,25 +121,20 @@ public class UserLevelServlet extends HttpServlet{
         return isCorrect;
     }
 
-    /*strips the user answer os all punctuation, spaces, and any "an" "a" or "the" 
+    /*strips the user answer of any "an" "a" or "the" 
     assumes you pass in answer in all caps
     */
     public String stripAnswer(String userAnswer){
         String result = "";
-        String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
+        if(userAnswer.indexOf(' ') != -1){
+            String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
 
-        //if the first word of the user answer equals an, a, or the, remove from string
-        if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
-            userAnswer = userAnswer.substring(userAnswer.indexOf(' ') + 1);
-        }
-        //go through user answer to sript any punctation 
-        for(int i = 0; i < userAnswer.length(); i++){
-            char letter = userAnswer.charAt(i);
-            //check if character is letter or digit 
-            if(Character.isLetterOrDigit(letter)){
-                result += letter;
+            //if the first word of the user answer equals an, a, or the, remove from string
+            if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
+                result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
             }
         }
+        
         result = result.trim();
         return result;
     }
