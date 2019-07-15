@@ -49,6 +49,8 @@ public class Datastore {
         storePuzzle(puzzle3);
         Puzzle puzzle4 = new Puzzle(2, Puzzle.Puzzle_Type.LOCATION, "The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 100 miles of the city we are looking for. Good Luck!", "SACRAMENTO CHERNOBYL CARTAGENA");
         storePuzzle(puzzle4);
+        Puzzle puzzle5 = new Puzzle(5, Puzzle.Puzzle_Type.TEXT, "Find the needle in the haystack.", "(47.6038321,-122.3300623)");
+        storePuzzle(puzzle5);
     }
 
     /** Stores the Message in Datastore. */

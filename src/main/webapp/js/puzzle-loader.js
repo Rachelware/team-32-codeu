@@ -104,8 +104,6 @@ function levelUp() {
     } else if (level === 3) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
     } else if (level === 4) {
-        //TODO: Call this method ONLY when necessary for puzzle
-        fetchBlobstoreUrlAndShowForm();
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
     } else if (level === 5) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level5.html" ></object>';
@@ -203,6 +201,7 @@ function fetchBlobstoreUrlAndShowForm() {
             messageForm.classList.remove('hidden');
           });
       }
+
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
