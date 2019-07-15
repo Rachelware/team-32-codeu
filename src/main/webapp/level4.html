@@ -11,27 +11,32 @@
 </head>
 <body>
     <p>The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 100 miles of the city we are looking for. Good Luck!</p>
-    <p class="card">
-        In a frenzy they flocked to my state.
-        Treasure is what they found in the year 1848.
-        <i>Drop a pin on my capitol city!</i>
-    </p>
-    <p class="card">
-        Uranium, graphite, dosimeters, oh my!
-        A ghost-town, a wasteland, an accident, am I.
-        <i>Drop a pin on my city!</i>
-    </p>
-    <p class="card">
-        Vamos a El Centro! Let’s watch the party boats drive by!
-        Don’t burn, don’t sweat! Just dance and enjoy
-        My color, my vibrance, my history… Oh and the cute pool boy!
-        <i>Drop a pin on my city!</i>
-    </p>
+    <div id="clues">
+        <p id="clue" class="card">
+            Frantic, they flocked to my state. <br>
+            Treasure, they found in the year 1848. <br>
+            <i>Drop a pin on my capitol city!</i>
+        </p>
+        <p id="clue" class="card">
+            Uranium, graphite, dosimeters, oh my! <br>
+            A ghost-town, wasteland, accident, am I. <br>
+            <i>Drop a pin on my city!</i>
+        </p>
+        <p id="clue" class="card">
+            <i>Vamos a El Centro!</i> Old walls, so high, <br>
+            seat us as we see lively boats drive by! <br>
+            Don&#39t burn, stay cool, dance, and enjoy <br>
+            My color, my vibrance, my history ... <br>
+            Oh and that cute pool boy! <br>
+            <i>Drop a pin on my city!</i>
+        </p>
+    </div>
+    <br style="clear: left;" />
     <div id="floating-panel">
         <input onclick="deleteMarkers();" type=button value="Delete Markers">
     </div>
     <div id="map"></div>
-    <p>Click on the map to add markers. Hover over markers to see the clue they are responding to.</p>
+    <p>Click on the map to add pins. Hover over pins to see the clue they are responding to.</p>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA&callback=initMap">
     </script>

@@ -1,6 +1,7 @@
 .card {
-    margin: 10px;
-    padding: 20px;
+    margin: 5px;
+    padding: 10px;
+    font-size: small;
     background-color: #26A69A;
 }
 
@@ -11,4 +12,13 @@ p {
 
 input {
     margin-bottom: 10px;
+}
+
+#clues {
+    width: 100%;
+}
+
+#clue {
+    float: left;
+    width: 32%;
 }

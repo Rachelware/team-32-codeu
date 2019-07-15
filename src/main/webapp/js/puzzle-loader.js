@@ -98,14 +98,20 @@ function levelUp() {
     if (level === 1) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
     } else if (level === 2) {
+<<<<<<< HEAD
         //fetchBlobstoreUrlAndShowForm();
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
         //document.getElementById("answer-section").innerHTML='<form id="my-form" action="/user-level" class="hidden" method="POST" enctype="multipart/form-data"><p>Upload an image:</p><input type="file" name="image"><br/><br/><input class="submit-answer z-depth-1" type="submit" value="Submit Answer"></form>';
+=======
+        //TODO: Call this method ONLY when necessary for puzzle
+        fetchBlobstoreUrlAndShowForm();
+        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level2.html" ></object>';
+        //one submit button document.getElementById("answer-section").innerHTML='<form id="my-form" action="/user-level" class="hidden" method="POST" enctype="multipart/form-data"> <h3 class="enter-answer"></h3><input type="file" name="image"><br/><br/><input class="submit-answer z-depth-1" type="submit" value="Submit Answer"></form>';
+        document.getElementById("answer-section").innerHTML='<form id="my-form" class="hidden" method="POST" enctype="multipart/form-data"><p>Upload an image:</p><input type="file" name="image"><br/><button>Submit</button></form> <form id="answer-form" action="/user-level" method="POST"> <h3 class="enter-answer">Submit Your Answer Here:</h3> <input class="submit-answer z-depth-1" type="submit" value="Submit Answer"></form>';
+>>>>>>> dc2f5034e51c915f9062e576cecf82b92aae647f
     } else if (level === 3) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
     } else if (level === 4) {
-        //TODO: Call this method ONLY when necessary for puzzle
-        fetchBlobstoreUrlAndShowForm();
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
     } else if (level === 5) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level5.html" ></object>';
@@ -203,6 +209,7 @@ function fetchBlobstoreUrlAndShowForm() {
             messageForm.classList.remove('hidden');
           });
       }
+
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {

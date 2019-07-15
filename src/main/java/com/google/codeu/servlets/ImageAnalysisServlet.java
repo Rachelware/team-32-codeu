@@ -49,7 +49,7 @@ import com.google.gson.Gson;
     @Override
     public void init() {
         datastore = new Datastore();
-        answer = "";
+        String answer = "none";
     }
     
     @Override
@@ -83,6 +83,8 @@ import com.google.gson.Gson;
         String user = userService.getCurrentUser().getEmail();
         int level = datastore.getUser(user).getLevel(); 
         
+        boolean flag = false;
+        
         //create image html link and labels string
         String imageHtml = "<a href=\"" + imageUrl + "\">";
         imageHtml = imageHtml + "<img src=\"" + imageUrl + "\" />" + "</a>";
@@ -92,9 +94,14 @@ import com.google.gson.Gson;
             imageHtml = imageHtml + "<li>" + label.getDescription() + " " + label.getScore() + "</li>";
             if (label.getDescription().toUpperCase().equals(datastore.getPuzzle(level).getAnswer())){
                 answer = label.getDescription();
+                flag = true;
             }
         }
-        imageHtml = imageHtml + "</ul>";
+                
+        if (flag == false)
+            answer = "none";
+        imageHtml = imageHtml + "</ul><br/>"+ answer;
+
         
         //save answer for use in level up
         HttpSession session = request.getSession();
