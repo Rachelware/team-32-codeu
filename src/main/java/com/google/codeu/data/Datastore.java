@@ -41,12 +41,14 @@ public class Datastore {
 
     public void savePuzzles() {
         Puzzle puzzle1 = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?",
-            "ELEPHANTSSHADOW");
+            "(ELEPHANT'?S?)?\\s?SHADOW");
         storePuzzle(puzzle1);
         Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
         storePuzzle(puzzle2);
         Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
+        Puzzle puzzle5 = new Puzzle(5, Puzzle.Puzzle_Type.TEXT, "Find the needle in the haystack.", "(47.6038321,-122.3300623)");
+        storePuzzle(puzzle5);
     }
 
     /** Stores the Message in Datastore. */
