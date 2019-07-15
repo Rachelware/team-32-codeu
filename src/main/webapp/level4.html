@@ -7,10 +7,9 @@
     <link rel = "stylesheet" href = "/css/map.css">
     <link rel = "stylesheet" href = "/css/level4.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA"></script>
     <script src = "/js/scavenger-map-loader.js"></script>
 </head>
-<body onload="createMap();">
+<body>
     <p>The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 100 miles of the city we are looking for. Good Luck!</p>
     <p class="card">
         In a frenzy they flocked to my state.
@@ -33,5 +32,8 @@
     </div>
     <div id="map"></div>
     <p>Click on the map to add markers. Hover over markers to see the clue they are responding to.</p>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA&callback=initMap">
+    </script>
 </body>
 </html>

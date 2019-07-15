@@ -8,3 +8,7 @@ p {
     margin-top: 0;
     margin-left: unset;
 }
+
+input {
+    margin-bottom: 10px;
+}
