@@ -107,6 +107,8 @@ function levelUp() {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
     } else if (level === 4) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
+        document.getElementById("answer-section").innerHTML='';
+        document.getElementById("puzzle-container").style.setProperty('height', '535px');
     } else if (level === 5) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level5.html" ></object>';
     } else if (level === 6) {

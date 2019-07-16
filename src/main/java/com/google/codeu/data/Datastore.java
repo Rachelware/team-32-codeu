@@ -198,7 +198,7 @@ public class Datastore {
     /**
      * Returns the Stat owned by the user, with the specific stat,
      * and level identified. null if no matching Stat was found.
-     */
+     *
     public Stat getStat(String email, Stat.Stat_Type type, int level) {
         Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type.name())).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
         PreparedQuery results = datastore.prepare(query);
@@ -210,6 +210,7 @@ public class Datastore {
         Stat stat = new Stat(email, type, value, level);
         return stat;
     }
+     */
 
   /**
    * Gets messages for all users
@@ -269,4 +270,5 @@ public class Datastore {
         System.err.println(newEntity.toString());
         e.printStackTrace();
     }
+
 }

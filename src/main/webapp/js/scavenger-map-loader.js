@@ -1,5 +1,6 @@
 var map;
 var markers = [];
+var locations = [];
 var clicks = 0;
 
 function initMap() {
@@ -27,6 +28,7 @@ function addMarker(location) {
             map: map
         });
         markers.push(marker);
+        locations.push(location);
         var infoWindow = new google.maps.InfoWindow({
             content: 'Answer to Clue #' + clicks
         });
@@ -42,6 +44,7 @@ function addMarker(location) {
 function setMapOnAll(map) {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
+        locations[i] = null;
     }
 }
 
@@ -60,4 +63,9 @@ function showMarkers() {
 function deleteMarkers() {
     clearMarkers();
     markers = [];
+}
+
+function saveMarkers() {
+    pos = locations[0] + ", " + locations[1] + ", " + locations[2];
+    document.getElementById('answer-input').innerHTML = pos;
 }

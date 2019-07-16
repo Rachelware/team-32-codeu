@@ -35,6 +35,7 @@ public class UserLevelServlet extends HttpServlet{
         response.setContentType("application/json");
         UserService userService = UserServiceFactory.getUserService();
         String user_email = userService.getCurrentUser().getEmail();
+
         User user = datastore.getUser(user_email);
         if (user == null) {
             user = new User(user_email, null, 1);
@@ -64,8 +65,11 @@ public class UserLevelServlet extends HttpServlet{
             session.removeAttribute("imageAnswer");
             session.setAttribute("imageAnswer", "blorp");
             //System.out.print("ANSWER: " + answer);
-        }
-        else {
+        } else if (level == 4) {
+            answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+            //TODO: delete this
+            System.out.println(answer);
+        } else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
             if (level == 1) {
                 answer = stripAnswer(answer.toUpperCase());
@@ -99,12 +103,12 @@ public class UserLevelServlet extends HttpServlet{
             response.sendRedirect("/puzzle.html?user=" + user_email);
         } else {
 
-            Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
+           /* Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
             if (attempt_stat == null){
                 attempt_stat = new Stat(user_email, Stat.Stat_Type.ATTEMPTS, 0, level);
             }
             attempt_stat.incrementValue();
-            datastore.storeStat(attempt_stat);
+            datastore.storeStat(attempt_stat); */
             response.sendRedirect("/puzzle.html?user=" + user_email);
         }
     }

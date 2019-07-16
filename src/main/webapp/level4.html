@@ -7,6 +7,7 @@
     <link rel = "stylesheet" href = "/css/map.css">
     <link rel = "stylesheet" href = "/css/level4.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA"></script>
     <script src = "/js/scavenger-map-loader.js"></script>
 </head>
 <body>
@@ -54,6 +55,13 @@
     </div>
     <div id="map"></div>
     <p>Click on the map to add pins. Hover over pins to see the clue they are responding to.</p>
+    <div id="positions"></div>
+    <div id="answer-section" class="card z-depth-5">
+        <form id="answer-form" action="/user-level" method="POST" class="hidden">
+            <textarea name="answer" id="answer-input"></textarea>
+            <input onclick="saveMarkers();" type="submit" value="Sumbit Answers"><br>
+        </form>
+    </div>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA&callback=initMap">
     </script>
