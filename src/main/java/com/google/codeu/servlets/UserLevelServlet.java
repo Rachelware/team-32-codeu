@@ -67,11 +67,16 @@ public class UserLevelServlet extends HttpServlet{
         }
         else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-            answer = stripAnswer(answer.toUpperCase());
+            if (level == 1) {
+                answer = stripAnswer(answer.toUpperCase());
+            } else {
+                answer = answer.toUpperCase();
+            }
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
-
+        System.out.println(correct_answer);
+        System.out.println(answer);
       
         if (checkAnswer(correct_answer, answer, level)) {
             //If the user's input is correct

@@ -27,7 +27,7 @@ function fetchMessages(){
 }).then((messages) => {
         const messageContainer = document.getElementById('message-container');
     if(messages.length === 0){
-        messageContainer.appendChild('<p>There are no posts yet.</p>');
+        messageContainer.innerHTML = 'There are no posts yet.';
     }
     else{
         messageContainer.innerHTML = '';
