@@ -5,13 +5,17 @@
     background-color: #26A69A;
 }
 
+.text {
+    display: none;
+}
+
 p {
     margin-top: 0;
     margin-left: unset;
 }
 
 input {
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 #clues {
@@ -21,4 +25,14 @@ input {
 #clue {
     float: left;
     width: 32%;
+}
+
+.title {
+    font-size: large;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+.title:hover + .text {
+    display: block;
 }
