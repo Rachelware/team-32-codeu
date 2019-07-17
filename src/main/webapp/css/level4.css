@@ -1,0 +1,42 @@
+.card {
+    margin: 5px;
+    padding: 10px;
+    font-size: small;
+    background-color: #26A69A;
+}
+
+.text {
+    display: none;
+}
+
+p {
+    margin-top: 0;
+    margin-left: unset;
+}
+
+input {
+    margin: 10px;
+}
+
+#clues {
+    width: 100%;
+}
+
+#clue {
+    float: left;
+    width: 32%;
+}
+
+.title {
+    font-size: large;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+.title:hover + .text {
+    display: block;
+}
+
+textarea {
+    display: none;
+}
