@@ -36,3 +36,7 @@ input {
 .title:hover + .text {
     display: block;
 }
+
+textarea {
+    display: none;
+}

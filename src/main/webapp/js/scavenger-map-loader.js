@@ -66,6 +66,10 @@ function deleteMarkers() {
 }
 
 function saveMarkers() {
-    pos = locations[0] + ", " + locations[1] + ", " + locations[2];
-    document.getElementById('answer-input').innerHTML = pos;
+    if (clicks < 3) {
+        window.alert("You must submit 3 answers! You only submitted " + clicks + " answers!");
+    } else {
+        pos = locations[0] + "%" + locations[1] + "%" + locations[2];
+        document.getElementById('answer-input').innerHTML = pos;
+    }
 }
