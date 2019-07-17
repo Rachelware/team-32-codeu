@@ -43,10 +43,12 @@ public class Datastore {
         Puzzle puzzle1 = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?",
             "(ELEPHANT'?S?)?\\s?SHADOW");
         storePuzzle(puzzle1);
-        Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.TEXT, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
+        Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.PICTURE, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
         storePuzzle(puzzle2);
         Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
+        Puzzle puzzle4 = new Puzzle(4, Puzzle.Puzzle_Type.LOCATION, "The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 100 miles of the city we are looking for. Good Luck!", "38, -121%51, 30%10, -75");
+        storePuzzle(puzzle4);
         Puzzle puzzle5 = new Puzzle(5, Puzzle.Puzzle_Type.TEXT, "Find the needle in the haystack.", "(47.6038321,-122.3300623)");
         storePuzzle(puzzle5);
         Puzzle puzzle6 = new Puzzle(6, Puzzle.Puzzle_Type.TEXT, "There are 7 U.S. states that have the same state bird. Using the letters from the abbreviations of those states, make a 7 letter word.", "CANNOLI");
@@ -196,7 +198,7 @@ public class Datastore {
     /**
      * Returns the Stat owned by the user, with the specific stat,
      * and level identified. null if no matching Stat was found.
-     */
+     *
     public Stat getStat(String email, Stat.Stat_Type type, int level) {
         Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type.name())).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
         PreparedQuery results = datastore.prepare(query);
@@ -208,6 +210,7 @@ public class Datastore {
         Stat stat = new Stat(email, type, value, level);
         return stat;
     }
+     */
 
   /**
    * Gets messages for all users
@@ -267,4 +270,5 @@ public class Datastore {
         System.err.println(newEntity.toString());
         e.printStackTrace();
     }
+
 }

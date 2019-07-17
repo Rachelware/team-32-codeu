@@ -35,6 +35,7 @@ public class UserLevelServlet extends HttpServlet{
         response.setContentType("application/json");
         UserService userService = UserServiceFactory.getUserService();
         String user_email = userService.getCurrentUser().getEmail();
+
         User user = datastore.getUser(user_email);
         if (user == null) {
             user = new User(user_email, null, 1);
@@ -64,14 +65,20 @@ public class UserLevelServlet extends HttpServlet{
             session.removeAttribute("imageAnswer");
             session.setAttribute("imageAnswer", "blorp");
             //System.out.print("ANSWER: " + answer);
-        }
-        else {
+        } else if (level == 4) {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-            answer = stripAnswer(answer.toUpperCase());
+            //TODO: delete this
+            System.out.println(answer);
+        } else {
+            answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+            if (level == 1) {
+                answer = stripAnswer(answer.toUpperCase());
+            } else {
+                answer = answer.toUpperCase();
+            }
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
-
       
         if (checkAnswer(correct_answer, answer, level)) {
             //If the user's input is correct
@@ -79,45 +86,73 @@ public class UserLevelServlet extends HttpServlet{
             //Increment level
             user.setLevel(level);
             //grab time User started puzzle
-            long start_time = user.getTimestamp();
+            //long start_time = user.getTimestamp();
             //Update timeStamp to current time
-            user.setTimestamp(System.currentTimeMillis());
+            //user.setTimestamp(System.currentTimeMillis());
             // Grab current time
-            long end_time = user.getTimestamp();
+            //long end_time = user.getTimestamp();
             //Save info in stat object
-            Stat time_stat = new Stat(user_email, Stat.Stat_Type.DURATION, end_time - start_time, level);
+            //Stat time_stat = new Stat(user_email, Stat.Stat_Type.DURATION, end_time - start_time, level);
             //Store updated user and stat object
             datastore.storeUser(user);
-            datastore.storeStat(time_stat);
+            //datastore.storeStat(time_stat);
             Gson gson = new Gson();
             String json = gson.toJson(level);
             response.sendRedirect("/puzzle.html?user=" + user_email);
         } else {
 
-            Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
+           /* Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
             if (attempt_stat == null){
                 attempt_stat = new Stat(user_email, Stat.Stat_Type.ATTEMPTS, 0, level);
             }
             attempt_stat.incrementValue();
-            datastore.storeStat(attempt_stat);
-            response.sendRedirect("/puzzle.html?user=" + user_email);
+            datastore.storeStat(attempt_stat); */
+            if (level != 4) {
+                response.sendRedirect("/puzzle.html?user=" + user_email);
+            } else {
+                response.sendRedirect("/level4.html");
+            }
         }
+
     }
 
     public boolean checkAnswer(String correctAnswer, String userAnswer, int userLevel){
         boolean isCorrect = false;
-        if(userLevel == 1){
-            if(Pattern.matches(correctAnswer, userAnswer)){
+        if (userLevel == 1){
+            if (Pattern.matches(correctAnswer, userAnswer)){
                 isCorrect = true;
-                System.out.println("Correct answer: " + correctAnswer);
-                System.out.println("User answer: " + userAnswer);
             }
-        }
-        else{
+        } else if (userLevel == 4) {
+            isCorrect = true;
+            String[] userLocs = userAnswer.split("%");
+            String[] correctLocs = correctAnswer.split("%");
+            for (int i = 0; i < 3; i++) {
+                //take away ()
+                userLocs[i] = userLocs[i].replace(')',' ').replace('(',' ').trim();
+                correctLocs[i] = correctLocs[i].replace(')',' ').replace('(',' ').trim();
+
+                //split string into two "num1, num2" -> [num1, num2]
+                String[] a1 = userLocs[i].split(", ");
+                //ignore decimals. 00.0000 -> [00, 0000]
+                String[] a2 = a1[0].split("\\.");
+                //only grab first index
+                String formUserAnswer = a2[0];
+                //a2[1]
+                a2 = a1[1].split("\\.");
+                formUserAnswer += ", " + a2[0];
+                userLocs[i] = formUserAnswer;
+
+                //check if answer is correct
+                if (!userLocs[i].equals(correctLocs[i])) {
+                    isCorrect = false;
+                }
+            }
+        } else{
             if(correctAnswer.equals(userAnswer)){
                 isCorrect = true;
             }
         }
+        System.out.println("Correct? -> " + isCorrect);
         return isCorrect;
     }
 
