@@ -7,6 +7,50 @@ const parameterUsername = urlParams.get('user');
 if (!parameterUsername) {
     window.location.replace('/');
 }
+
+//Been trying some different stuff to try to show a user feedback message. This is just some tests I was trying and didn't was to lose them
+/*function myTestButton() {
+  var inpObj = document.getElementById("submission");
+  var Demo = document.getElementById("demo").innerHTML;
+  if(true){
+    //window.alert("Correct! Moving on to the next level...");
+  }
+  else{
+    //window.alert("Sorry that is incorrect. Try again!"); 
+  }
+} 
+
+function answerFeedback(){
+    const url = '/user-level';
+    const error = document.getElementById('error');
+    fetch(url)
+        .then((response) => {
+        return response.json();
+})
+.then((feedback) => {
+    if(feedback == false){
+        console.log("Working");
+        window.alert("Sorry that is incorrect. Try again!"); 
+    }
+});
+}
+const form = document.getElementById('answer-form');
+
+const submission = document.getElementById('submission');
+const correct = document.getElementById('correct');
+//submission.oninvalid = invalid;
+//form.onsubmit = window.alert("Hello");
+
+function invalid(event) {
+  error.removeAttribute('hidden');
+}
+
+function submit(event) {
+  //form.setAttribute('hidden', '');
+  correct.removeAttribute('hidden');
+}*/
+
+
 /*
 function fetchPuzzles(){
     const url = '/puzzle';
