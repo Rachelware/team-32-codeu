@@ -98,6 +98,7 @@ function levelUp() {
     if (level === 1) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
     } else if (level === 2) {
+<<<<<<< HEAD
         //TODO: Call this method ONLY when necessary for puzzle
         fetchBlobstoreUrlAndShowForm();
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level2.html" ></object>';
