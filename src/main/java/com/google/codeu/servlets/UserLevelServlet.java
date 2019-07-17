@@ -86,18 +86,19 @@ public class UserLevelServlet extends HttpServlet{
             //Increment level
             user.setLevel(level);
             //grab time User started puzzle
-            long start_time = user.getTimestamp();
+            //long start_time = user.getTimestamp();
             //Update timeStamp to current time
-            user.setTimestamp(System.currentTimeMillis());
+            //user.setTimestamp(System.currentTimeMillis());
             // Grab current time
-            long end_time = user.getTimestamp();
+            //long end_time = user.getTimestamp();
             //Save info in stat object
-            Stat time_stat = new Stat(user_email, Stat.Stat_Type.DURATION, end_time - start_time, level);
+            //Stat time_stat = new Stat(user_email, Stat.Stat_Type.DURATION, end_time - start_time, level);
             //Store updated user and stat object
             datastore.storeUser(user);
-            datastore.storeStat(time_stat);
+            //datastore.storeStat(time_stat);
             Gson gson = new Gson();
             String json = gson.toJson(level);
+            response.sendRedirect("/puzzle.html?user=" + user_email);
         } else {
 
            /* Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
@@ -120,10 +121,9 @@ public class UserLevelServlet extends HttpServlet{
         if (userLevel == 1){
             if (Pattern.matches(correctAnswer, userAnswer)){
                 isCorrect = true;
-                System.out.println("Correct answer: " + correctAnswer);
-                System.out.println("User answer: " + userAnswer);
             }
         } else if (userLevel == 4) {
+            isCorrect = true;
             String[] userLocs = userAnswer.split("%");
             String[] correctLocs = correctAnswer.split("%");
             for (int i = 0; i < 3; i++) {
@@ -131,35 +131,28 @@ public class UserLevelServlet extends HttpServlet{
                 userLocs[i] = userLocs[i].replace(')',' ').replace('(',' ').trim();
                 correctLocs[i] = correctLocs[i].replace(')',' ').replace('(',' ').trim();
 
-                //ignore decimals
-                String[] a1 = userLocs[i].split(", "); // a1 should have two elements [0] and [1]
-                System.out.println(a1[0] + " " + a1[1]);
-
-                //a1[0]
-                String[] a2 = a1[0].split("\\."); // a1[0] should have two elements [0] and [1]
-                System.out.println(a2[0]);
-                String formUserAnswer = a2[0]; //[0] element is before the decimal
-                System.out.println(formUserAnswer);
-
+                //split string into two "num1, num2" -> [num1, num2]
+                String[] a1 = userLocs[i].split(", ");
+                //ignore decimals. 00.0000 -> [00, 0000]
+                String[] a2 = a1[0].split("\\.");
+                //only grab first index
+                String formUserAnswer = a2[0];
                 //a2[1]
                 a2 = a1[1].split("\\.");
-                System.out.println(a2[0] + " " + a2[1]);
                 formUserAnswer += ", " + a2[0];
-                System.out.println(formUserAnswer);
                 userLocs[i] = formUserAnswer;
+
+                //check if answer is correct
+                if (!userLocs[i].equals(correctLocs[i])) {
+                    isCorrect = false;
+                }
             }
-            System.out.println("AFTER FOR LOOP");
-            System.out.println(userLocs[0]);
-            System.out.println(userLocs[1]);
-            System.out.println(userLocs[2]);
-            System.out.println(correctLocs[0]);
-            System.out.println(correctLocs[1]);
-            System.out.println(correctLocs[2]);
         } else{
             if(correctAnswer.equals(userAnswer)){
                 isCorrect = true;
             }
         }
+        System.out.println("Correct? -> " + isCorrect);
         return isCorrect;
     }
 
