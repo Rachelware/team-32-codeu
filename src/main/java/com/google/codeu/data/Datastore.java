@@ -106,25 +106,6 @@ public class Datastore {
         return results.countEntities(FetchOptions.Builder.withLimit(1000));
     }
 
-    public int getActiveUserCount() {
-        List<Object> users = new ArrayList<>();
-        Query query = new Query("Message");
-        PreparedQuery results = datastore.prepare(query);
-        for (Entity entity : results.asIterable()) {
-            Object user = entity.getProperty("user");
-            if (!users.contains(user)) {
-                users.add(user);
-            }
-        }
-        return users.size();
-    }
-
-    public String getAverageMessagesPerUser() {
-        int users = getActiveUserCount();
-        int messages = getTotalMessageCount();
-        String average = Float.toString((float) messages / users);
-        return average;
-    }
 
     /** Stores the User in Datastore. */
     public void storeUser(User user) {
@@ -134,16 +115,6 @@ public class Datastore {
         userEntity.setProperty("aboutMe", user.getAboutMe());
         userEntity.setProperty("level", user.getLevel());
         datastore.put(userEntity);
-    }
-
-    /** Stores the Stat in Datastore. */
-    public void storeStat(Stat user_stat) {
-        Entity statEntity = new Entity("Stat", user_stat.getUser());
-        statEntity.setProperty("user", user_stat.getUser());
-        statEntity.setProperty("value", user_stat.getValue());
-        statEntity.setProperty("type", user_stat.getType().name());
-        statEntity.setProperty("level", user_stat.getLevel());
-        datastore.put(statEntity);
     }
 
     /** Stores the Puzzle in Datastore. */
@@ -189,28 +160,17 @@ public class Datastore {
         }
         String aboutMe = (String) userEntity.getProperty("aboutMe");
         long level = (long) userEntity.getProperty("level");
-        long timeStamp = (long) userEntity.getProperty("time");
+        //Trying to handle NPE
+        long timeStamp;
+        if (userEntity.getProperty("time") == null) {
+            timeStamp = System.currentTimeMillis();
+        } else {
+            timeStamp = (long) userEntity.getProperty("time");
+        }
         User user = new User(email, aboutMe, (int) level);
         user.setTimestamp(timeStamp);
         return user;
     }
-
-    /**
-     * Returns the Stat owned by the user, with the specific stat,
-     * and level identified. null if no matching Stat was found.
-     *
-    public Stat getStat(String email, Stat.Stat_Type type, int level) {
-        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type.name())).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
-        PreparedQuery results = datastore.prepare(query);
-        Entity statEntity = results.asSingleEntity();
-        if(statEntity == null) {
-            return null;
-        }
-        double value = (double) statEntity.getProperty("value");
-        Stat stat = new Stat(email, type, value, level);
-        return stat;
-    }
-     */
 
   /**
    * Gets messages for all users

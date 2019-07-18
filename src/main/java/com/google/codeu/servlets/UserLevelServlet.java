@@ -61,14 +61,17 @@ public class UserLevelServlet extends HttpServlet{
         if (level == 2) { //for image input, get answer from ImageAnalysisServlet
             HttpSession session = request.getSession();
             answer = (String) session.getAttribute("imageAnswer");
+            if (answer == null) {
+                response.sendRedirect("/puzzle.html?user=" + user_email);
+                return;
+            }
+            System.out.print("ANSWER: " + answer);
             answer = answer.toUpperCase();
             session.removeAttribute("imageAnswer");
             session.setAttribute("imageAnswer", "blorp");
-            //System.out.print("ANSWER: " + answer);
+            System.out.print("ANSWER: " + answer);
         } else if (level == 4) {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-            //TODO: delete this
-            System.out.println(answer);
         } else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
             if (level == 1) {
@@ -98,7 +101,12 @@ public class UserLevelServlet extends HttpServlet{
             //datastore.storeStat(time_stat);
             Gson gson = new Gson();
             String json = gson.toJson(level);
-            response.sendRedirect("/puzzle.html?user=" + user_email);
+            if (level != 5) {
+                response.sendRedirect("/puzzle.html?user=" + user_email);
+            } else {
+                response.sendRedirect("/level5.html");
+                return;
+            }
         } else {
 
            /* Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);

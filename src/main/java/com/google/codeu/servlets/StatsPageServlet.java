@@ -1,4 +1,4 @@
-package com.google.codeu.servlets;
+/*package com.google.codeu.servlets;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 
 /**
  * Handles fetching site statistics.
- */
+ *
 @WebServlet("/stats")
 public class StatsPageServlet extends HttpServlet{
 
@@ -25,7 +25,7 @@ public class StatsPageServlet extends HttpServlet{
 
 	/**
 	 * Responds with site statistics in JSON.
-	 */
+	 *
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -42,4 +42,4 @@ public class StatsPageServlet extends HttpServlet{
 		jsonObject.addProperty("average", average);
 		response.getOutputStream().println(jsonObject.toString());
 	}
-}
+} */
