@@ -163,7 +163,6 @@ public class UserLevelServlet extends HttpServlet{
         String result = "";
         if(userAnswer.indexOf(' ') != -1){
             String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
-            System.out.println("First word: " + firstWord);
             //if the first word of the user answer equals an, a, or the, remove from string
             if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
                 result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
@@ -173,7 +172,6 @@ public class UserLevelServlet extends HttpServlet{
         }
         result = userAnswer;
         result = result.trim();
-        System.out.println("Result: " + result);
         return result;
     }
 }
