@@ -7,12 +7,12 @@ function createLevel5Map(){
         center: {lat: 35.78613674, lng: -119.4491591},
         zoom: 7
     });
+    console.log("Hello");
 
     var title = "haystack";
     
     ufoSightings.forEach((ufoSighting) => {
         var description = "( " + ufoSighting.lat.toString() + ", " + ufoSighting.lng.toString() + ")";
-        console.log(description);
         addLandmark(map, ufoSighting.lat, ufoSighting.lng, title, description); 
         });
     });
@@ -36,3 +36,10 @@ function addLandmark(map, lat, lng, title, description){
         infoWindow.open(marker.get('map'), marker);
     });
 }
+
+//working on adding a hint button
+/*$(document).ready(function(){
+  $("#hint").click(function(){
+    $("p").show();
+  });
+});*/
