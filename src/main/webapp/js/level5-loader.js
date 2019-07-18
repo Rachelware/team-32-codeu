@@ -4,15 +4,15 @@ function createLevel5Map(){
     }).then((ufoSightings) => {
           
     const map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 35.78613674, lng: -119.4491591},
-        zoom: 7
+        center: {lat: 39.8283, lng: -98.5795},
+        zoom: 3
     });
     console.log("Hello");
 
     var title = "haystack";
     
     ufoSightings.forEach((ufoSighting) => {
-        var description = "( " + ufoSighting.lat.toString() + ", " + ufoSighting.lng.toString() + ")";
+        var description = "( " + ufoSighting.lat.toString() + "," + ufoSighting.lng.toString() + ")";
         addLandmark(map, ufoSighting.lat, ufoSighting.lng, title, description); 
         });
     });
