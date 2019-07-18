@@ -70,7 +70,7 @@ public class UserLevelServlet extends HttpServlet{
             session.removeAttribute("imageAnswer");
             session.setAttribute("imageAnswer", "blorp");
             System.out.print("ANSWER: " + answer);
-        } else if (level == 4) {
+        } else if (level == 6) {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
         } else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
@@ -84,83 +84,76 @@ public class UserLevelServlet extends HttpServlet{
         String correct_answer = datastore.getPuzzle(level).getAnswer();
       
         if (checkAnswer(correct_answer, answer, level)) {
-            //If the user's input is correct
+            //IF CORRECT
             level = level + 1;
             //Increment level
             user.setLevel(level);
-            //grab time User started puzzle
-            //long start_time = user.getTimestamp();
-            //Update timeStamp to current time
-            //user.setTimestamp(System.currentTimeMillis());
-            // Grab current time
-            //long end_time = user.getTimestamp();
-            //Save info in stat object
-            //Stat time_stat = new Stat(user_email, Stat.Stat_Type.DURATION, end_time - start_time, level);
-            //Store updated user and stat object
             datastore.storeUser(user);
-            //datastore.storeStat(time_stat);
             Gson gson = new Gson();
             String json = gson.toJson(level);
-            if (level != 5) {
+
+            if (level != 7) {
                 response.sendRedirect("/puzzle.html?user=" + user_email);
             } else {
-                response.sendRedirect("/level5.html");
+                response.sendRedirect("/escaped.html");
                 return;
             }
         } else {
-
-           /* Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
-            if (attempt_stat == null){
-                attempt_stat = new Stat(user_email, Stat.Stat_Type.ATTEMPTS, 0, level);
-            }
-            attempt_stat.incrementValue();
-            datastore.storeStat(attempt_stat); */
-            if (level != 4) {
+            //IF WRONG ANSWER
+            if (level != 6) {
                 response.sendRedirect("/puzzle.html?user=" + user_email);
             } else {
-                response.sendRedirect("/level4.html");
+                response.sendRedirect("/level6.html");
             }
         }
 
     }
 
-    public boolean checkAnswer(String correctAnswer, String userAnswer, int userLevel){
+    public boolean checkAnswer(String correctAnswer, String userAnswer, int userLevel) throws ArrayIndexOutOfBoundsException {
         boolean isCorrect = false;
         if (userLevel == 1){
             if (Pattern.matches(correctAnswer, userAnswer)){
                 isCorrect = true;
             }
-        } else if (userLevel == 4) {
+        } else if (userLevel == 6) {
             isCorrect = true;
-            String[] userLocs = userAnswer.split("%");
-            String[] correctLocs = correctAnswer.split("%");
-            for (int i = 0; i < 3; i++) {
-                //take away ()
-                userLocs[i] = userLocs[i].replace(')',' ').replace('(',' ').trim();
-                correctLocs[i] = correctLocs[i].replace(')',' ').replace('(',' ').trim();
-
-                //split string into two "num1, num2" -> [num1, num2]
-                String[] a1 = userLocs[i].split(", ");
-                //ignore decimals. 00.0000 -> [00, 0000]
-                String[] a2 = a1[0].split("\\.");
-                //only grab first index
-                String formUserAnswer = a2[0];
-                //a2[1]
-                a2 = a1[1].split("\\.");
-                formUserAnswer += ", " + a2[0];
-                userLocs[i] = formUserAnswer;
-
-                //check if answer is correct
-                if (!userLocs[i].equals(correctLocs[i])) {
-                    isCorrect = false;
+            try {
+                String[] userLocs = userAnswer.split("%");
+                //Handle the case where input is incorrect
+                if (userLocs.length != 3) {
+                    throw new ArrayIndexOutOfBoundsException();
                 }
+                String[] correctLocs = correctAnswer.split("%");
+                for (int i = 0; i < 3; i++) {
+                    //take away ()
+                    userLocs[i] = userLocs[i].replace(')', ' ').replace('(', ' ').trim();
+                    correctLocs[i] = correctLocs[i].replace(')', ' ').replace('(', ' ').trim();
+
+                    //split string into two "num1, num2" -> [num1, num2]
+                    String[] a1 = userLocs[i].split(", ");
+                    //ignore decimals. 00.0000 -> [00, 0000]
+                    String[] a2 = a1[0].split("\\.");
+                    //only grab first index
+                    String formUserAnswer = a2[0];
+                    //a2[1]
+                    a2 = a1[1].split("\\.");
+                    formUserAnswer += ", " + a2[0];
+                    userLocs[i] = formUserAnswer;
+
+                    //check if answer is correct
+                    if (!userLocs[i].equals(correctLocs[i])) {
+                        isCorrect = false;
+                    }
+                }
+            } catch (ArrayIndexOutOfBoundsException ex){
+                isCorrect = false;
             }
         } else{
             if(correctAnswer.equals(userAnswer)){
                 isCorrect = true;
             }
         }
-        System.out.println("Correct? -> " + isCorrect);
+        //System.out.println("Correct? -> " + isCorrect);
         return isCorrect;
     }
 
