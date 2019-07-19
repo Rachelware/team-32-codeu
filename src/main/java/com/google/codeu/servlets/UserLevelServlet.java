@@ -98,7 +98,14 @@ public class UserLevelServlet extends HttpServlet{
             //datastore.storeStat(time_stat);
             Gson gson = new Gson();
             String json = gson.toJson(level);
-            response.sendRedirect("/puzzle.html?user=" + user_email);
+            if(level == 7){
+                response.sendRedirect("/escaped.html");
+            }
+            else{
+                response.sendRedirect("/correct.html");
+            }
+            //response.sendRedirect("/puzzle.html?user=" + user_email);
+
         } else {
 
            /* Stat attempt_stat = datastore.getStat(user_email, Stat.Stat_Type.ATTEMPTS, level);
@@ -107,10 +114,10 @@ public class UserLevelServlet extends HttpServlet{
             }
             attempt_stat.incrementValue();
             datastore.storeStat(attempt_stat); */
-            if (level != 4) {
-                response.sendRedirect("/puzzle.html?user=" + user_email);
+            if (level != 6) {
+                response.sendRedirect("/incorrect.html");
             } else {
-                response.sendRedirect("/level4.html");
+                response.sendRedirect("/escaped.html");
             }
         }
 
