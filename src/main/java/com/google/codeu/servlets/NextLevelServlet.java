@@ -28,15 +28,15 @@ public class NextLevelServlet extends HttpServlet{
         datastore = new Datastore();
     }
 
-    /** Grabs a users level to display */
+    /** Grabs a users level to display 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         /*response.setContentType("application/json");
         UserService userService = UserServiceFactory.getUserService();
         String user_email = userService.getCurrentUser().getEmail();
         User user = datastore.getUser(user_email);
-        int level = user.getLevel();*/
-    }
+        int level = user.getLevel();
+    }*/
 
     /** Gets called when a user presses the 'Next level' or 'Try again' button - increments the users level
      * then reloads the page! */
