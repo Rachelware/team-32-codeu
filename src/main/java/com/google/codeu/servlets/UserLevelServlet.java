@@ -87,6 +87,7 @@ public class UserLevelServlet extends HttpServlet{
             level = level + 1;
             //Increment level
             user.setLevel(level);
+            user.setTimestamp(System.currentTimeMillis());
             datastore.storeUser(user);
             Gson gson = new Gson();
             String json = gson.toJson(level);
