@@ -62,14 +62,11 @@ public class UserLevelServlet extends HttpServlet{
                 response.sendRedirect("/puzzle.html?user=" + user_email);
                 return;
             }
-            //System.out.print("ANSWER: " + answer);
             answer = answer.toUpperCase();
             session.removeAttribute("imageAnswer");
             session.setAttribute("imageAnswer", "blorp");
-           // System.out.print("ANSWER: " + answer);
         } else if (level == 6) {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
-           // System.out.println("ANSWER = " + answer);
             if (answer == null || answer == "") {
                 response.sendRedirect("/incorrect.html");
                 return;
@@ -149,7 +146,6 @@ public class UserLevelServlet extends HttpServlet{
                 isCorrect = true;
             }
         }
-        //System.out.println("Correct? -> " + isCorrect);
         return isCorrect;
     }
 
