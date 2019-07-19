@@ -54,22 +54,23 @@ public class UserLevelServlet extends HttpServlet{
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
         String answer = "";
-        
-        
+
         if (level == 2) { //for image input, get answer from ImageAnalysisServlet
             HttpSession session = request.getSession();
             answer = (String) session.getAttribute("imageAnswer");
-            if (answer == null) {
+            if (answer == null || answer == "") {
                 response.sendRedirect("/puzzle.html?user=" + user_email);
                 return;
             }
-            System.out.print("ANSWER: " + answer);
             answer = answer.toUpperCase();
             session.removeAttribute("imageAnswer");
             session.setAttribute("imageAnswer", "blorp");
-            System.out.print("ANSWER: " + answer);
         } else if (level == 6) {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
+            if (answer == null || answer == "") {
+                response.sendRedirect("/incorrect.html");
+                return;
+            }
         } else {
             answer = Jsoup.clean(request.getParameter("answer"), Whitelist.none());
             if (level == 1) {
@@ -80,7 +81,7 @@ public class UserLevelServlet extends HttpServlet{
         }
 
         String correct_answer = datastore.getPuzzle(level).getAnswer();
-      
+
         if (checkAnswer(correct_answer, answer, level)) {
             //IF CORRECT
             level = level + 1;
@@ -97,12 +98,7 @@ public class UserLevelServlet extends HttpServlet{
                 response.sendRedirect("/correct.html");
             }
         } else {
-            //IF WRONG ANSWER
-            if (level != 6) {
-                response.sendRedirect("/incorrect.html");
-            } else {
-                response.sendRedirect("/escaped.html");
-            }
+            response.sendRedirect("/incorrect.html");
         }
     }
 
@@ -150,7 +146,6 @@ public class UserLevelServlet extends HttpServlet{
                 isCorrect = true;
             }
         }
-        //System.out.println("Correct? -> " + isCorrect);
         return isCorrect;
     }
 

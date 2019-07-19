@@ -28,22 +28,24 @@ public class NextLevelServlet extends HttpServlet{
         datastore = new Datastore();
     }
 
-    /** Grabs a users level to display 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        /*response.setContentType("application/json");
-        UserService userService = UserServiceFactory.getUserService();
-        String user_email = userService.getCurrentUser().getEmail();
-        User user = datastore.getUser(user_email);
-        int level = user.getLevel();
-    }*/
-
     /** Gets called when a user presses the 'Next level' or 'Try again' button - increments the users level
      * then reloads the page! */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         UserService userService = UserServiceFactory.getUserService();
         String user_email = userService.getCurrentUser().getEmail();
+        User user = datastore.getUser(user_email);
+
+        if (user.getLevel() == 6) {
+            response.sendRedirect("/puzzle_level6.html?user=" + user_email);
+            return;
+        } else if (user.getLevel() == 7) {
+            user.setLevel(1);
+            datastore.storeUser(user);
+
+            response.sendRedirect("/puzzle.html?user=" + user_email);
+            return;
+        }
         response.sendRedirect("/puzzle.html?user=" + user_email);
     }
 }

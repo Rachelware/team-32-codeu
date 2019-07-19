@@ -31,4 +31,8 @@ p {
 
 .title:hover + .text {
     display: block;
+
+#answer-input {
+    display: none;
+
 }
