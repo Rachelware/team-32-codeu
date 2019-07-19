@@ -90,21 +90,20 @@ public class UserLevelServlet extends HttpServlet{
             Gson gson = new Gson();
             String json = gson.toJson(level);
 
-            if (level != 7) {
-                response.sendRedirect("/puzzle.html?user=" + user_email);
-            } else {
+            if(level == 7){
                 response.sendRedirect("/escaped.html");
-                return;
+            }
+            else{
+                response.sendRedirect("/correct.html");
             }
         } else {
             //IF WRONG ANSWER
             if (level != 6) {
-                response.sendRedirect("/puzzle.html?user=" + user_email);
+                response.sendRedirect("/incorrect.html");
             } else {
-                response.sendRedirect("/level6.html");
+                response.sendRedirect("/escaped.html");
             }
         }
-
     }
 
     public boolean checkAnswer(String correctAnswer, String userAnswer, int userLevel) throws ArrayIndexOutOfBoundsException {
@@ -162,7 +161,6 @@ public class UserLevelServlet extends HttpServlet{
         String result = "";
         if(userAnswer.indexOf(' ') != -1){
             String firstWord = userAnswer.substring(0, userAnswer.indexOf(' '));
-            System.out.println("First word: " + firstWord);
             //if the first word of the user answer equals an, a, or the, remove from string
             if(firstWord.equals("AN") || firstWord.equals("A") || firstWord.equals("THE")){
                 result = userAnswer.substring(userAnswer.indexOf(' ') + 1);
@@ -172,7 +170,6 @@ public class UserLevelServlet extends HttpServlet{
         }
         result = userAnswer;
         result = result.trim();
-        System.out.println("Result: " + result);
         return result;
     }
 }

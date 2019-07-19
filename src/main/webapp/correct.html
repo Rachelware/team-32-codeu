@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Escaped</title>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
+    <link rel = "stylesheet" href ="/css/main.css">
+    <link rel = "stylesheet" href ="/css/level.css">
+    <script src="/js/navigation-loader.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body onload="addLoginOrLogoutLinkToNavigation();">
+    <nav>
+        <ul id="navigation" class="z-depth-2">
+            <li><a href="/">Home</a></li>
+            <li><a href="/aboutus.html">About Our Team</a></li>
+        </ul>
+    </nav>
+    <div style = "text-align:center">
+        <h4>Correct!</h4>
+        <div>
+            <p><b> Move on to the next level </b></p>
+        </div>
+        <div>
+            <form id="answer-form" action="/next-level" method="POST" class="hidden">
+                <input id = "submission" class="submit-answer z-depth-1" type="submit" value="Next Level">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+</body>
+</html>
