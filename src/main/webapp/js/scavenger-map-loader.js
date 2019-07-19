@@ -72,14 +72,19 @@ function deleteMarkers() {
 }
 
 function saveMarkers() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const parameterUsername = urlParams.get('user');
     if (clicks < 3) {
         window.alert("You must submit 3 answers! You only submitted " + clicks + " answers!");
+        return false;
     } else {
         if (locations[0] == null || locations[1] == null || locations[2] == null) {
             window.alert("Something has gone wrong! Please submit again!");
+            return false;
         } else {
             pos = locations[0] + "%" + locations[1] + "%" + locations[2];
             document.getElementById('answer-input').innerHTML = pos;
+            return true;
         }
     }
 }

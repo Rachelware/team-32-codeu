@@ -37,6 +37,6 @@ input {
     display: block;
 }
 
-textarea {
+#answer-input {
     display: none;
 }

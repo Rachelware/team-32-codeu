@@ -44,6 +44,18 @@ public class NextLevelServlet extends HttpServlet{
 
         UserService userService = UserServiceFactory.getUserService();
         String user_email = userService.getCurrentUser().getEmail();
+        User user = datastore.getUser(user_email);
+        System.out.println("Level = " + datastore.getUser(user_email).getLevel());
+        if (user.getLevel() == 6) {
+            response.sendRedirect("/puzzle_level6.html?user=" + user_email);
+            return;
+        } else if (user.getLevel() == 7) {
+            user.setLevel(1);
+            datastore.storeUser(user);
+            System.out.println("Level = " + datastore.getUser(user_email).getLevel());
+            response.sendRedirect("/puzzle.html?user=" + user_email);
+            return;
+        }
         response.sendRedirect("/puzzle.html?user=" + user_email);
     }
 }

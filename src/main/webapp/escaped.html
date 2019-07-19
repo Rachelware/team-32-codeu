@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="/css/escaped.css">
     <script src="/js/navigation-loader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script>
-        if (!window.location.contains('/escaped.html')) {
-            window.locationassign('/escaped.html');
-        }
-    </script>
 </head>
 <body onload="addLoginOrLogoutLinkToNavigation();">
     <nav>
@@ -27,6 +22,9 @@
             <p><b> You are a super slueth! </b></p>
             <p><b>Thanks for playing!</b></p>
         </div>
+        <form id="answer-form" action="/next-level" method="POST" class="hidden">
+            <input id ="submission" class="submit-answer z-depth-1" type="submit" value="Play Again!">
+        </form>
     </div>
     <div class="pyro">
         <div class="before"></div>

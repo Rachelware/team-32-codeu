@@ -1,0 +1,231 @@
+p {
+    margin-top: 0;
+    margin-left: unset;
+}
+
+.content1 {
+    width: 70%;
+    height: 200px;
+    float: left;
+}
+
+#puzzle-title {
+    margin-right: 0px;
+    margin-bottom: 25px;
+}
+
+#chat-title {
+    margin-left: 20px;
+    margin-right: 15px;
+}
+
+.content2 {
+    width: 30%;
+    margin-left: 70%;
+    margin-right: 15px;
+    height: 100%;
+}
+
+#level-container{
+    font-size: smaller;
+    float: right;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 35px;
+    width: 90px;
+    display: flex;
+}
+
+.level-header {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 6px;
+    width: inherit;
+}
+
+.submit-message {
+    font-size: smaller;
+    margin-bottom: 10px;
+}
+
+.enter-message {
+    font-size: smaller;
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 8px;
+}
+
+/* Set the size of the message input to be 100 pixels high
+   and will fill the width of its parent element. */
+#message-input {
+    height: 80px;
+    width: -webkit-fill-available;
+    margin-top: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    color: #263238;
+    font-size: small;
+    background-color: white;
+    border-radius: 3px;
+    border-color: transparent;
+}
+
+#message-container {
+    height: 370px;
+    padding-top: 0px;
+    padding: 5px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    overflow-y:auto;
+    background-color: white;
+    border-radius: 3px 3px 0px 0px;
+}
+
+
+#message-section {
+    margin-top: 0px;
+    margin-left:20px;
+    margin-right: 15px;
+    background-color: #448aff;
+    border-radius: 0px 0px 3px 3px;
+}
+
+
+/* Give each message a rounded border. */
+.message-div {
+    font-size: small;
+    border: 0px solid rgba(0, 0, 0, 0.12);
+    background-color: white;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Add a bottom border to the message header. */
+.message-header {
+    font-size: smaller;
+    padding: 5px;
+    background-color: #448aff;
+    border-color: #448aff;
+    border-radius: 3px 3px 0px 0px;
+}
+
+/* Give the message body a margin so the text
+   isn't too close to the border. */
+.message-body {
+    margin: 5px;
+    color: #444;
+}
+
+/* Give message image a size restriction */
+.message-body img {
+    display: block;
+    margin-top: 25px;
+    max-width: 75%;
+}
+
+.submit-answer {
+    font-size: smaller;
+    margin-bottom: 10px;
+}
+
+.enter-answer {
+    font-size: smaller;
+    margin-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 8px;
+}
+
+#answer-input {
+    display: none;
+}
+
+#answer-section {
+    margin-top: 20px;
+    margin-left:25px;
+    margin-right: 10px;
+    background-color: #26a69a;
+    border-radius: 3px;
+}
+
+/* Give each message a rounded border. */
+.answer-div {
+    border: 1px solid #80808057;
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 10px;
+}
+
+/* Add a bottom border to the message header. */
+.answer-header {
+    padding: 5px;
+    background-color: #80808057;
+}
+
+/* Give the message body a margin so the text
+   isn't too close to the border. */
+.answer-body {
+    margin: 5px;
+}
+
+/* Give message image a size restriction */
+.answer-body img {
+    display: block;
+    margin-top: 25px;
+    max-width: 75%;
+}
+
+/* Use this to hide certain elements like forms if the
+   user is not logged in or viewing their own page. */
+.hidden {
+    display: none;
+}
+
+#puzzle-container {
+    height: 465px;
+    margin: 0;
+    margin-left: 25px;
+    padding: 0;
+    overflow: scroll;
+}
+
+.clue-text {
+    display: none;
+}
+
+#clues {
+    width: 100%;
+}
+
+#clue {
+    float: left;
+    width: 32%;
+    margin: 5px;
+    padding: 10px;
+    font-size: small;
+    background-color: #26A69A;
+}
+
+.clue-title {
+    font-size: large;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+.clue-title:hover + .clue-text {
+    display: block;
+}
+
+#submission {
+    font-size: smaller;
+    margin: 10px;
+}
