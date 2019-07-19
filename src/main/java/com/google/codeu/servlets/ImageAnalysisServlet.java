@@ -56,22 +56,6 @@ import com.google.gson.Gson;
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         
-        //get the Blobkey that points to the image uploaded by the user
-        BlobKey blobKey = getBlobKey(request, "image");
-        
-        //User didn't upload a file, so render an error message
-        if (blobKey == null) {
-            out.println("Please upload an image file.");
-            return;
-        }
-        
-        //Get the URL of the image that the user uploaded
-        String imageUrl = getUploadedFileUrl(blobKey);
-        
-        //Get the labels of the image that the user uploaded
-        byte[] blobBytes = getBlobBytes(blobKey);
-        List<EntityAnnotation> imageLabels = getImageLabels(blobBytes);
-        
         //check if user is logged in
         UserService userService = UserServiceFactory.getUserService();
         if (!userService.isUserLoggedIn()) {
@@ -82,6 +66,22 @@ import com.google.gson.Gson;
         //get User
         String user = userService.getCurrentUser().getEmail();
         int level = datastore.getUser(user).getLevel(); 
+        
+        //get the Blobkey that points to the image uploaded by the user
+        BlobKey blobKey = getBlobKey(request, "image");
+        
+        //User didn't upload a file, so render an error message
+        if (blobKey == null) {
+            response.sendRedirect("/puzzle.html?user=" + user);
+            return;
+        }
+        
+        //Get the URL of the image that the user uploaded
+        String imageUrl = getUploadedFileUrl(blobKey);
+        
+        //Get the labels of the image that the user uploaded
+        byte[] blobBytes = getBlobBytes(blobKey);
+        List<EntityAnnotation> imageLabels = getImageLabels(blobBytes);
         
         boolean flag = false;
         
