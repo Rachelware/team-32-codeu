@@ -100,17 +100,23 @@ import com.google.gson.Gson;
                 
         if (flag == false)
             answer = "none";
-        imageHtml = imageHtml + "</ul><br/>"+ answer;
-
+        imageHtml = imageHtml + "</ul><br/>"+ answer; 
+        
         
         //save answer for use in level up
         HttpSession session = request.getSession();
         session.setAttribute("imageAnswer", answer);
 
+        Message imageUploaded = new Message(user, "Uploaded an image", level);
+        datastore.storeMessage(imageUploaded);
+        response.sendRedirect("/puzzle.html?user=" + user);
+
+        /* For testing image upload/analysis
         //store image link as a message
         Message myImage = new Message(user, imageHtml, level);
         datastore.storeMessage(myImage);
         response.sendRedirect("/puzzle.html?user=" + user);
+        */
     }
     
     /*
