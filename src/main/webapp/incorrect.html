@@ -5,14 +5,8 @@
     <title>Escaped</title>
     <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
     <link rel = "stylesheet" href ="/css/main.css">
-    <link rel="stylesheet" href="/css/escaped.css">
     <script src="/js/navigation-loader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script>
-        if (!window.location.contains('/escaped.html')) {
-            window.locationassign('/escaped.html');
-        }
-    </script>
 </head>
 <body onload="addLoginOrLogoutLinkToNavigation();">
     <nav>
@@ -22,15 +16,13 @@
         </ul>
     </nav>
     <div style = "text-align:center">
-        <h4>Congratulations! You ESCAPED!</h4>
-        <div class="card z-depth-1">
-            <p><b> You are a super slueth! </b></p>
-            <p><b>Thanks for playing!</b></p>
+        <h4>Sorry, try again! </h4>
+        <div>
+            <p><b> If at first you don't succeed, try again. </b></p>
+            <form id="answer-form" action="/next-level" method="POST" class="hidden">
+                <input id = "submission" class="submit-answer z-depth-1" type="submit" value="Next Level">
+            </form>
         </div>
-    </div>
-    <div class="pyro">
-        <div class="before"></div>
-        <div class="after"></div>
     </div>
     <script type="text/javascript" src="/js/materialize.js"></script>
 </body>

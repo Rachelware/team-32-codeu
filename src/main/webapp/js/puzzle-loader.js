@@ -94,7 +94,7 @@ function levelUp() {
         return response.json();
 })
 .then((level) => {
-    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level + ' of 10';
+    document.getElementById('puzzle-title').innerText = 'Puzzle: Level ' + level + ' of 6';
     document.getElementById('chat-title').innerText = 'Level ' + level + ' Chat';
     if (level === 1) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level1.html" ></object>';
@@ -108,21 +108,12 @@ function levelUp() {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level3.html" ></object>';
     } else if (level === 4) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level4.html" ></object>';
-        document.getElementById("answer-section").innerHTML='';
-        document.getElementById("puzzle-container").style.setProperty('height', '535px');
     } else if (level === 5) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level5.html" ></object>';
     } else if (level === 6) {
         document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level6.html" ></object>';
-    } else if (level === 7) {
-        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level7.html" ></object>';
-    } else if (level === 8) {
-        fetchBlobstoreUrlAndShowForm();
-        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level8.html" ></object>';
-    } else if (level === 9) {
-        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level9.html" ></object>';
-    } else if (level === 10) {
-        document.getElementById("puzzle-container").innerHTML='<object type="text/html" data="../level10.html" ></object>';
+        document.getElementById("answer-section").innerHTML='';
+        document.getElementById("puzzle-container").style.setProperty('height', '535px');
     } else {
         //Redirect to Congratulations message
         window.location.replace('/escaped.html');

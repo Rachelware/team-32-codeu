@@ -35,7 +35,7 @@ public class PuzzleServlet extends HttpServlet {
 
         User user = datastore.getUser(user_email);
         int level = user.getLevel();
-        String puzzle = datastore.getPuzzle(level).getQuestion();
+        String puzzle = datastore.getPuzzle(level).getAnswer();
 
         Gson gson = new Gson();
         String json = gson.toJson(puzzle);

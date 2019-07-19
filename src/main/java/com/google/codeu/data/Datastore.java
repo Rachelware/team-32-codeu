@@ -40,18 +40,17 @@ public class Datastore {
     }
 
     public void savePuzzles() {
-        Puzzle puzzle1 = new Puzzle(1, Puzzle.Puzzle_Type.TEXT, "At midday, I am the same size and shape of an elephant, but I do not weight the same as an elephant. At night, I am not seen at all. What am I?",
-            "(ELEPHANT'?S?)?\\s?SHADOW");
+        Puzzle puzzle1 = new Puzzle(1, "(ELEPHANT'?S?)?\\s?SHADOW");
         storePuzzle(puzzle1);
-        Puzzle puzzle2 = new Puzzle(2, Puzzle.Puzzle_Type.PICTURE, "What animal do you not want to play cards with? (TIP: Upload a picture of the animal for your answer. Submit the file and then submit in the answer box.)", "CHEETAH");
+        Puzzle puzzle2 = new Puzzle(2, "CHEETAH");
         storePuzzle(puzzle2);
-        Puzzle puzzle3 = new Puzzle(3, Puzzle.Puzzle_Type.TEXT, "Rearrange the words on the map to get the secret message.", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
+        Puzzle puzzle3 = new Puzzle(3, "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         storePuzzle(puzzle3);
-        Puzzle puzzle4 = new Puzzle(4, Puzzle.Puzzle_Type.LOCATION, "The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 100 miles of the city we are looking for. Good Luck!", "38, -121%51, 30%10, -75");
+        Puzzle puzzle4 = new Puzzle(4, "CANNOLI");
         storePuzzle(puzzle4);
-        Puzzle puzzle5 = new Puzzle(5, Puzzle.Puzzle_Type.TEXT, "Find the needle in the haystack.", "(47.6038321,-122.3300623)");
+        Puzzle puzzle5 = new Puzzle(5, "(47.6038321,-122.3300623)");
         storePuzzle(puzzle5);
-        Puzzle puzzle6 = new Puzzle(6, Puzzle.Puzzle_Type.TEXT, "There are 7 U.S. states that have the same state bird. Using the letters from the abbreviations of those states, make a 7 letter word.", "CANNOLI");
+        Puzzle puzzle6 = new Puzzle(6, "38, -121%51, 30%10, -75");
         storePuzzle(puzzle6);
     }
 
@@ -106,25 +105,6 @@ public class Datastore {
         return results.countEntities(FetchOptions.Builder.withLimit(1000));
     }
 
-    public int getActiveUserCount() {
-        List<Object> users = new ArrayList<>();
-        Query query = new Query("Message");
-        PreparedQuery results = datastore.prepare(query);
-        for (Entity entity : results.asIterable()) {
-            Object user = entity.getProperty("user");
-            if (!users.contains(user)) {
-                users.add(user);
-            }
-        }
-        return users.size();
-    }
-
-    public String getAverageMessagesPerUser() {
-        int users = getActiveUserCount();
-        int messages = getTotalMessageCount();
-        String average = Float.toString((float) messages / users);
-        return average;
-    }
 
     /** Stores the User in Datastore. */
     public void storeUser(User user) {
@@ -136,24 +116,11 @@ public class Datastore {
         datastore.put(userEntity);
     }
 
-    /** Stores the Stat in Datastore. */
-    public void storeStat(Stat user_stat) {
-        Entity statEntity = new Entity("Stat", user_stat.getUser());
-        statEntity.setProperty("user", user_stat.getUser());
-        statEntity.setProperty("value", user_stat.getValue());
-        statEntity.setProperty("type", user_stat.getType().name());
-        statEntity.setProperty("level", user_stat.getLevel());
-        datastore.put(statEntity);
-    }
-
     /** Stores the Puzzle in Datastore. */
     public void storePuzzle(Puzzle puzzle) {
         Entity puzzleEntity = new Entity("Puzzle", puzzle.getLevel());
         puzzleEntity.setProperty("answer", puzzle.getAnswer());
-        puzzleEntity.setProperty("question", puzzle.getQuestion());
-        puzzleEntity.setProperty("type", puzzle.getType().name());
         puzzleEntity.setProperty("level", puzzle.getLevel());
-        puzzleEntity.setProperty("stats", puzzle.getStats());
         datastore.put(puzzleEntity);
     }
 
@@ -170,9 +137,7 @@ public class Datastore {
             return null;
         }
         String answer = (String) puzzleEntity.getProperty("answer");
-        String question = (String) puzzleEntity.getProperty("question");
-        Puzzle.Puzzle_Type type = Puzzle.Puzzle_Type.valueOf((String) puzzleEntity.getProperty("type"));
-        Puzzle puzzle = new Puzzle(level, type, question, answer);
+        Puzzle puzzle = new Puzzle(level, answer);
         return puzzle;
     }
 
@@ -189,28 +154,17 @@ public class Datastore {
         }
         String aboutMe = (String) userEntity.getProperty("aboutMe");
         long level = (long) userEntity.getProperty("level");
-        long timeStamp = (long) userEntity.getProperty("time");
+        //Trying to handle NPE
+        long timeStamp;
+        if (userEntity.getProperty("time") == null) {
+            timeStamp = System.currentTimeMillis();
+        } else {
+            timeStamp = (long) userEntity.getProperty("time");
+        }
         User user = new User(email, aboutMe, (int) level);
         user.setTimestamp(timeStamp);
         return user;
     }
-
-    /**
-     * Returns the Stat owned by the user, with the specific stat,
-     * and level identified. null if no matching Stat was found.
-     *
-    public Stat getStat(String email, Stat.Stat_Type type, int level) {
-        Query query = new Query("Stat").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, email)).setFilter(new Query.FilterPredicate("type", FilterOperator.EQUAL, type.name())).setFilter(new Query.FilterPredicate("level", FilterOperator.EQUAL, level));
-        PreparedQuery results = datastore.prepare(query);
-        Entity statEntity = results.asSingleEntity();
-        if(statEntity == null) {
-            return null;
-        }
-        double value = (double) statEntity.getProperty("value");
-        Stat stat = new Stat(email, type, value, level);
-        return stat;
-    }
-     */
 
   /**
    * Gets messages for all users
