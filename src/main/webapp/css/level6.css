@@ -14,6 +14,10 @@ p {
     margin-left: unset;
 }
 
+input {
+    margin: 10px;
+}
+
 #clues {
     width: 100%;
 }
@@ -31,8 +35,8 @@ p {
 
 .title:hover + .text {
     display: block;
+}
 
-#answer-input {
+textarea {
     display: none;
-
 }
