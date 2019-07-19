@@ -1,4 +1,4 @@
-function fetchStats(){
+/*function fetchStats(){
     const url = '/stats';
     fetch(url).then((response) => {
         return response.json();
@@ -25,4 +25,4 @@ function buildStatElement(statString) {
 // Fetch data and populate the UI of the page.
 function buildUI(){
     fetchStats();
-}
+} */

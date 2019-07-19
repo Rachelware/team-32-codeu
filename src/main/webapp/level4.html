@@ -1,69 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Level 4</title>
     <link rel = "stylesheet" href = "/css/main.css">
     <link rel = "stylesheet" href = "/css/materialize.css">
-    <link rel = "stylesheet" href = "/css/map.css">
-    <link rel = "stylesheet" href = "/css/level4.css">
+    <link rel = "stylesheet" href = "/css/level.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA"></script>
-    <script src = "/js/scavenger-map-loader.js"></script>
 </head>
 <body>
-    <p>The following clues will lead you on a global scavenger hunt. The answer to each clue is a city somewhere in the world. To submit your response, drop a map pin on each city! In order to answer the puzzle correctly, all three pins must be placed within 1 degree of latitude and longitude of the city we are looking for. Good Luck!</p>
-    <div id="clues">
-        <div id="clue" class="card">
-            <div class="title">CLUE #1</div>
-            <div class="text">
-                <p>A sparkle in water. Hope for the poor. <br>
-                Suddently, I was a fronteir no more! <br>
-                Franticly, they flocked to my state, <br>
-                for rare treasure discovered in 1848. <br>
-                <i style="color: #263238">Drop a pin on my capitol city!</i></p>
-            </div>
-        </div>
-        <div id="clue" class="card">
-            <div class="title">CLUE #2</div>
-            <div class="text">
-            <p>
-                Uranium, graphite, dosimeters, oh my! <br>
-                A ghost-town, wasteland, accident, am I. <br>
-                Who's fault, you ask? Don&#39t say a name! <br>
-                My state played a cruel, sick game. <br>
-                <i style="color: #263238">Drop a pin on my city!</i>
-            </p>
-            </div>
-        </div>
-        <div id="clue" class="card">
-            <div class="title">CLUE #3</div>
-            <div class="text">
-            <p>
-                <i>Vamos a El Centro!</i> Old walls, so high, <br>
-                seat us as we see lively boats drive by! <br>
-                Don&#39t burn, stay cool, dance, and enjoy <br>
-                My color, my vibrance, my history ... <br>
-                Oh and a cute <i>mochila</i>! Wow! <i>Me voy!</i> <br>
-                <i style="color: #263238">Drop a pin on my city!</i>
-            </p>
-            </div>
-        </div>
-    </div>
-    <br style="clear: left;" />
-    <div id="floating-panel">
-        <input onclick="deleteMarkers();" type=button value="Delete Markers">
-    </div>
-    <div id="map"></div>
-    <p>Click on the map to add pins. Hover over pins to see the clue they are responding to.</p>
-    <div id="positions"></div>
-    <div id="answer-section" class="card z-depth-5">
-        <form id="answer-form" action="/user-level" method="POST" class="hidden">
-            <textarea name="answer" id="answer-input"></textarea>
-            <input onclick="saveMarkers();" type="submit" value="Sumbit Answers"><br>
-        </form>
-    </div>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA&callback=initMap">
-    </script>
+<p>There are 7 U.S. states that have the same state bird. Using the letters from the abbreviations of those states, make a 7 letter word.</p>
 </body>
 </html>
