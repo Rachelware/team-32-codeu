@@ -214,3 +214,16 @@ object {
     padding: 0;
     overflow: hidden;
 }
+
+
+button {
+    font-size: smaller;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    color: white;
+    background-color: #fbc02d;
+    border:transparent;
+    border-radius: 3px;
+    padding: 8px 4px 8px 4px;
+    box-shadow: 3px 3px #58585857;
+}
