@@ -8,13 +8,29 @@
     <link rel = "stylesheet" href = "/css/level5.css">
     <link rel = "stylesheet" href = "/css/materialize.css">
     <link rel = "stylesheet" href = "/css/level.css">
+    <link rel = "stylesheet" href = "/css/level4.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkWQmagGmCHKRX2osG0BSWiUYLOZaxWA"></script>
     <script src = "/js/level5-loader.js"></script>
 </head>
 <body onload="createLevel5Map();">
-    <p style="margin-top: 0;">Find the needle in the haystack. Read the riddle below. Enter your answer as a coordinate location. Hover cursor over marker to see clue. Zoom in to see all the markers. Click on marker to see location. Enter your answer in the same format you see on the marker. Ex. (32.9000,-78.999). There should be NO SPACES in your answer.</p>
-    <p class = "card">Americano and Latte, Cappuccino and Tea, Macchiato and Expresso, there's a famous needle near me.</p>
+    <p style="margin-top: 0;">Find the needle in the haystack. Enter your answer as a coordinate location. Hover cursor over marker to see clue. Zoom in to see all the markers. Click on marker to see location. Enter your answer in the same format you see on the marker. Ex. (32.9000,-78.999). There should be NO SPACES in your answer.</p>
+    <div id="clues">
+        <div id="clue" class="card">
+            <div class="title">HINT #1</div>
+            <div class="text">
+                <p>Americano and Latte, Cappuccino and Tea, Macchiato and Expresso, where will you find me?
+                </p>
+            </div>
+        </div>
+        <div id="clue" class="card">
+            <div class="title">HINT #2</div>
+            <div class="text">
+                <p>Famous needle</p>
+            </div>
+        </div>
+    </div>
+    <br style="clear: left;" />
     <div id="map"></div>
 </body>
 </html>
