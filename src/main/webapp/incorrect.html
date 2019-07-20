@@ -5,6 +5,7 @@
     <title>Escaped</title>
     <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
     <link rel = "stylesheet" href ="/css/main.css">
+    <link rel = "stylesheet" href ="/css/correct-incorrect.css">
     <script src="/js/navigation-loader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
@@ -16,11 +17,11 @@
         </ul>
     </nav>
     <div style = "text-align:center">
-        <h4>Sorry, try again! </h4>
+        <h4 id="result">Sorry, try again! </h4>
         <div>
-            <p><b> If at first you don't succeed, try again. </b></p>
+            <p id="result-text"><b> If at first you don't succeed, try again. </b></p>
             <form id="answer-form" action="/next-level" method="POST" class="hidden">
-                <input id = "submission" class="submit-answer z-depth-1" type="submit" value="Try Again">
+                <input id = "submission result-button" class="submit-answer z-depth-1" type="submit" value="Try Again">
             </form>
         </div>
     </div>
