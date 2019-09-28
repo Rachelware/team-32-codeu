@@ -8,7 +8,7 @@
     the specific language governing permissions and limitations under the License. -->
 
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application>su19-codeu-32-6493</application>
+    <application>codeu-2019-virtualescape</application>
     <version>1</version>
     <threadsafe>false</threadsafe>
     <sessions-enabled>true</sessions-enabled>
